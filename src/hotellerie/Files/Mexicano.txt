@@ -1,0 +1,13 @@
+ME01-Tacos L-10
+ME02-Tacos XL-15
+ME03-Tacos XXL-20
+ME04-Burger-12
+ME05-Fajitas à la viande hachée-11
+ME06-Crepe aux chocolats-10
+ME07-Salade de riz rouge-9
+ME08-Burritos MixGrill-12
+ME09-Soda-5
+ME10-Eau 1.5L-5
+ME11-Flans mexicain-10
+
+

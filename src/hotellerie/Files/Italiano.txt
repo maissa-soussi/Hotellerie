@@ -1,0 +1,11 @@
+IT01-Pizza Neptune-18
+IT02-Pizza 4 fromages-23
+IT03-Lasagne-22
+IT04-L'escalope milanaise-18
+IT05-Les pasta e fagioli-25
+IT06-Soda-5
+IT07-Eau 1.5L-5
+IT08-Tiramisu-10
+IT09-Fondant Chocolat-8
+IT10-Menu enfant-15
+
