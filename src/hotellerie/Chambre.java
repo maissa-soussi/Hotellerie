@@ -6,9 +6,18 @@
 package hotellerie;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 
 /**
  *
@@ -83,26 +92,73 @@ catch (IOException e) {
                 e.printStackTrace();
             }  
 }
-public void ReserverChambre(int numC,int numSemaine)
+public void ReserverChambre(int numC,int numS)
 {
    try { 
-    BufferedReader br = new BufferedReader(new FileReader("src\\Hotellerie\\Files\\Chambre.txt"));
+    File fichier1 = new File("src\\Chambre.txt");
+    FileReader fichier=new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
+    BufferedReader br = new BufferedReader(fichier);
+       BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1,true));
 String line;
 boolean verif=false;
 DecimalFormat nf = new DecimalFormat("000");
-while ((line = br.readLine()) != null && verif==false ) {
+while ((line = br.readLine()) != null ) {
    if(line.contains(nf.format(numC)))
    {
-       System.out.println(line);
-       verif=true;
+       if (Verifier(line, numS)==true)
+       {
+           line=ChangerChamp(line,numS);
+               //StringBuffer sb = new StringBuffer();
+       //line=line.replaceFirst(line,ChangerChamp(line,1));
+                      // sb.append(line + "\n");
+                         // StringBuilder str=new StringBuilder();
+                         // str.append(line);
+                            // str.append("\n");
+         //line=line.replaceAll(line,ChangerChamp(line, 1));
+        //bufferedWriter.write(str.toString());
+       bufferedWriter.write(line);
+              bufferedWriter.write("\r\n");
+       }
+       else {
+           System.out.println("erreur");
+            bufferedWriter.write(line);
+              bufferedWriter.write("\r\n");
+       }
    }
-}
-br.close();
-}
+   else
+   {
+       bufferedWriter.write(line);
+              bufferedWriter.write("\r\n");
+   }
+}  
+       bufferedWriter.close();
+    br.close(); 
+    Path temp = Files.move(Paths.get("src\\Chambre.txt"),Paths.get("src\\Hotellerie\\Files\\Chambre.txt"),StandardCopyOption.REPLACE_EXISTING);}
 catch (IOException e) {
                 e.printStackTrace();
             }  
+   
 }
-    
+public String ChangerChamp(String line, int num)
+{
+    String[] update=line.split("-");
+        update[num+2]="1";
+  return update[0] + "-" + update[1]+ "-" + update[2]+ "-" + update[3] + "-"+ update[4]+ "-" + update[5] +"-"+update[6];
+}  
+public boolean Verifier(String line,int num)
+{
+     String[] update=line.split("-");
+     boolean test;
+     if (num<1 || num>4)
+         test=false;
+     else
+     {
+       if (update[num+2].compareTo("1")>=0)
+          test=false;
+       else 
+         test=true;
+     }
+     return test;
+}
 
 }
