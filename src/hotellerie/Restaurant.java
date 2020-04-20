@@ -23,7 +23,7 @@ public class Restaurant {
     private Plat [] Plats;
     public Plat [] importer_plat() {
         Plat [] p= new Plat[11];
-        String pathFichier="C:\\Users\\moham\\Desktop\\java\\Hotellerie\\src\\hotellerie\\Files\\"+getNom_R();
+        String pathFichier="src\\Hotellerie\\Files\\"+getNom_R();
 
 		BufferedReader fluxEntree=null;
 		try {
