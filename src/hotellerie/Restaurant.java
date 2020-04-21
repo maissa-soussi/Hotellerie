@@ -1,13 +1,13 @@
 package hotellerie;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-
 public class Restaurant {
-
+    /* declaration de la classe Plat */
     public static class Plat {
-
         public String code;
         public String nom;
         public int prix;
@@ -17,74 +17,54 @@ public class Restaurant {
             prix=p;
         }
     }
+    
     private String Nom_R;
     private  int Nb_Fourchette;
     private int Nb_Plat;
     private Plat [] Plats;
-    public int Calcul_Nb_Plat(){
-        String pathFichier="src\\Hotellerie\\Files\\"+getNom_R()+".txt";
-        int i=-1;
-		BufferedReader fluxEntree=null;
-		try {
-			/* Création du flux vers le fichier texte */
-			fluxEntree = new BufferedReader(new FileReader(pathFichier));
-			
-			/* Lecture d'une ligne */
-			String ligneLue = fluxEntree.readLine();
-			while(ligneLue!=null){
-                                
-				ligneLue = fluxEntree.readLine();                                                      
-                                i++;
-                                 
-			}
-                        
-                        fluxEntree.close();
-                        
-		}
-		catch(IOException exc){
-			exc.printStackTrace();
-		}
+    
+    public int Calcul_Nb_Plat(){ 
+        int i=0;
+        try {
+            /* Création du flux vers le fichier texte */
+            File f = new File("src\\Hotellerie\\Files\\"+getNom_R()+".txt");
+            BufferedReader b = new BufferedReader(new FileReader(f));
+            /* parcours du fichier ligne par ligne */
+            String readLine = "";
+            while ((readLine = b.readLine()) != null) {
+                i++;
+            }
+            b.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
                 return i;
     }
+    
     public Plat [] importer_plat() {
         Plat [] p= new Plat[this.getNb_Plat()];
-        String pathFichier="src\\Hotellerie\\Files\\"+getNom_R()+".txt";
-
-		BufferedReader fluxEntree=null;
-		try {
-			fluxEntree = new BufferedReader(new FileReader(pathFichier));
-			
-			String ligneLue = fluxEntree.readLine();
-			
-                        
-                        int i = 0;
-                        String [] tab1= new String [this.getNb_Plat()+1];
-			while(ligneLue!=null){
-                                tab1[i]=ligneLue;
-				ligneLue = fluxEntree.readLine();                                                      
-                                i++;
-                                 
-			}
-                         fluxEntree.close();
-                        for(int j=0;j<this.getNb_Plat();j++){
-                                
-				String[] tab=tab1[j].split("-");
-                                p[j]=new Plat(tab[0], tab[1], Integer.parseInt(tab[2]));
-                                
-                                
-                                
-                                
-			} 
-                        
-		}
-		catch(IOException exc){
-			exc.printStackTrace();
-		}
-		
-		
+        try {
+            File f = new File("src\\Hotellerie\\Files\\"+getNom_R()+".txt");
+            BufferedReader b = new BufferedReader(new FileReader(f));
+            int i=0;
+            String readLine = "";
+            /* chaque ligne dans une case de tab1 */
+            String [] tab1= new String [this.getNb_Plat()];
+            while ((readLine = b.readLine()) != null) {
+                tab1[i]=readLine;
+                i++;
+            }
+            b.close();
+            /* importer les plats */
+            for(int j=0;j<this.getNb_Plat();j++){                               
+		String[] tab=tab1[j].split("-");
+                p[j]=new Plat(tab[0], tab[1], Integer.parseInt(tab[2]));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     return p;
-    }
-    
+    }    
     
     public Restaurant (String n, int nb) {
         Nom_R=n;
@@ -115,10 +95,10 @@ public class Restaurant {
     }
 
         public void setPlats(Plat[] Plats) {
-        this.Plats = Plats;
+            this.setPlats(Plats);
+    } 
+
+    public void setNb_Plat(int Nb_Plat) {
+        this.Nb_Plat = Nb_Plat;
     }
-    
-        
-          
-    
 }
