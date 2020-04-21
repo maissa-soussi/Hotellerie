@@ -76,6 +76,64 @@ public void SetRes4(boolean a)
 {
     Res4=a;
 }
+public Chambre()
+{
+    
+}
+public Chambre(int numC)
+{
+     try {
+            DecimalFormat nf = new DecimalFormat("000");
+            BufferedReader br = new BufferedReader(new FileReader("src\\Hotellerie\\Files\\Chambre.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.contains(nf.format(numC))) {
+                    break;
+                }
+            }
+            System.out.println(line);
+            br.close();
+            String[] update=line.split("-");
+            Num=Integer.parseInt(update[0]);
+            Type=update[1];
+            Vue=update[2];
+            Res1=StringToBoolean(update[0]);
+            Res2=StringToBoolean(update[4]);
+            Res3=StringToBoolean(update[5]);
+            Res4=StringToBoolean(update[6]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+}
+ public void AfficherChambre(int numC) {
+        try {
+            DecimalFormat nf = new DecimalFormat("000");
+            BufferedReader br = new BufferedReader(new FileReader("src\\Hotellerie\\Files\\Chambre.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.contains(nf.format(numC))) {
+                    System.out.println(line);
+                    break;
+                }
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+     
+    public void AfficherChambres() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Hotellerie\\Files\\Chambre.txt"));
+            String line;
+            while ((line = br.readLine()) != null){
+            System.out.println(line);}
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 public void lireChambre()
 {
    try { 
@@ -132,8 +190,9 @@ while ((line = br.readLine()) != null ) {
    }
 }  
        bufferedWriter.close();
-    br.close(); 
-    Path temp = Files.move(Paths.get("src\\Chambre.txt"),Paths.get("src\\Hotellerie\\Files\\Chambre.txt"),StandardCopyOption.REPLACE_EXISTING);}
+    br.close();
+    
+     Files.move(Paths.get("src\\Chambre.txt"),Paths.get("src\\Hotellerie\\Files\\Chambre.txt"),StandardCopyOption.REPLACE_EXISTING);}
 catch (IOException e) {
                 e.printStackTrace();
             }  
@@ -160,5 +219,14 @@ public boolean Verifier(String line,int num)
      }
      return test;
 }
+private Boolean StringToBoolean(String ch)
+{
+    int a=Integer.parseInt(ch);
+    if (a==1)
+        return true;
+    else return false;
+      
+}
+
 
 }
