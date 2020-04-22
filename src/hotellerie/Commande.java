@@ -56,7 +56,7 @@ public class Commande {
         /* determiner le nombre de ligne */
         int i=0;
         try {
-            File f = new File("C:\\Users\\moham\\Desktop\\Hotellerie\\src\\hotellerie\\Files\\Commande.txt");
+            File f = new File("src\\Hotellerie\\Files\\Commande.txt");
             BufferedReader b = new BufferedReader(new FileReader(f));
             String readLine = "";
             while ((readLine = b.readLine()) != null) {
@@ -68,7 +68,7 @@ public class Commande {
         }
         /* supprimer l'ancien fichier commande et creer un nouveau fichier commande si on est a la fin de semaine */
         try {
-            File f = new File("C:\\Users\\moham\\Desktop\\Hotellerie\\src\\hotellerie\\Files\\Commande.txt");
+            File f = new File("src\\Hotellerie\\Files\\Commande.txt");
             BufferedReader b = new BufferedReader(new FileReader(f));           
             for(int j=0;j<i;j++){                               
 		String readLine = b.readLine();
