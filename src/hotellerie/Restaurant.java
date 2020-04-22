@@ -103,7 +103,7 @@ public class Restaurant {
     public void setNb_Plat(int Nb_Plat) {
         this.Nb_Plat = Nb_Plat;
     }
-    
+    /* ajouter une commande a la liste des commande */
     public void Ajouter_C(Commande c)
     {
         /* Chemin vers le fichier à modifier*/
@@ -123,13 +123,12 @@ public class Restaurant {
 			ex.printStackTrace();
 		}
     }
-    public int getprix(Commande c, String co){
+    /* determiner le prix du plat du code co */
+    public int getprix(String co){
         int p=0;
         try {
-            /* Création du flux vers le fichier texte */
             File f = new File("src\\Hotellerie\\Files\\"+getNom_R()+".txt");
             BufferedReader b = new BufferedReader(new FileReader(f));
-            /* parcours du fichier ligne par ligne */
             String readLine = "";
             while ((readLine = b.readLine()) != null) {
                 if(readLine.startsWith(co)){
@@ -145,12 +144,13 @@ public class Restaurant {
         
     }
     
+    /* effectuer une commande */
     public void effectuer(int n, String co, int nb, int d)
     {
         Commande c=new Commande(n, co, nb, d);
         c.initialiser();
         this.Ajouter_C(c);
-        int p=this.getprix(c, co);
+        int p=this.getprix(co);
         String t = String.valueOf(n);
         try
         {
@@ -164,7 +164,6 @@ public class Restaurant {
             if(ligne.startsWith(t)){
                   String[] tab=ligne.split("-");                 
                   int nouv_prix=Integer.parseInt(tab[7])+p*c.getNb_Plat();
-
                   bw.write(tab[0]+"-"+tab[1]+"-"+tab[2]+"-"+tab[3]+"-"+tab[4]+"-"+tab[5]+"-"+tab[6]+"-"+nouv_prix+"\n");
                   bw.flush();
              }else{
@@ -183,4 +182,91 @@ public class Restaurant {
             e.printStackTrace();
         }
     }
+    
+    /* verifier si le plat du code co appartient au restaurant courant ou non */
+    public Boolean verifier(String co)
+    {
+        Boolean bo=false;
+        try {
+            File f = new File("src\\Hotellerie\\Files\\"+getNom_R()+".txt");
+            BufferedReader b = new BufferedReader(new FileReader(f));
+            String readLine = "";
+            while (((readLine = b.readLine()) != null) && (bo==false)) {
+                String[] tab=readLine.split("-");
+                if(tab[0].equals(co)){
+                  bo=true;
+            }
+            }
+            b.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bo;
+    }
+    
+    /* afficher la recette de la journee */
+    public void recette_journee(int d)
+    {
+        int r=0;
+        try {
+            File f = new File("src\\Hotellerie\\Files\\Commande.txt");
+            BufferedReader b = new BufferedReader(new FileReader(f));
+            String readLine = "";
+            while ((readLine = b.readLine()) != null) {
+                String[] tab=readLine.split("-");
+                if((Integer.parseInt(tab[3])==d) && (verifier(tab[1]))){
+                  r=r+Integer.parseInt(tab[2])*this.getprix(tab[1]);
+            }
+            }
+            b.close();
+            System.out.println("la recette de la journée "+d+" est: "+r);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /* afficher la recette de la journee */
+    public void recette_semaine()
+    {
+        int r=0;
+        try {
+            File f = new File("src\\Hotellerie\\Files\\Commande.txt");
+            BufferedReader b = new BufferedReader(new FileReader(f));
+            String readLine = "";
+            while ((readLine = b.readLine()) != null) {
+                String[] tab=readLine.split("-");
+                if(verifier(tab[1])){
+                  r=r+Integer.parseInt(tab[2])*this.getprix(tab[1]);
+            }
+            }
+            b.close();
+            System.out.println("la recette de la semaine est: "+r);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /* afficher la fréquence de demande de chaque plat pendant la semaine courante */
+    public void frequence()
+    {
+        for(int i=0;i<this.Nb_Plat;i++)
+        {
+            int fr=0;
+            try {
+            File f = new File("src\\Hotellerie\\Files\\Commande.txt");
+            BufferedReader b = new BufferedReader(new FileReader(f));
+            String readLine = "";
+            while ((readLine = b.readLine()) != null) {
+                String[] tab=readLine.split("-");
+                if(this.Plats[i].code.equals(tab[1])){
+                    fr=fr+Integer.parseInt(tab[2]);
+            }
+            }
+            b.close();
+            System.out.println("la fréquence de demande du plat "+this.Plats[i].nom+" pendant la semaine courante est: "+fr);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 }
