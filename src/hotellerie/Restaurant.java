@@ -12,8 +12,8 @@ public class Restaurant {
     public static class Plat {
         public String code;
         public String nom;
-        public int prix;
-        public Plat(String c, String n, int p) {
+        public float prix;
+        public Plat(String c, String n, float p) {
             code=c;
             nom=n;
             prix=p;
@@ -60,7 +60,7 @@ public class Restaurant {
             /* importer les plats */
             for(int j=0;j<this.getNb_Plat();j++){                               
 		String[] tab=tab1[j].split("-");
-                p[j]=new Plat(tab[0], tab[1], Integer.parseInt(tab[2]));
+                p[j]=new Plat(tab[0], tab[1], Float.parseFloat(tab[2]));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,8 +124,8 @@ public class Restaurant {
 		}
     }
     /* determiner le prix du plat du code co */
-    public int getprix(String co){
-        int p=0;
+    public float getprix(String co){
+        float p=0;
         try {
             File f = new File("src\\Hotellerie\\Files\\"+getNom_R()+".txt");
             BufferedReader b = new BufferedReader(new FileReader(f));
@@ -133,7 +133,7 @@ public class Restaurant {
             while ((readLine = b.readLine()) != null) {
                 if(readLine.startsWith(co)){
                   String[] tab=readLine.split("-");
-                  p=Integer.parseInt(tab[2]);
+                  p=Float.parseFloat(tab[2]);
             }
             }
             b.close();
@@ -150,8 +150,9 @@ public class Restaurant {
         Commande c=new Commande(n, co, nb, d);
         c.initialiser();
         this.Ajouter_C(c);
-        int p=this.getprix(co);
+        float p=this.getprix(co);
         String t = String.valueOf(n);
+    /* ajouter le prix de la commande au prix total et au reste a payer dans le fichier reservation */
         try
         {
         File entree = new File("src\\Hotellerie\\Files\\Reservation.txt");
@@ -163,8 +164,9 @@ public class Restaurant {
         while ((ligne = br.readLine()) != null){
             if(ligne.startsWith(t)){
                   String[] tab=ligne.split("-");                 
-                  int nouv_prix=Integer.parseInt(tab[7])+p*c.getNb_Plat();
-                  bw.write(tab[0]+"-"+tab[1]+"-"+tab[2]+"-"+tab[3]+"-"+tab[4]+"-"+tab[5]+"-"+tab[6]+"-"+nouv_prix+"\n");
+                  float nouv_resteapayer=Float.parseFloat(tab[7])+p*c.getNb_Plat();
+                  float nouv_prixtotal=Float.parseFloat(tab[6])+p*c.getNb_Plat();
+                  bw.write(tab[0]+"-"+tab[1]+"-"+tab[2]+"-"+tab[3]+"-"+tab[4]+"-"+tab[5]+"-"+nouv_prixtotal+"-"+nouv_resteapayer+"\n");
                   bw.flush();
              }else{
                   bw.write(ligne+"\n");
@@ -207,7 +209,7 @@ public class Restaurant {
     /* afficher la recette de la journee */
     public void recette_journee(int d)
     {
-        int r=0;
+        float r=0;
         try {
             File f = new File("src\\Hotellerie\\Files\\Commande.txt");
             BufferedReader b = new BufferedReader(new FileReader(f));
@@ -228,7 +230,7 @@ public class Restaurant {
     /* afficher la recette de la journee */
     public void recette_semaine()
     {
-        int r=0;
+        float r=0;
         try {
             File f = new File("src\\Hotellerie\\Files\\Commande.txt");
             BufferedReader b = new BufferedReader(new FileReader(f));

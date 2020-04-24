@@ -5,11 +5,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.text.SimpleDateFormat; 
+import java.util.Date; 
+import java.util.Locale; 
 
 class ErrException extends Exception {
 }
@@ -17,8 +17,8 @@ class ErrException extends Exception {
 public class Reservation {
 	private int Num_R = 0;
 	private int Cin_client;
-	private LocalDateTime Date_Reservation;
-	private String Date_Arrivee = "2020-08-02";
+	private String Date_Reservation;
+	private String Date_Arrivee = "2020/08/02";
 	private int Nb_semaine;
 	private int Nb_chambre;
 	private float prix_total;
@@ -30,6 +30,10 @@ public class Reservation {
 		Cin_client = cin;
 		Nb_semaine = nbs;
 		Nb_chambre = nbcham;
+                Date d=new Date(); 
+                SimpleDateFormat f=new SimpleDateFormat( "dd/M/yyyy H':'m", Locale.FRANCE); 
+                Date_Reservation=f.format(d);
+                
 	}
 	// rechercher une chambre selon les criteres
 
@@ -56,34 +60,33 @@ public class Reservation {
 			Chambre c = new Chambre();
 			int numero_chambre = rechercher_chambre(type, vue, sem);
 			c.ReserverChambre(numero_chambre, sem);
-			this.Calcul_prix_reservation(type);
+			this.Calcul_prix_total(type);
 			this.Calcul_reste_payer();
-			Date_Reservation = LocalDateTime.now();
 			Path reservation = Paths.get("src\\Hotellerie\\Files\\Reservation.txt");
-			Files.write(reservation, ("" + Num_R).getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+			Files.write(reservation, ("" + getNum_R()).getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + Cin_client).getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+			Files.write(reservation, ("" + getCin_client()).getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + Date_Reservation).getBytes(), StandardOpenOption.WRITE,
+			Files.write(reservation, ("" + getDate_Reservation()).getBytes(), StandardOpenOption.WRITE,
 					StandardOpenOption.APPEND);
 			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 			if (sem == 2) {
-				Date_Arrivee = "2020_08_09";
+				setDate_Arrivee("2020_08_09");
 			} else if (sem == 3) {
-				Date_Arrivee = "2020-08-16";
+				setDate_Arrivee("2020-08-16");
 			} else if (sem == 4) {
-				Date_Arrivee = "2020-08-23";
+				setDate_Arrivee("2020-08-23");
 			}
-			Files.write(reservation, Date_Arrivee.getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+			Files.write(reservation, getDate_Arrivee().getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + Nb_semaine).getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+			Files.write(reservation, ("" + getNb_semaine()).getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 			Files.write(reservation, ("" + numero_chambre).getBytes(), StandardOpenOption.WRITE,
 					StandardOpenOption.APPEND);
 			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + prix_total).getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+			Files.write(reservation, ("" + getPrix_total()).getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + reste_payer).getBytes(), StandardOpenOption.WRITE,
+			Files.write(reservation, ("" + getReste_payer()).getBytes(), StandardOpenOption.WRITE,
 					StandardOpenOption.APPEND);
 			Files.write(reservation, ("\n").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 		} catch (ErrException e) {
@@ -93,25 +96,20 @@ public class Reservation {
 	}
 
 	// le prix juste au moment de la reservation
-	public void Calcul_prix_reservation(String type) {
+	public void Calcul_prix_total(String type) {
 		if (type == "simple") {
-			prix_total = 500;
+			setPrix_total(500);
 		} else if (type == "double") {
-			prix_total = 700;
+			setPrix_total(700);
 		} else if (type == "luxe") {
-			prix_total = 1000;
+			setPrix_total(1000);
 		}
 	}
 
-	// Calculer le prix total
-	public void Calcul_prix_total(String type) {
-		float prix_commandes = 0;// attendre farouk
-		prix_total = prix_reservation + prix_commandes;
-	}
 
-	// calculer le reste à paye
+	// calculer le reste ï¿½ paye
 	public void Calcul_reste_payer() {
-		reste_payer = (float) (prix_total - (prix_reservation * 0.1));
+		setReste_payer((float) (getPrix_total()*0.9));
 
 	}
 
@@ -119,4 +117,123 @@ public class Reservation {
 	public void modifier(int numr) {
 
 	}
+
+    /**
+     * @return the Num_R
+     */
+    public int getNum_R() {
+        return Num_R;
+    }
+
+    /**
+     * @param Num_R the Num_R to set
+     */
+    public void setNum_R(int Num_R) {
+        this.Num_R = Num_R;
+    }
+
+    /**
+     * @return the Cin_client
+     */
+    public int getCin_client() {
+        return Cin_client;
+    }
+
+    /**
+     * @param Cin_client the Cin_client to set
+     */
+    public void setCin_client(int Cin_client) {
+        this.Cin_client = Cin_client;
+    }
+
+    /**
+     * @return the Date_Reservation
+     */
+    public String getDate_Reservation() {
+        return Date_Reservation;
+    }
+
+    /**
+     * @return the Date_Arrivee
+     */
+    public String getDate_Arrivee() {
+        return Date_Arrivee;
+    }
+
+    /**
+     * @param Date_Arrivee the Date_Arrivee to set
+     */
+    public void setDate_Arrivee(String Date_Arrivee) {
+        this.Date_Arrivee = Date_Arrivee;
+    }
+
+    /**
+     * @return the Nb_semaine
+     */
+    public int getNb_semaine() {
+        return Nb_semaine;
+    }
+
+    /**
+     * @param Nb_semaine the Nb_semaine to set
+     */
+    public void setNb_semaine(int Nb_semaine) {
+        this.Nb_semaine = Nb_semaine;
+    }
+
+    /**
+     * @return the Nb_chambre
+     */
+    public int getNb_chambre() {
+        return Nb_chambre;
+    }
+
+    /**
+     * @param Nb_chambre the Nb_chambre to set
+     */
+    public void setNb_chambre(int Nb_chambre) {
+        this.Nb_chambre = Nb_chambre;
+    }
+
+    /**
+     * @return the prix_total
+     */
+    public float getPrix_total() {
+        return prix_total;
+    }
+
+    /**
+     * @param prix_total the prix_total to set
+     */
+    public void setPrix_total(float prix_total) {
+        this.prix_total = prix_total;
+    }
+
+    /**
+     * @return the prix_reservation
+     */
+    public float getPrix_reservation() {
+        return prix_reservation;
+    }
+
+    /**
+     * @param prix_reservation the prix_reservation to set
+     */
+    public void setPrix_reservation(float prix_reservation) {
+        this.prix_reservation = prix_reservation;
+    }
+
+    /**
+     * @return the reste_payer
+     */
+    public float getReste_payer() {
+        return reste_payer;
+    }
+
+    /**
+     * @param reste_payer the reste_payer to set
+     */
+    public void setReste_payer(float reste_payer) {
+        this.reste_payer = reste_payer;
+    }
 }
