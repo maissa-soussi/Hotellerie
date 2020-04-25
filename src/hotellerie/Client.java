@@ -78,7 +78,7 @@ public class Client {
     // fonction d'affichage d'un client
     public void affiche()
     {
-        System.out.println(Cin+"-"+Nom+"-"+Prenom+"-"+Date_N+"-"+Email+"-"+Tel+"-"+Pays);
+        System.out.println("Cin: "+Cin+"\n"+"Nom: "+Nom+"\n"+"Prenom: "+Prenom+"\n"+"Date de naissance: "+Date_N+"\n"+"Email: "+Email+"\n"+"Tel"+Tel+"\n"+"Pays"+Pays);
     }
     
     //ajout d'un nouveau client
@@ -245,6 +245,7 @@ public class Client {
     public void setPays(String Pays) {
         this.Pays = Pays;
     }
+
 
 
 
