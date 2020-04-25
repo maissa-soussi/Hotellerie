@@ -15,8 +15,8 @@ class ErrException extends Exception {
 }
 
 public class Reservation {
-	private int Num_R = 0;
-	private int Cin_client;
+	private static int Num_R = 0;
+	private long Cin_client;
 	private String Date_Reservation;
 	private String Date_Arrivee = "2020/08/02";
 	private int Nb_semaine;
@@ -26,7 +26,7 @@ public class Reservation {
 	private float reste_payer;
 
 	public Reservation(int cin, int nbs, int nbcham) {
-		Num_R++;
+		++Num_R;
 		Cin_client = cin;
 		Nb_semaine = nbs;
 		Nb_chambre = nbcham;
@@ -37,63 +37,83 @@ public class Reservation {
 	}
 	// rechercher une chambre selon les criteres
 
-	public int rechercher_chambre(String type, String vue, int sem) throws IOException {
+	public int rechercher_chambre(String type, String vue, int nbSem,int numS) throws IOException {
 		Path chambre = Paths.get("src\\Hotellerie\\Files\\Chambre.txt");
 		List<String> lignes = Files.readAllLines(chambre);
 		int num = 0;
 		for (String ligne : lignes) {
 			String[] detail = ligne.split("-");
-			if ((detail[1].equals(type)) && (detail[2].equals(vue)) && (Integer.valueOf(detail[2 + sem]) == 0)) {
-				num = Integer.parseInt(detail[0]);
+			if ((detail[1].equals(type)) && (detail[2].equals(vue))) {
+			boolean verif=true;
+                        int i=0;
+                        while (verif==true && i < nbSem)
+                        {
+                            if (Integer.valueOf(detail[2 + numS + i]) == 1)
+                                verif=false;
+                            else i++;
+                        }
+                        if(verif==true)
+                        {
+                            num = Integer.parseInt(detail[0]);
 				break;
-
+                        }
+                       
 			}
 		}
+              //  System.out.println(num); pour tester les numeros de chambres
 		return num;
 	}
 
 	// faire la reservation
-	public void reserver(String type, String vue, int sem) throws IOException {
+	public void reserver(String type, String vue, int semdebut, int nbsem) {
 		try {
-			if (sem < 0 || sem > 4)
+			if (semdebut < 0 || semdebut > 4)
 				throw new ErrException();
 			Chambre c = new Chambre();
-			int numero_chambre = rechercher_chambre(type, vue, sem);
-			c.ReserverChambre(numero_chambre, sem);
-			this.Calcul_prix_total(type);
-			this.Calcul_reste_payer();
-			Path reservation = Paths.get("src\\Hotellerie\\Files\\Reservation.txt");
-			Files.write(reservation, ("" + getNum_R()).getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + getCin_client()).getBytes(), StandardOpenOption.WRITE,
-					StandardOpenOption.APPEND);
-			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + getDate_Reservation()).getBytes(), StandardOpenOption.WRITE,
-					StandardOpenOption.APPEND);
-			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			if (sem == 2) {
-				setDate_Arrivee("2020_08_09");
-			} else if (sem == 3) {
-				setDate_Arrivee("2020-08-16");
-			} else if (sem == 4) {
-				setDate_Arrivee("2020-08-23");
+			int numero_chambre = rechercher_chambre(type, vue, semdebut, nbsem);
+			if (numero_chambre != 0) {
+				c.ReserverChambre(numero_chambre, semdebut);
+				this.Calcul_prix_total(type);
+				this.Calcul_reste_payer();
+				
+				Path reservation = Paths.get("src\\Hotellerie\\Files\\Reservation.txt");
+				Files.write(reservation, ("" + getNum_R()).getBytes(), StandardOpenOption.WRITE,
+						StandardOpenOption.APPEND);
+				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				Files.write(reservation, ("" + getCin_client()).getBytes(), StandardOpenOption.WRITE,
+						StandardOpenOption.APPEND);
+				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				Files.write(reservation, ("" + getDate_Reservation()).getBytes(), StandardOpenOption.WRITE,
+						StandardOpenOption.APPEND);
+				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				if (semdebut == 2) {
+					setDate_Arrivee("2020_08_09");
+				} else if (semdebut == 3) {
+					setDate_Arrivee("2020-08-16");
+				} else if (semdebut == 4) {
+					setDate_Arrivee("2020-08-23");
+				}
+				Files.write(reservation, getDate_Arrivee().getBytes(), StandardOpenOption.WRITE,
+						StandardOpenOption.APPEND);
+				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				Files.write(reservation, ("" + getNb_semaine()).getBytes(), StandardOpenOption.WRITE,
+						StandardOpenOption.APPEND);
+				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				Files.write(reservation, ("" + numero_chambre).getBytes(), StandardOpenOption.WRITE,
+						StandardOpenOption.APPEND);
+				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				Files.write(reservation, ("" + getPrix_total()).getBytes(), StandardOpenOption.WRITE,
+						StandardOpenOption.APPEND);
+				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				Files.write(reservation, ("" + getReste_payer()).getBytes(), StandardOpenOption.WRITE,
+						StandardOpenOption.APPEND);
+				Files.write(reservation, ("\n").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 			}
-			Files.write(reservation, getDate_Arrivee().getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + getNb_semaine()).getBytes(), StandardOpenOption.WRITE,
-					StandardOpenOption.APPEND);
-			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + numero_chambre).getBytes(), StandardOpenOption.WRITE,
-					StandardOpenOption.APPEND);
-			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + getPrix_total()).getBytes(), StandardOpenOption.WRITE,
-					StandardOpenOption.APPEND);
-			Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-			Files.write(reservation, ("" + getReste_payer()).getBytes(), StandardOpenOption.WRITE,
-					StandardOpenOption.APPEND);
-			Files.write(reservation, ("\n").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+			else {System.out.println("chambre non disponible");}
 		} catch (ErrException e) {
 			System.out.println("Saisir une semaine valide");
+		} catch (IOException e) {
+			System.out.println("erreur1");
 		}
 
 	}
@@ -120,8 +140,8 @@ public class Reservation {
 		setReste_payer((float) (getPrix_total() * 0.9));
 
 	}
-	
-	//Visualiser une reservation à partir de son numéro
+
+	// Visualiser une reservation à partir de son numéro
 	public void visualiser(int num) throws IOException {
 		Path reservation = Paths.get("src\\Hotellerie\\Files\\Reservation.txt");
 		List<String> lignes = Files.readAllLines(reservation);
@@ -176,7 +196,7 @@ public class Reservation {
 	/**
 	 * @return the Cin_client
 	 */
-	public int getCin_client() {
+	public long getCin_client() {
 		return Cin_client;
 	}
 
