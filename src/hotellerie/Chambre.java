@@ -18,10 +18,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-/**
- *
- * @author asus
- */
 public class Chambre {
 
     private int Num;
@@ -31,6 +27,7 @@ public class Chambre {
     private boolean Res2;
     private boolean Res3;
     private boolean Res4;
+    
 
     public int GetNum() {
         return Num;
@@ -151,7 +148,7 @@ public class Chambre {
         }
     }*/
 // reserve une chambre donné par son numero et numero de semaine et stocke la modification sur le fichier chambre
-    public void ReserverChambre(int numC, int numS) {
+    public void ReserverChambre(int numC,int nbSem,int numS) {
         try {
             File fichier1 = new File("src\\Chambre.txt");
             FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
@@ -162,24 +159,12 @@ public class Chambre {
             DecimalFormat nf = new DecimalFormat("000");
             while ((line = br.readLine()) != null) {
                 if (line.contains(nf.format(numC))) {
-                    if (Verifier(line, numS) == true) {
-                        line = ChangerChamp(line, numS);
-                        //StringBuffer sb = new StringBuffer();
-                        //line=line.replaceFirst(line,ChangerChamp(line,1));
-                        // sb.append(line + "\n");
-                        // StringBuilder str=new StringBuilder();
-                        // str.append(line);
-                        // str.append("\n");
-                        //line=line.replaceAll(line,ChangerChamp(line, 1));
-                        //bufferedWriter.write(str.toString());
+                 for (int i=0;i<nbSem;i++)
+                        line = ChangerChamp(line, numS+i);
                         bufferedWriter.write(line);
-                        bufferedWriter.write("\r\n");
-                    } else {
-                        System.out.println("erreur");
-                        bufferedWriter.write(line);
-                        bufferedWriter.write("\r\n");
-                    }
-                } else {
+                    bufferedWriter.write("\r\n");
+                }
+                else {
                     bufferedWriter.write(line);
                     bufferedWriter.write("\r\n");
                 }
