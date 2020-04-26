@@ -49,8 +49,10 @@ public class Reservation {
                         int i=0;
                         while (verif==true && i < nbSem)
                         {
-                            if (Integer.valueOf(detail[2 + numS + i]) == 1)
+                            if (Integer.valueOf(detail[2 + numS + i]) != 0)
+                            {
                                 verif=false;
+                            }
                             else i++;
                         }
                         if(verif==true)
@@ -70,8 +72,10 @@ public class Reservation {
 		try {
 			if (semdebut < 0 || semdebut > 4)
 				throw new ErrException();
+                        if (semdebut+nbsem > 5)
+				throw new ErrException();
 			Chambre c = new Chambre();
-			int numero_chambre = rechercher_chambre(type, vue, semdebut, nbsem);
+			int numero_chambre = rechercher_chambre(type, vue, nbsem,semdebut);
 			if (numero_chambre != 0) {
                             //Num_R++;
 				c.ReserverChambre(numero_chambre,nbsem, semdebut);
