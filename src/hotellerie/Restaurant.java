@@ -24,7 +24,7 @@ public class Restaurant {
     private  int Nb_Fourchette;
     private int Nb_Plat;
     private Plat [] Plats;
-    
+    // calculer le nombre de plats
     public int Calcul_Nb_Plat(){ 
         int i=0;
         try {
@@ -42,7 +42,7 @@ public class Restaurant {
         }
                 return i;
     }
-    
+    //remplir le tableau Plats par des plats a partir du fichier
     public Plat [] importer_plat() {
         Plat [] p= new Plat[this.getNb_Plat()];
         try {
@@ -50,24 +50,19 @@ public class Restaurant {
             BufferedReader b = new BufferedReader(new FileReader(f));
             int i=0;
             String readLine = "";
-            /* chaque ligne dans une case de tab1 */
-            String [] tab1= new String [this.getNb_Plat()];
+            /* importer les plats */
             while ((readLine = b.readLine()) != null) {
-                tab1[i]=readLine;
+                String[] tab=readLine.split("-");
+                p[i]=new Plat(tab[0], tab[1], Float.parseFloat(tab[2]));
                 i++;
             }
             b.close();
-            /* importer les plats */
-            for(int j=0;j<this.getNb_Plat();j++){                               
-		String[] tab=tab1[j].split("-");
-                p[j]=new Plat(tab[0], tab[1], Float.parseFloat(tab[2]));
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     return p;
     }    
-    
+    //constructeur
     public Restaurant (String n, int nb) {
         Nom_R=n;
         Nb_Fourchette=nb;
@@ -103,15 +98,14 @@ public class Restaurant {
     public void setNb_Plat(int Nb_Plat) {
         this.Nb_Plat = Nb_Plat;
     }
-    /* ajouter une commande a la liste des commande */
+    /* ajouter une commande au fichier Commande */
     public void Ajouter_C(Commande c)
     {
         /* Chemin vers le fichier à modifier*/
 		String pathFichier = "src\\Hotellerie\\Files\\Commande.txt";
 		
 		/* Texte à ajouter */
-		String newLine = System.getProperty("line.separator");
-                String aAjouter =c.getNum_R() + "-" + c.getCode_Plat() + "-" + c.getNb_Plat() + "-" + c.getDate_C() + newLine;
+                String aAjouter =c.getNum_R() + "-" + c.getCode_Plat() + "-" + c.getNb_Plat() + "-" + c.getDate_C() + "\n";
 		FileWriter writer = null;
 		try	{
 			/* Ouverture du fichier en écriture */
@@ -125,23 +119,19 @@ public class Restaurant {
     }
     /* determiner le prix du plat du code co */
     public float getprix(String co){
+        int i=0;
+        Boolean b=false;
         float p=0;
-        try {
-            File f = new File("src\\Hotellerie\\Files\\"+getNom_R()+".txt");
-            BufferedReader b = new BufferedReader(new FileReader(f));
-            String readLine = "";
-            while ((readLine = b.readLine()) != null) {
-                if(readLine.startsWith(co)){
-                  String[] tab=readLine.split("-");
-                  p=Float.parseFloat(tab[2]);
+        while((i<this.getNb_Plat()) && (b==false))
+        {
+            if(this.Plats[i].code.equals(co))
+            {
+                b=true;
+                p=this.Plats[i].prix;
             }
-            }
-            b.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            i++;
         }
         return p;
-        
     }
     
     /* effectuer une commande */
@@ -227,7 +217,7 @@ public class Restaurant {
         }
     }
     
-    /* afficher la recette de la journee */
+    /* afficher la recette de la semaine */
     public void recette_semaine()
     {
         float r=0;
