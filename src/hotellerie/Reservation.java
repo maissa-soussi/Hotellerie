@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
@@ -72,10 +73,13 @@ public class Reservation {
 			Chambre c = new Chambre();
 			int numero_chambre = rechercher_chambre(type, vue, semdebut, nbsem);
 			if (numero_chambre != 0) {
-				c.ReserverChambre(numero_chambre, semdebut);
+                            //Num_R++;
+				c.ReserverChambre(numero_chambre,nbsem, semdebut);
 				this.Calcul_prix_total(type);
 				this.Calcul_reste_payer();
-				
+				            DecimalFormat nf = new DecimalFormat("000");
+                                            System.out.println(nf.format(numero_chambre));
+
 				Path reservation = Paths.get("src\\Hotellerie\\Files\\Reservation.txt");
 				Files.write(reservation, ("" + getNum_R()).getBytes(), StandardOpenOption.WRITE,
 						StandardOpenOption.APPEND);
@@ -99,7 +103,7 @@ public class Reservation {
 				Files.write(reservation, ("" + getNb_semaine()).getBytes(), StandardOpenOption.WRITE,
 						StandardOpenOption.APPEND);
 				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-				Files.write(reservation, ("" + numero_chambre).getBytes(), StandardOpenOption.WRITE,
+				Files.write(reservation, ("" + nf.format(numero_chambre)).getBytes(), StandardOpenOption.WRITE,
 						StandardOpenOption.APPEND);
 				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 				Files.write(reservation, ("" + getPrix_total()).getBytes(), StandardOpenOption.WRITE,
@@ -141,7 +145,7 @@ public class Reservation {
 
 	}
 
-	// Visualiser une reservation à partir de son numéro
+	// Visualiser une reservation ï¿½ partir de son numï¿½ro
 	public void visualiser(int num) throws IOException {
 		Path reservation = Paths.get("src\\Hotellerie\\Files\\Reservation.txt");
 		List<String> lignes = Files.readAllLines(reservation);
@@ -159,17 +163,17 @@ public class Reservation {
 				break;
 			}
 		}
-		System.out.println("\t\t\t Date de réservation : " + getDate_Reservation());
-		System.out.println("\t\t\t Numéro de réservation : " + getNum_R());
+		System.out.println("\t\t\t Date de rï¿½servation : " + getDate_Reservation());
+		System.out.println("\t\t\t Numï¿½ro de rï¿½servation : " + getNum_R());
 		Client c = new Client(cin);
-		System.out.println("Nom : " + c.getNom() + "\t" + "Prénom" + c.getPrenom());
+		System.out.println("Nom : " + c.getNom() + "\t" + "Prï¿½nom" + c.getPrenom());
 		System.out.println("E-mail : " + c.getEmail());
-		System.out.println("Tél : " + c.getTel());
+		System.out.println("Tï¿½l : " + c.getTel());
 		System.out.println("Pays : " + c.getPays() + "\n");
 		System.out.println("Nombre de chambres : " + getNb_chambre());
 		System.out.println("Prix total en (dinars) : " + getPrix_total());
-		System.out.println("Avance payée en (dinars) :" + getPrix_reservation() * 0.1);
-		System.out.println("Date d'arrivée : " + getDate_Arrivee());
+		System.out.println("Avance payï¿½e en (dinars) :" + getPrix_reservation() * 0.1);
+		System.out.println("Date d'arrivï¿½e : " + getDate_Arrivee());
 		System.out.println("Nombre de semaine : " + getNb_semaine());
 
 	}
