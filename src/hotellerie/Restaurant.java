@@ -29,7 +29,7 @@ public class Restaurant {
         int i=0;
         try {
             /* Création du flux vers le fichier texte */
-            File f = new File("src\\Hotellerie\\Files\\"+getNom_R()+".txt");
+            File f = new File("src\\Hotellerie\\Files\\"+Nom_R+".txt");
             BufferedReader b = new BufferedReader(new FileReader(f));
             /* parcours du fichier ligne par ligne */
             String readLine = "";
@@ -44,9 +44,9 @@ public class Restaurant {
     }
     //remplir le tableau Plats par des plats a partir du fichier
     public Plat [] importer_plat() {
-        Plat [] p= new Plat[this.getNb_Plat()];
+        Plat [] p= new Plat[Nb_Plat];
         try {
-            File f = new File("src\\Hotellerie\\Files\\"+getNom_R()+".txt");
+            File f = new File("src\\Hotellerie\\Files\\"+Nom_R+".txt");
             BufferedReader b = new BufferedReader(new FileReader(f));
             int i=0;
             String readLine = "";
@@ -67,7 +67,7 @@ public class Restaurant {
         Nom_R=n;
         Nb_Fourchette=nb;
         Nb_Plat=Calcul_Nb_Plat();
-        Plats=this.importer_plat();
+        Plats=importer_plat();
     }
     public String getNom_R() {
         return Nom_R;
@@ -91,16 +91,12 @@ public class Restaurant {
         return Plats;
     }
 
-        public void setPlats(Plat[] Plats) {
-            this.setPlats(Plats);
-    } 
-
     public void setNb_Plat(int Nb_Plat) {
         this.Nb_Plat = Nb_Plat;
     }
     /* ajouter une commande au fichier Commande */
     public void Ajouter_C(Commande c)
-    {
+    {    c.initialiser();
         /* Chemin vers le fichier à modifier*/
 		String pathFichier = "src\\Hotellerie\\Files\\Commande.txt";
 		
@@ -122,9 +118,9 @@ public class Restaurant {
         int i=0;
         Boolean b=false;
         float p=0;
-        while((i<this.getNb_Plat()) && (b==false))
+        while((i<Nb_Plat) && (b==false))
         {
-            if(this.Plats[i].code.equals(co))
+            if(Plats[i].code.equals(co))
             {
                 b=true;
                 p=this.Plats[i].prix;
@@ -138,7 +134,6 @@ public class Restaurant {
     public void effectuer(int n, String co, int nb, int d)
     {
         Commande c=new Commande(n, co, nb, d);
-        c.initialiser();
         this.Ajouter_C(c);
         float p=this.getprix(co);
         String t = String.valueOf(n);
@@ -241,7 +236,7 @@ public class Restaurant {
     /* afficher la fréquence de demande de chaque plat pendant la semaine courante */
     public void frequence()
     {
-        for(int i=0;i<this.Nb_Plat;i++)
+        for(int i=0;i<Nb_Plat;i++)
         {
             int fr=0;
             try {
@@ -250,12 +245,12 @@ public class Restaurant {
             String readLine = "";
             while ((readLine = b.readLine()) != null) {
                 String[] tab=readLine.split("-");
-                if(this.Plats[i].code.equals(tab[1])){
+                if(Plats[i].code.equals(tab[1])){
                     fr=fr+Integer.parseInt(tab[2]);
             }
             }
             b.close();
-            System.out.println("la fréquence de demande du plat "+this.Plats[i].nom+" pendant la semaine courante est: "+fr);
+            System.out.println("la fréquence de demande du plat "+Plats[i].nom+" pendant la semaine courante est: "+fr);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -75,7 +75,7 @@ public class Commande {
                 String[] tab=readLine.split("-");
                 if(j==i-1)
                 {                                      
-                    if("7".equals(tab[3]) && (this.Date_C!=7))
+                    if("7".equals(tab[3]) && (Date_C!=7))
                     {
                         b.close();
                         File entree = new File("src\\Hotellerie\\Files\\Commande.txt");
