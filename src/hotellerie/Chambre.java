@@ -27,7 +27,6 @@ public class Chambre {
     private boolean Res2;
     private boolean Res3;
     private boolean Res4;
-    
 
     public int GetNum() {
         return Num;
@@ -77,6 +76,7 @@ public class Chambre {
 
     }
 //Construire un objet Chambre à partir de son numeroC : convertir la ligne de la chambre en une instance chambre
+
     public Chambre(int numC) {
         try {
             DecimalFormat nf = new DecimalFormat("000");
@@ -102,6 +102,7 @@ public class Chambre {
         }
     }
 //afficher une chambre donnée par son NumC
+
     public void AfficherChambre(int numC) {
         try {
             DecimalFormat nf = new DecimalFormat("000");
@@ -120,6 +121,7 @@ public class Chambre {
 
     }
 //afficher toutes les chambres de l'hotels
+
     public void AfficherChambres() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("src\\Hotellerie\\Files\\Chambre.txt"));
@@ -133,22 +135,8 @@ public class Chambre {
         }
     }
 
-   /* public void lireChambre() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("src\\Hotellerie\\Files\\Chambre.txt"));
-            String line;
-//while ((line = br.readLine()) != null) {
-            // process the line.
-//}
-            line = br.readLine();
-            br.close();
-            System.out.println(line);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 // reserve une chambre donné par son numero et numero de semaine et stocke la modification sur le fichier chambre
-    public void ReserverChambre(int numC,int nbSem,int numS) {
+    public void ReserverChambre(int numC, int nbSem, int numS) {
         try {
             File fichier1 = new File("src\\Chambre.txt");
             FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
@@ -159,12 +147,12 @@ public class Chambre {
             DecimalFormat nf = new DecimalFormat("000");
             while ((line = br.readLine()) != null) {
                 if (line.contains(nf.format(numC))) {
-                 for (int i=0;i<nbSem;i++)
-                        line = ChangerChamp(line, numS+i);
-                        bufferedWriter.write(line);
+                    for (int i = 0; i < nbSem; i++) {
+                        line = ChangerChamp(line, numS + i);
+                    }
+                    bufferedWriter.write(line);
                     bufferedWriter.write("\r\n");
-                }
-                else {
+                } else {
                     bufferedWriter.write(line);
                     bufferedWriter.write("\r\n");
                 }
@@ -178,14 +166,16 @@ public class Chambre {
         }
 
     }
- //fonction utilisé pour changer le champs Res'num'(Res1 ou Res2....) de la chambre qui sera reservé durant cette semaine
-    public String ChangerChamp(String line, int num) {
+    //fonction utilisé pour changer le champs Res'num'(Res1 ou Res2....) de la chambre qui sera reservé durant cette semaine
+
+    private String ChangerChamp(String line, int num) {
         String[] update = line.split("-");
         update[num + 2] = "1";
         return update[0] + "-" + update[1] + "-" + update[2] + "-" + update[3] + "-" + update[4] + "-" + update[5] + "-" + update[6];
     }
-  //fonction qui permet de verifier sur une ligne(une chambre) si elle est disponible durant la semaine donnée
-    public boolean Verifier(String line, int num) {
+    //fonction qui permet de verifier sur une ligne(une chambre) si elle est disponible durant la semaine donnée
+
+    private boolean Verifier(String line, int num) {
         String[] update = line.split("-");
         boolean test;
         if (num < 1 || num > 4) {
@@ -200,7 +190,7 @@ public class Chambre {
         return test;
     }
 
-   //fonction utilisé pour convertir (0,1) du fichier texte en type boolean(true,false)
+    //fonction utilisé pour convertir (0,1) du fichier texte en type boolean(true,false)
     private Boolean StringToBoolean(String ch) {
         int a = Integer.parseInt(ch);
         if (a == 1) {
