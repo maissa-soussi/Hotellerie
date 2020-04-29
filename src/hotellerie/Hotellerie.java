@@ -24,7 +24,7 @@ public class Hotellerie {
                     {
                     if (Client.Verif(nb1))
                     {
-                        System.out.println("Bienvenue cher Client");
+                       System.out.println("Bienvenue cher Client");
                         Client e=new Client(nb1);
                         System.out.println("Voici vos coordonnées");
                         e.affiche();
@@ -49,8 +49,8 @@ public class Hotellerie {
                         System.out.println("A quelle semaine voulez-vous debuter votre sejour ?");
                         int semdebut= input5.nextInt();
                         r.reserver(type, vue, semdebut, nbsem);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
-                        r.visualiser(r.getNum_R());// visualiser les details de cette reservation
-                        r.cloturer(nb1);  //cloturer et afficher les details des reservations du client cin=250*/ */
+                        r.visualiser(r.getNum_R());// visualiser les details de cette reservation 
+                        //r.cloturer(nb1);  //cloturer et afficher les details des reservations du client cin=250
                        // r.annuler(r.getNum_R()-1);
                         
                         
@@ -130,7 +130,7 @@ public class Hotellerie {
 		    int n=c1.nextInt();
                     System.out.println("entrer le code du plat");
                     Scanner c2=new Scanner(System.in);
-		    String co=c1.nextLine();
+		    String co=c2.nextLine();
                     System.out.println("entrer le nombre de plats");
                     Scanner c3=new Scanner(System.in);
 		    int nbp=c3.nextInt();

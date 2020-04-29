@@ -176,16 +176,16 @@ public class Reservation {
                 }
             }
             System.out.println("\t\t\t Date de rï¿½servation : " + getDate_Reservation());
-            System.out.println("\t\t\t Numï¿½ro de rï¿½servation : " + getNum_R());
+            System.out.println("\t\t\t Numéro de réservation : " + getNum_R());
             Client c = new Client(cin);
-            System.out.println("Nom : " + c.getNom() + "\t" + "Prï¿½nom" + c.getPrenom());
+            System.out.println("Nom : " + c.getNom() + "\t" + "Prénom" + c.getPrenom());
             System.out.println("E-mail : " + c.getEmail());
-            System.out.println("Tï¿½l : " + c.getTel());
+            System.out.println("Tél : " + c.getTel());
             System.out.println("Pays : " + c.getPays() + "\n");
             System.out.println("Nombre de chambres : " + getNb_chambre());
-            System.out.println("Numï¿½ro de chambre : " + Num_Chambre);
+            System.out.println("Numéro de chambre : " + Num_Chambre);
             System.out.println("Prix total en (dinars) : " + getPrix_total());
-            System.out.println("Avance payï¿½e en (dinars) :" + getPrix_reservation() * 0.1);
+            System.out.println("Avance payée en (dinars) :" + getPrix_reservation() * 0.1);
             System.out.println("Date d'arrive : " + getDate_Arrivee());
             System.out.println("Nombre de semaine : " + getNb_semaine());
         } catch (IOException e) {
@@ -207,7 +207,7 @@ public class Reservation {
                     setPrix_total(Float.valueOf(donnees[6]));
                     setReste_payer(Float.valueOf(donnees[7]));
                     System.out.println("\t\t\t Numéro de chambre : " + getNb_chambre());
-                    System.out.println("Nom : " + c.getNom() + "\t\t Prï¿½nom : " + c.getPrenom());
+                    System.out.println("Nom : " + c.getNom() + "\t\t Prénom : " + c.getPrenom());
                     System.out.println("E-mail : " + c.getEmail());
                     System.out.println("Téléphone : " + c.getTel());
                     System.out.println("Pays : " + c.getPays() + "\n");

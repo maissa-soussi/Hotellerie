@@ -16,7 +16,7 @@
 106-double-jardin-0-0-0-0
 107-triple-mer-0-0-0-0
 108-triple-jardin-0-0-0-0
-109-luxe-mer-0-0-0-0
+109-luxe-mer-0-1-1-1
 110-luxe-piscine-0-0-0-0
 201-simple-mer-0-0-0-0
 202-simple-piscine-0-0-0-0
