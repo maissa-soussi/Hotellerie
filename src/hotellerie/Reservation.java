@@ -159,6 +159,7 @@ public class Reservation {
             int Num_Chambre = 0;
             Path reservation = Paths.get("src\\Hotellerie\\Files\\Reservation.txt");
             List<String> lignes = Files.readAllLines(reservation);
+            System.out.println("Visualisation de la reservation \n");
             long cin = 0;
             for (String ligne : lignes) {
                 String[] donnees = ligne.split("-");
@@ -198,19 +199,20 @@ public class Reservation {
             Client c = new Client(cin);
             Path reservation = Paths.get("src\\Hotellerie\\Files\\Reservation.txt");
             List<String> lignes = Files.readAllLines(reservation);
+            System.out.println("Cloturer votre reservation");
             for (String ligne : lignes) {
                 String[] donnees = ligne.split("-");
                 if (donnees[1].equals("" + cin)) {
                     setNb_chambre(Integer.valueOf(donnees[5]));
                     setPrix_total(Float.valueOf(donnees[6]));
                     setReste_payer(Float.valueOf(donnees[7]));
-                    System.out.println("\t\t\t Numï¿½ro de chambre : " + getNb_chambre());
+                    System.out.println("\t\t\t Numéro de chambre : " + getNb_chambre());
                     System.out.println("Nom : " + c.getNom() + "\t\t Prï¿½nom : " + c.getPrenom());
                     System.out.println("E-mail : " + c.getEmail());
-                    System.out.println("Tï¿½lï¿½phone : " + c.getTel());
+                    System.out.println("Téléphone : " + c.getTel());
                     System.out.println("Pays : " + c.getPays() + "\n");
-                    System.out.println("Prix total payï¿½ : " + getPrix_total());
-                    System.out.println("Supplement ï¿½ payer (en dinars) : " + getReste_payer());
+                    System.out.println("Prix total payée : " + getPrix_total());
+                    System.out.println("Supplement à payer (en dinars) : " + getReste_payer());
                 }
             }
         } catch (IOException e) {
