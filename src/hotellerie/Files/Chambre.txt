@@ -3,7 +3,7 @@
 003-simple-jardin-0-0-0-0
 004-double-mer-0-0-0-0
 005-double-piscine-0-0-0-0
-006-double-jardin-0-0-0-0
+006-double-jardin-0-0-1-0
 007-triple-mer-0-0-0-0
 008-triple-jardin-0-0-0-0
 009-luxe-mer-0-1-1-0
