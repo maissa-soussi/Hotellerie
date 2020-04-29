@@ -40,9 +40,9 @@ public class Hotellerie {
                     {
                         System.out.println("Bienvenue cher Client");
                         Client e=new Client(nb1);
-                        System.out.println("Voici vos coordonnÃ©es");
+                        System.out.println("Voici vos coordonnées");
                         e.affiche();
-                        System.out.println("1- Reserver une chambre     2- Modifier vos cordonnÃ©es     0- Annuler");
+                        System.out.println("1- Reserver une chambre     2- Modifier vos cordonnées     0- Annuler");
                         Scanner sc2=new Scanner(System.in);
 		        int nb2=sc2.nextInt();
                         if (nb2==1)
@@ -62,7 +62,7 @@ public class Hotellerie {
                         Scanner input5 =new Scanner(System.in);
                         System.out.println("A Quelle semaine de Aout voulez-vous reserver ? ");
                         int semdebut =input5.nextInt();
-                        r.reserver(type, vue, nbsem, nb_chambre);// appel à la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
+                        r.reserver(type, vue,semdebut, nbsem);// appel à la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
                         r.visualiser(r.getNum_R());// visualiser les details de cette reservation
                         r.cloturer(nb1);  //cloturer et afficher les details des reservations du client cin=250*/ */
                        // r.annuler(r.getNum_R()-1);
@@ -80,7 +80,7 @@ public class Hotellerie {
                             System.out.println("Entrer votre nouveau pays d'habitat");
 		            String nb5=sc3.nextLine();
                             e.Modifier(nb1, nb3, nb4, nb5);
-                            System.out.println("Modification effectuÃ©e avec susccÃ©s !");
+                            System.out.println("Modification effectuée avec susccés !");
                         }
                         if (nb2==0)
                         {

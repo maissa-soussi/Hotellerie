@@ -1,4 +1,4 @@
-001-simple-mer-1-1-0-0
+001-simple-mer-0-0-0-0
 002-simple-piscine-0-0-0-0
 003-simple-jardin-0-0-0-0
 004-double-mer-0-0-0-0

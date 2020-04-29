@@ -132,16 +132,16 @@ public class Reservation {
 
     // le prix juste au moment de la reservation
     public void Calcul_prix_total(String type) {
-        if (type == "simple") {
+        if (type.contains("simple") ) {
             setPrix_total(500);
             setPrix_reservation(500);
-        } else if (type == "double") {
+        } else if (type.contains("double")) {
             setPrix_total(700);
             setPrix_reservation(700);
-        } else if (type == "triple") {
+        } else if (type.contains("triple")) {
             setPrix_total(1000);
             setPrix_reservation(1000);
-        } else if (type == "luxe") {
+        } else if (type.contains("luxe")){
             setPrix_total(1500);
             setPrix_reservation(1500);
         }
