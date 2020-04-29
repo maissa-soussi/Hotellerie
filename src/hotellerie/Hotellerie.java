@@ -46,7 +46,26 @@ public class Hotellerie {
                         Scanner sc2=new Scanner(System.in);
 		        int nb2=sc2.nextInt();
                         if (nb2==1)
-                        {
+                        {  Scanner input1=new Scanner(System.in);
+                        System.out.println("Combien de semaine voulez-vous allouez?");
+                        int nbsem=input1.nextInt();
+                        Scanner input2=new Scanner(System.in);
+                        System.out.println("Combien de chambre voulez-vous reservez?");
+                        int nb_chambre=input2.nextInt();
+                        Reservation r=new Reservation(nb1,nbsem,nb_chambre);//initialiser une reservation avec cin=250 , nb semaine à louer =1 ,nb de chambre a louer =1 
+                        Scanner input3=new Scanner(System.in);
+                        System.out.println("Quel type voulez-vous choisir ?");
+                        String type=input3.nextLine();
+                        Scanner input4=new Scanner(System.in);
+                        System.out.println("Voulez vous choisir une chambre avec vue mer/piscine/jardin ");
+                        String vue=input4.nextLine();
+                        r.reserver(type, vue, nbsem, nb_chambre);// appel à la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
+                        r.visualiser(r.getNum_R());// visualiser les details de cette reservation
+                        r.cloturer(nb1);  //cloturer et afficher les details des reservations du client cin=250*/ */
+                       // r.annuler(r.getNum_R()-1);
+                        
+                        
+                        
                             //ici raaafet le cin c'est dans nb1
                         }
                         if (nb2==2)
@@ -84,7 +103,24 @@ public class Hotellerie {
                         sc4.nextLine();
                         Client e1=new Client(nb1,nom,prenom,date,mail,tel,pays);
                         System.out.println("Maintenant on commence la procedure de reservation");
-                        
+                       
+                        Scanner input5=new Scanner(System.in);
+                        System.out.println("Combien de semaine voulez-vous allouez?");
+                        int nbsem=input5.nextInt();
+                        Scanner input6=new Scanner(System.in);
+                        System.out.println("Combien de chambre voulez-vous reservez?");
+                        int nb_chambre=input6.nextInt();
+                        Reservation r=new Reservation(nb1,nbsem,nb_chambre);//initialiser une reservation avec cin=250 , nb semaine à louer =1 ,nb de chambre a louer =1 
+                        Scanner input7=new Scanner(System.in);
+                        System.out.println("Quel type voulez-vous choisir ?");
+                        String type=input7.nextLine();
+                        Scanner input8=new Scanner(System.in);
+                        System.out.println("Voulez vous choisir une chambre avec vue mer/piscine/jardin ");
+                        String vue=input8.nextLine();
+                        r.reserver(type, vue, nbsem, nb_chambre);// appel à la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
+                        r.visualiser(r.getNum_R());// visualiser les details de cette reservation
+                        r.cloturer(nb1);  //cloturer et afficher les details des reservations du client cin=250*/ */
+                       // r.annuler(r.getNum_R()-1);
                         //raafet recopie le code eli 5demtou l fou9 hounii 
                         
                         
