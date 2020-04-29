@@ -143,7 +143,6 @@ public class Chambre {
             BufferedReader br = new BufferedReader(fichier);
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1, true));
             String line;
-            boolean verif = false;
             DecimalFormat nf = new DecimalFormat("000");
             while ((line = br.readLine()) != null) {
                 if (line.contains(nf.format(numC))) {
@@ -166,13 +165,20 @@ public class Chambre {
         }
 
     }
-    //fonction utilisé pour changer le champs Res'num'(Res1 ou Res2....) de la chambre qui sera reservé durant cette semaine
+    //fonction utilisé pour changer le champs Res'num'(Res1 ou Res2....) de la chambre qui sera reservé durant cette semaine (change de 0 a 1)
 
     private String ChangerChamp(String line, int num) {
         String[] update = line.split("-");
         update[num + 2] = "1";
         return update[0] + "-" + update[1] + "-" + update[2] + "-" + update[3] + "-" + update[4] + "-" + update[5] + "-" + update[6];
     }
+    //
+    private String InitChamp(String line, int num) {
+        String[] update = line.split("-");
+        update[num + 2] = "0";
+        return update[0] + "-" + update[1] + "-" + update[2] + "-" + update[3] + "-" + update[4] + "-" + update[5] + "-" + update[6];
+    }
+    
     //fonction qui permet de verifier sur une ligne(une chambre) si elle est disponible durant la semaine donnée
 
     private boolean Verifier(String line, int num) {
@@ -197,6 +203,35 @@ public class Chambre {
             return true;
         } else {
             return false;
+        }
+
+    }
+    public void AnnulerReservation(int numC, int nbSem, int numS) {
+        try {
+            File fichier1 = new File("src\\Chambre.txt");
+            FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
+            BufferedReader br = new BufferedReader(fichier);
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1, true));
+            String line;
+            DecimalFormat nf = new DecimalFormat("000");
+            while ((line = br.readLine()) != null) {
+                if (line.contains(nf.format(numC))) {
+                    for (int i = 0; i < nbSem; i++) {
+                        line = InitChamp(line, numS + i);
+                    }
+                    bufferedWriter.write(line);
+                    bufferedWriter.write("\r\n");
+                } else {
+                    bufferedWriter.write(line);
+                    bufferedWriter.write("\r\n");
+                }
+            }
+            bufferedWriter.close();
+            br.close();
+
+            Files.move(Paths.get("src\\Chambre.txt"), Paths.get("src\\Hotellerie\\Files\\Chambre.txt"), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
