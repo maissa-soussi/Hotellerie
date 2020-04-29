@@ -88,7 +88,6 @@ public class Reservation {
                 this.Calcul_prix_total(type);
                 this.Calcul_reste_payer();
                 DecimalFormat nf = new DecimalFormat("000");
-                System.out.println(nf.format(numero_chambre));
                 Files.write(reservation, ("\n").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
                 Files.write(reservation, ("" + getNum_R()).getBytes(), StandardOpenOption.WRITE,
                         StandardOpenOption.APPEND);
