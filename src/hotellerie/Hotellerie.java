@@ -45,7 +45,10 @@ public class Hotellerie {
                         Scanner input4=new Scanner(System.in);
                         System.out.println("Voulez vous choisir une chambre avec vue mer/piscine/jardin ");
                         String vue=input4.nextLine();
-                        r.reserver(type, vue, nbsem, nb_chambre);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
+                        Scanner input5=new Scanner(System.in);
+                        System.out.println("A quelle semaine voulez-vous debuter votre sejour");
+                        int semdebut= input5.nextInt();
+                        r.reserver(type, vue, semdebut, nbsem);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
                         r.visualiser(r.getNum_R());// visualiser les details de cette reservation
                         r.cloturer(nb1);  //cloturer et afficher les details des reservations du client cin=250*/ */
                        // r.annuler(r.getNum_R()-1);
@@ -103,7 +106,10 @@ public class Hotellerie {
                         Scanner input8=new Scanner(System.in);
                         System.out.println("Voulez vous choisir une chambre avec vue mer/piscine/jardin ");
                         String vue=input8.nextLine();
-                        r.reserver(type, vue, nbsem, nb_chambre);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
+                        Scanner input9=new Scanner(System.in);
+                        System.out.println("A quelle semaine voulez-vous debuter votre sejour");
+                        int semdebut= input9.nextInt();
+                        r.reserver(type, vue, semdebut, nbsem);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
                         r.visualiser(r.getNum_R());// visualiser les details de cette reservation
                         r.cloturer(nb1);  //cloturer et afficher les details des reservations du client cin=250*/ */
                        // r.annuler(r.getNum_R()-1);
