@@ -63,11 +63,16 @@ public class Restaurant {
     return p;
     }    
     //constructeur
-    public Restaurant (String n, int nb) {
+    public Restaurant (String n) {
         Nom_R=n;
-        Nb_Fourchette=nb;
         Nb_Plat=Calcul_Nb_Plat();
         Plats=importer_plat();
+        if("Italiano".equals(n))
+            Nb_Fourchette=3;
+        if("Mexicano".equals(n))
+            Nb_Fourchette=3;
+        if("Royale".equals(n))
+            Nb_Fourchette=2;
     }
     public String getNom_R() {
         return Nom_R;
