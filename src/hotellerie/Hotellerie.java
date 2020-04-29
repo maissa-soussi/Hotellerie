@@ -34,6 +34,8 @@ public class Hotellerie {
                     {
                         System.out.println("Operation annuler");
                     }
+                    else
+                    {
                     if (Client.Verif(nb1))
                     {
                         System.out.println("Bienvenue cher Client");
@@ -85,9 +87,10 @@ public class Hotellerie {
                         
                         //raafet recopie le code eli 5demtou l fou9 hounii 
                         
+                        
                     }
                     
-                }
+                }}
                 
                 if (nb==2)
                 {
