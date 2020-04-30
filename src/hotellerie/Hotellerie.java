@@ -26,7 +26,7 @@ public class Hotellerie {
                     {
                        System.out.println("Bienvenue cher Client");
                         Client e=new Client(nb1);
-                        System.out.println("Voici vos coordonnées");
+                        System.out.println("Voici vos coordonnees");
                         e.affiche();
                         System.out.println("1- Reserver une chambre     2- Modifier vos cordonnées     0- Annuler");
                         Scanner sc2=new Scanner(System.in);
@@ -66,11 +66,11 @@ public class Hotellerie {
                             System.out.println("Entrer votre nouveau pays d'habitat");
 		            String nb5=sc3.nextLine();
                             e.Modifier(nb1, nb3, nb4, nb5);
-                            System.out.println("Modification effectuée avec susccés !");
+                            System.out.println("Modification effectuee avec suscces !");
                         }
                         if (nb2==0)
                         {
-                            System.out.println("Operation annuler");
+                            System.out.println("Operation annulee");
                         }
                     }
                     else
@@ -94,10 +94,10 @@ public class Hotellerie {
                         System.out.println("Maintenant on commence la procedure de reservation");
                        
                         Scanner input5=new Scanner(System.in);
-                        System.out.println("Combien de semaine voulez-vous allouez?");
+                        System.out.println("Combien de semaine voulez-vous allouer?");
                         int nbsem=input5.nextInt();
                         Scanner input6=new Scanner(System.in);
-                        System.out.println("Combien de chambre voulez-vous reservez?");
+                        System.out.println("Combien de chambre voulez-vous reserver?");
                         int nb_chambre=input6.nextInt();
                         Reservation r=new Reservation(nb1,nbsem,nb_chambre);//initialiser une reservation avec cin=250 , nb semaine � louer =1 ,nb de chambre a louer =1 
                         Scanner input7=new Scanner(System.in);
@@ -122,7 +122,7 @@ public class Hotellerie {
                 
                 if (nb==2)
                 {
-                    System.out.println("entrer le nom du restaurant");
+                    System.out.println("entrer le nom du restaurant Royale/Italiano/Mexicano");
                     Scanner c5=new Scanner(System.in);
 		    String nom=c5.nextLine();
                     System.out.println("entrer le numero de reservation");
@@ -134,7 +134,7 @@ public class Hotellerie {
                     System.out.println("entrer le nombre de plats");
                     Scanner c3=new Scanner(System.in);
 		    int nbp=c3.nextInt();
-                    System.out.println("entrer la date de la commande");
+                    System.out.println("entrer le numero de la journee de la commande");
                     Scanner c4=new Scanner(System.in);
 		    int d=c4.nextInt();
                     Restaurant R=new Restaurant(nom);
@@ -142,14 +142,14 @@ public class Hotellerie {
                 }
                 if (nb==3)
                 {
-                    System.out.println("entrer le nom du restaurant");
+                    System.out.println("entrer le nom du restaurant Royale/Italiano/Mexicano");
                     Scanner s1=new Scanner(System.in);
 		    String no=s1.nextLine();
                     Restaurant R=new Restaurant(no);
                     System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
                     System.out.println(" 1- Visualiser la recette d'une journee");
                     System.out.println(" 2- Visualiser la recette de la semaine courante");
-                    System.out.println(" 1- Visualiser la  fréquence de demande de chaque plat pendant la semaine courante");
+                    System.out.println(" 3- Visualiser la  fréquence de demande de chaque plat pendant la semaine courante");
                     Scanner a=new Scanner(System.in);
 		    int i=a.nextInt();
                     if(i==1)

@@ -175,17 +175,17 @@ public class Reservation {
                     break;
                 }
             }
-            System.out.println("\t\t\t Date de rï¿½servation : " + getDate_Reservation());
-            System.out.println("\t\t\t Numéro de réservation : " + getNum_R());
+            System.out.println("\t\t\t Date de reservation : " + getDate_Reservation());
+            System.out.println("\t\t\t Numero de reservation : " + getNum_R());
             Client c = new Client(cin);
-            System.out.println("Nom : " + c.getNom() + "\t" + "Prénom" + c.getPrenom());
+            System.out.println("Nom : " + c.getNom() + "\t" + "Prenom : " + c.getPrenom());
             System.out.println("E-mail : " + c.getEmail());
-            System.out.println("Tél : " + c.getTel());
+            System.out.println("Tel : " + c.getTel());
             System.out.println("Pays : " + c.getPays() + "\n");
             System.out.println("Nombre de chambres : " + getNb_chambre());
-            System.out.println("Numéro de chambre : " + Num_Chambre);
+            System.out.println("Numero de chambre : " + Num_Chambre);
             System.out.println("Prix total en (dinars) : " + getPrix_total());
-            System.out.println("Avance payée en (dinars) :" + getPrix_reservation() * 0.1);
+            System.out.println("Avance payee en (dinars) : " + getPrix_reservation() * 0.1);
             System.out.println("Date d'arrive : " + getDate_Arrivee());
             System.out.println("Nombre de semaine : " + getNb_semaine());
         } catch (IOException e) {
@@ -206,13 +206,13 @@ public class Reservation {
                     setNb_chambre(Integer.valueOf(donnees[5]));
                     setPrix_total(Float.valueOf(donnees[6]));
                     setReste_payer(Float.valueOf(donnees[7]));
-                    System.out.println("\t\t\t Numéro de chambre : " + getNb_chambre());
-                    System.out.println("Nom : " + c.getNom() + "\t\t Prénom : " + c.getPrenom());
+                    System.out.println("\t\t\t Numero de chambre : " + getNb_chambre());
+                    System.out.println("Nom : " + c.getNom() + "\t\t Prenom : " + c.getPrenom());
                     System.out.println("E-mail : " + c.getEmail());
-                    System.out.println("Téléphone : " + c.getTel());
+                    System.out.println("Telephone : " + c.getTel());
                     System.out.println("Pays : " + c.getPays() + "\n");
-                    System.out.println("Prix total payée : " + getPrix_total());
-                    System.out.println("Supplement à payer (en dinars) : " + getReste_payer());
+                    System.out.println("Prix total payee : " + getPrix_total());
+                    System.out.println("Supplement a payer (en dinars) : " + getReste_payer());
                 }
             }
         } catch (IOException e) {

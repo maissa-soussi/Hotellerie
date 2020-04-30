@@ -106,7 +106,7 @@ public class Restaurant {
 		String pathFichier = "src\\Hotellerie\\Files\\Commande.txt";
 		
 		/* Texte à ajouter */
-                String aAjouter =c.getNum_R() + "-" + c.getCode_Plat() + "-" + c.getNb_Plat() + "-" + c.getDate_C() + "\n";
+                String aAjouter =c.getNum_R() + "-" + c.getCode_Plat() + "-" + c.getNb_Plat() + "-" + c.getDate_C() + "-" + this.getprix(c.getCode_Plat())*c.getNb_Plat() + "\n";
 		FileWriter writer = null;
 		try	{
 			/* Ouverture du fichier en écriture */
