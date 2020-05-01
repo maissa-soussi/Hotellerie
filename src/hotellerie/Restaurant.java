@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Restaurant {
     /* declaration de la classe Plat */
@@ -173,6 +176,17 @@ public class Restaurant {
         catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("                         Restaurant "+ this.Nom_R);
+        Date da = new Date();
+        SimpleDateFormat f = new SimpleDateFormat("dd/M/yyyy                                                   H':'m", Locale.FRANCE);
+	System.out.println(f.format(da));
+        System.out.println("NUM RESERVATION                                             "+n);
+        System.out.println("__________________________________________________________________");
+        System.out.println(co+"*"+nb+"                                                      "+p);
+        System.out.println("__________________________________________________________________");
+        System.out.println("TOTAL                                                       "+p*nb);
+        System.out.println("__________________________________________________________________");
+        System.out.println("                          MERCI A BIENTOT");
     }
     
     /* verifier si le plat du code co appartient au restaurant courant ou non */
