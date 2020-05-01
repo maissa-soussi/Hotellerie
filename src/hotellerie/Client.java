@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -74,7 +75,8 @@ public class Client {
     public void Ajouter() {
 
         try {
-            String nvclient = Cin + "-" + Nom + "-" + Prenom + "-" + Date_N + "-" + Email + "-" + Tel + "-" + Pays;
+            DecimalFormat nf=new DecimalFormat("00000000");
+            String nvclient = nf.format(Cin) + "-" + Nom + "-" + Prenom + "-" + Date_N + "-" + Email + "-" + Tel + "-" + Pays+"";
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src\\hotellerie\\Files\\Client.txt", true));
             bufferedWriter.newLine();
             bufferedWriter.write(nvclient);
