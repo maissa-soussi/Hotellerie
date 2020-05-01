@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hotellerie;
 
-/**
- *
- * @author ASUS
- */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -137,11 +129,7 @@ public class Client {
             if (!Email.equals(tab[4])) {
                 tab[4] = Email;
             }
-
-            if (!Pays.equals(tab[6])) {
-                tab[6] = Pays;
-            }
-
+            
             if (Tel != Integer.parseInt(tab[5])) {
                 tab[5] = Long.toString(Tel);
             }
