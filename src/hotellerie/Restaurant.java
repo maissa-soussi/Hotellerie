@@ -6,6 +6,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -148,11 +152,10 @@ public class Restaurant {
     /* ajouter le prix de la commande au prix total et au reste a payer dans le fichier reservation */
         try
         {
-        File entree = new File("src\\Hotellerie\\Files\\Reservation.txt");
-        File sortie = new File("src\\Hotellerie\\Files\\temp.txt");
-        BufferedReader br = new BufferedReader(new FileReader(entree));
-        BufferedWriter bw = new BufferedWriter(new FileWriter(sortie));
+        BufferedReader br = new BufferedReader(new FileReader("src\\Hotellerie\\Files\\Reservation.txt"));
         String ligne="";
+        File FileTemp = new File("Reservation.txt");
+        BufferedWriter bw = new BufferedWriter(new FileWriter(FileTemp, true));
  
         while ((ligne = br.readLine()) != null){
             if(ligne.startsWith(t)){
@@ -163,15 +166,11 @@ public class Restaurant {
                   bw.flush();
              }else{
                   bw.write(ligne+"\n");
-                  bw.flush();
              }
         }
         bw.close();
         br.close();
-        entree.renameTo(new File("src\\Hotellerie\\Files\\poubelle.txt"));
-        sortie.renameTo(new File("src\\Hotellerie\\Files\\Reservation.txt"));
-        File poubelle = new File("src\\Hotellerie\\Files\\poubelle.txt");
-        poubelle.delete();
+        Path temp = Files.move(Paths.get("Reservation.txt"), Paths.get("src\\Hotellerie\\Files\\Reservation.txt"), StandardCopyOption.REPLACE_EXISTING);
         }
         catch (IOException e) {
             e.printStackTrace();
