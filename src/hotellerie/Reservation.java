@@ -63,38 +63,39 @@ public class Reservation {
 	// rechercher une chambre selon les criteres
 
 	public int rechercher_chambre(String type, String vue, int nbSem, int numS) {
-	int num = 0;
-            try{	
-            Path chambre = Paths.get("src\\Hotellerie\\Files\\Chambre.txt");
-		List<String> lignes = Files.readAllLines(chambre);
-		
-		for (String ligne : lignes) {
-			String[] detail = ligne.split("-");
-			if ((detail[1].equals(type)) && (detail[2].equals(vue))) {
-				boolean verif = true;
-				int i = 0;
-				while (verif == true && i < nbSem) {
-					if (Integer.valueOf(detail[2 + numS + i]) != 0) {
-						verif = false;
-					} else {
-						i++;
+		int num = 0;
+	            try{	
+	            Path chambre = Paths.get("src\\Hotellerie\\Files\\Chambre.txt");
+			List<String> lignes = Files.readAllLines(chambre);
+			
+			for (String ligne : lignes) {
+				String[] detail = ligne.split("-");
+				if ((detail[1].equals(type)) && (detail[2].equals(vue))) {
+					boolean verif = true;
+					int i = 0;
+					while (verif == true && i < nbSem) {
+						if (Integer.valueOf(detail[2 + numS + i]) != 0) {
+							verif = false;
+						} else {
+							i++;
+						}
 					}
-				}
-				if (verif == true) {
-					num = Integer.parseInt(detail[0]);
-					break;
-				}
+					if (verif == true) {
+						num = Integer.parseInt(detail[0]);
+						break;
+					}
 
+				}
 			}
-		}
-            }
-        catch(IOException e)
-        {
-            e.getMessage();
-        }
+	            }
+	        catch(IOException e)
+	        {
+	            e.getMessage();
+	        }
 
-		return num;
-	}
+			return num;
+		}
+
 	// faire la reservation
 	public void reserver(String type, String vue, int nbsem, int semdebut) {
 		try {
@@ -154,6 +155,7 @@ public class Reservation {
 		}
 
 	}
+	
 
 	// le prix juste au moment de la reservation
 	public void Calcul_prix_total(String type) {
@@ -172,13 +174,13 @@ public class Reservation {
 		}
 	}
 
-	// calculer le reste � paye
+	// calculer le reste ï¿½ paye
 	public void Calcul_reste_payer() {
 		setReste_payer((float) (getPrix_total() * 0.9));
 
 	}
 
-	// Visualiser une reservation � partir de son num�ro
+	// Visualiser une reservation ï¿½ partir de son numï¿½ro
 	public void visualiser(int num) {
 		try {
 			int Num_Chambre = 0;
@@ -225,13 +227,13 @@ public class Reservation {
 		Client c = new Client(cin);
 		String chambres = "";
 		chambres = r.facture(reservation, cin, chambres);
-		System.out.println("\t\t\t" + "Num�ro de(s) chambre(s) r�s�rv�e(s) : " + chambres);
-		System.out.println("Nom : " + c.getNom() + "\t\t" + "Pr�nom : " + c.getPrenom());
+		System.out.println("\t\t\t" + "Numéro de(s) chambre(s) résérvée(s) : " + chambres);
+		System.out.println("Nom : " + c.getNom() + "\t\t" + "Prénom : " + c.getPrenom());
 		System.out.println("E-mail : " + c.getCin());
-		System.out.println("T�l�phone : " + c.getTel());
+		System.out.println("Téléphone : " + c.getTel());
 		System.out.println("Pays : " + c.getPays() + "\n");
-		System.out.println("Prix total � payer (en dinars) : " + r.getPrix_total());
-		System.out.println("Reste � payer (en dinars) : " + r.getReste_payer());
+		System.out.println("Prix total à payer (en dinars) : " + r.getPrix_total());
+		System.out.println("Reste à payer (en dinars) : " + r.getReste_payer());
 
 	}
 
@@ -334,12 +336,14 @@ public class Reservation {
 			List<String> lignes1 = Files.readAllLines(reservation1);
 			List<String> lignes2 = Files.readAllLines(destination);
 			for (String ligne : lignes1) {
-				Files.write(reservation2, ligne.getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
-				Files.write(reservation2, "\n".getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				if (ligne != null) {
+					Files.write(reservation2, ligne.getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+					Files.write(reservation2, "\n".getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				}
 
 			}
 			int[] details = retour_details(destination, num);
-			Chambre c=new Chambre();
+			Chambre c = new Chambre();
 			c.AnnulerReservation(details[0], details[1], details[2]);
 			for (String ligne : lignes2) {
 				String[] donnees = ligne.split("-");
@@ -354,13 +358,38 @@ public class Reservation {
 			Files.move(reservation2, reservation, StandardCopyOption.REPLACE_EXISTING);
 			Files.write(reservation1, "\n".getBytes(), StandardOpenOption.DELETE_ON_CLOSE);
 			Files.write(destination, "\n".getBytes(), StandardOpenOption.DELETE_ON_CLOSE);
-                        cloner();
+			cloner();
 
 		} catch (IOException e) {
 			System.out.println("erreur");
 		}
+		
 
 	}
+	private void cloner()
+    {
+         try{
+             File fichier1 = new File("src\\Reservation.txt");
+        FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Reservation.txt");
+        BufferedReader br = new BufferedReader(fichier);
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1, true));
+        String line=br.readLine();
+        if (line != null)
+         bufferedWriter.write(line);
+        while ((line = br.readLine()) != null) {
+       if(line.length()>0) {
+           bufferedWriter.write("\r\n");
+           bufferedWriter.write(line);
+                ;}
+        }
+        bufferedWriter.close();
+        br.close();
+        Files.move(Paths.get("src\\Reservation.txt"), Paths.get("src\\Hotellerie\\Files\\Reservation.txt"), StandardCopyOption.REPLACE_EXISTING);
+         }
+         catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
 
 	public static void nettoyer_fichier() {
 
@@ -405,6 +434,7 @@ public class Reservation {
 				+ donnees[6] + "-" + donnees[7];
 		return ("" + num) + ch;
 	}
+	
 
 	// modifier une reservation
 	public void modifier(int numr) {
@@ -551,27 +581,4 @@ public class Reservation {
 
 		return a;
 	}
-        private void cloner()
-        {
-             try{
-                 File fichier1 = new File("src\\Reservation.txt");
-            FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Reservation.txt");
-            BufferedReader br = new BufferedReader(fichier);
-                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1, true));
-            String line=br.readLine();
-            if (line != null)
-             bufferedWriter.write(line);
-            while ((line = br.readLine()) != null) {
-           if(line.length()>0) {
-               bufferedWriter.write("\r\n");
-               bufferedWriter.write(line);
-                    ;}
-            }
-            bufferedWriter.close();
-            br.close();
-            Files.move(Paths.get("src\\Reservation.txt"), Paths.get("src\\Hotellerie\\Files\\Reservation.txt"), StandardCopyOption.REPLACE_EXISTING);
-             }
-             catch (IOException e) {
-            e.printStackTrace();
-        }}
 }

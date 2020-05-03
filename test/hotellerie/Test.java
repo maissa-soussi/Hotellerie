@@ -156,8 +156,9 @@ public class Test {
      if(nbReserve!= nb_chambre)
         {
             for (int j=1;j<=nbReserve;j++)
-            r.annuler(r.getNum_R()-1);
+            r.annuler(r.getNum_R());
         }
+     else {System.out.println("La résérvation a été efféctuée avec succés .");}
     }
 
     public static void MenuModifierClient(int nb1, Client e) {
