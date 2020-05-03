@@ -117,6 +117,8 @@ public class Test {
             nb_chambre = input2.nextInt();
         }
         Reservation r = new Reservation(nb1, nbsem, nb_chambre);//initialiser une reservation avec cin=250 , nb semaine � louer =1 ,nb de chambre a louer =1 
+        for (int i=1;i<=nb_chambre;i++)
+        {
         Scanner input3 = new Scanner(System.in);
         System.out.println("Quel type voulez-vous choisir ? (simple|double|triple|luxe)");
         String type = input3.nextLine();
@@ -142,7 +144,8 @@ public class Test {
             semdebut = input5.nextInt();
         }
         r.reserver(type.toLowerCase(), vue.toLowerCase(), semdebut, nbsem);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
-        //r.visualiser(r.getNum_R());
+        }
+       //r.visualiser(r.getNum_R());
     }
 
     public static void MenuModifierClient(int nb1, Client e) {
