@@ -116,7 +116,16 @@ public class Test {
             System.out.println("Combien de chambre voulez-vous reservez?");
             nb_chambre = input2.nextInt();
         }
+          Scanner input5 = new Scanner(System.in);
+        System.out.println("A quelle semaine voulez-vous debuter votre sejour ?");
+        int semdebut = input5.nextInt();
+        while (semdebut + nbsem > 5 || semdebut <= 0) {
+            System.out.println("saisir un nombre de semaine correcte");
+            System.out.println("A quelle semaine voulez-vous debuter votre sejour ?");
+            semdebut = input5.nextInt();
+        }
         Reservation r = new Reservation(nb1, nbsem, nb_chambre);//initialiser une reservation avec cin=250 , nb semaine � louer =1 ,nb de chambre a louer =1 
+       int nbReserve=0;
         for (int i=1;i<=nb_chambre;i++)
         {
         Scanner input3 = new Scanner(System.in);
@@ -135,17 +144,20 @@ public class Test {
             System.out.println("Voulez vous choisir une chambre avec vue mer/piscine/jardin ");
             vue = input4.nextLine();
         }
-        Scanner input5 = new Scanner(System.in);
-        System.out.println("A quelle semaine voulez-vous debuter votre sejour ?");
-        int semdebut = input5.nextInt();
-        while (semdebut + nbsem > 5 || semdebut <= 0) {
-            System.out.println("saisir un nombre de semaine correcte");
-            System.out.println("A quelle semaine voulez-vous debuter votre sejour ?");
-            semdebut = input5.nextInt();
-        }
+       
+        if(r.rechercher_chambre(type, vue, nbsem,semdebut)!= 0){
         r.reserver(type.toLowerCase(), vue.toLowerCase(), semdebut, nbsem);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
+        nbReserve++;
         }
+        else break;
+       
        //r.visualiser(r.getNum_R());
+    }
+     if(nbReserve!= nb_chambre)
+        {
+            for (int j=1;j<=nbReserve;j++)
+            r.annuler(r.getNum_R()-1);
+        }
     }
 
     public static void MenuModifierClient(int nb1, Client e) {
