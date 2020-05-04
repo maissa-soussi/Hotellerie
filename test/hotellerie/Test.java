@@ -5,11 +5,15 @@
  */
 package hotellerie;
 
+import static hotellerie.Hotellerie.isEmailAdress;
+import static hotellerie.Hotellerie.islength8;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -74,10 +78,27 @@ public class Test {
                 String prenom = sc4.nextLine();
                 System.out.println("Entrer votre Date de naissance jj/mm/aaaa");
                 String date = sc4.nextLine();
-                System.out.println("Entrer votre Email");
-                String mail = sc4.nextLine();
-                System.out.println("Entrer votre Telephone");
-                int tel = sc4.nextInt();
+                
+                while (verifFormatDate(date)==false)
+                    {
+                        System.out.println("La format du date est incorrecte");
+                        date = sc4.nextLine();
+                    }
+		System.out.println("Entrer votre Email");
+		String mail = sc4.nextLine();
+                while (isEmailAdress(mail)==false)
+                    {
+                        System.out.println("La format du mail est incorrecte");
+                        mail = sc4.nextLine();
+                    }
+		System.out.println("Entrer votre Telephone");
+		int tel = sc4.nextInt();
+                while (islength8(tel)==false)
+                    {
+                        System.out.println("Il faut entrer un numero de 8 chiffres");
+                        tel = sc4.nextInt();
+                    }
+                
                 System.out.println("Entrer votre Pays d'habitat");
                 Scanner p = new Scanner(System.in);
                 String pays = p.nextLine();
@@ -160,6 +181,7 @@ public class Test {
         }
      else 
          System.out.println("La résérvation a été efféctuée avec succés .");
+        // SendMail.sendmail(e,r);
      
     }
 
@@ -167,8 +189,20 @@ public class Test {
         System.out.println("Entrer votre nouveau mail");
         Scanner sc3 = new Scanner(System.in);
         String nb3 = sc3.nextLine();
-        System.out.println("Entrer votre nouveau Tel");
-        int nb4 = sc3.nextInt();
+        
+        while (isEmailAdress(nb3)==false)
+            {
+                System.out.println("La format du mail est incorrecte");
+                nb3 = sc3.nextLine();
+            }
+	System.out.println("Entrer votre nouveau Tel");
+	int nb4 = sc3.nextInt();
+        while (islength8(nb4)==false)
+        {
+            System.out.println("Il faut entrer un numero de 8 chiffres");
+            nb4 = sc3.nextInt();
+        }
+        
         System.out.println("Entrer votre nouveau pays d'habitat");
         String nb5 = sc3.nextLine();
         e.Modifier(nb1, nb3, nb4, nb5);
@@ -231,9 +265,49 @@ public class Test {
         }
         return bo;
     }
+    
+    //verifier si la format du date est correcte
+        private static boolean verifFormatDate (String date) {
+            boolean v=false;
+            if (date.length()==10)
+            {String jour;
+            String mois;
+            String annee;
+            jour = date.substring(0, 2);
+            mois = date.substring(3, 5);
+            annee = date.substring(6, 10);
+            String sl1;
+            String sl2;
+            sl1 = date.substring(2,3);
+            sl2 = date.substring(5,6);
+            int m;
+            m=Integer.parseInt(mois);
+            int j;
+            j=Integer.parseInt(jour);
+            int a;
+            a=Integer.parseInt(annee);
+            
+            if((j>0) && (j<=31) && (m>0) && (m<=12) && (a>1929) && (a<=2003) && ("/".equals(sl1)) && ("/".equals(sl2)))
+            {
+             v=true;
+            }
+            }          
+            return v;
+        }
+        // verifier si l'adresse mail est valide
+        public static boolean isEmailAdress(String email){
+            Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
+            Matcher m = p.matcher(email.toUpperCase());
+            return m.matches();
+            }
+        
+        // verifier la longueur du tel = 8
+        public static boolean islength8(int num){
+            String chaine = Integer.toString(num);
+            return (8==chaine.length());
+            }
 
     public static void Menu() {
-        System.out.println("Bonjour ! ");
         System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
         System.out.println(" 1- Reserver chambre     2- Commander d'un restaurant de luxe     3- Statistiques des restaurants luxes");
         Scanner sc = new Scanner(System.in);
@@ -253,6 +327,7 @@ public class Test {
     }
 
     public static void main(String[] args) {
+        System.out.println("Bonjour ! ");
         Menu();
     }
 
