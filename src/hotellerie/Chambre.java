@@ -13,10 +13,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Chambre {
 
@@ -235,5 +238,64 @@ public class Chambre {
         }
 
     }
+    	private void cloner()
+    {
+         try{
+             File fichier1 = new File("src\\Chambre.txt");
+        FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
+        BufferedReader br = new BufferedReader(fichier);
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1, true));
+        String line=br.readLine();
+        if (line != null)
+         bufferedWriter.write(line);
+        while ((line = br.readLine()) != null) {
+       if(line.length()>0) {
+           bufferedWriter.write("\r\n");
+           bufferedWriter.write(line);
+                ;}
+        }
+        bufferedWriter.close();
+        br.close();
+        Files.move(Paths.get("src\\Chambre.txt"), Paths.get("src\\Hotellerie\\Files\\Chambre.txt"), StandardCopyOption.REPLACE_EXISTING);
+         }
+         catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
+      public void Suggestion(String type,int nbSem,int semDeb)  
+      {
+           try {
+            FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
+            BufferedReader br = new BufferedReader(fichier);
+            String line;
+            while ((line = br.readLine()) != null) {
+              String[] detail = line.split("-");
+                if (detail[1].equals(type)) {
+                    boolean verif = true;
+                    int i = 0;
+                    while (verif == true && i < nbSem) {
+                        if (Integer.valueOf(detail[2 + semDeb + i]) != 0) {
+                            verif = false;
+                        } else {
+                            i++;
+                        }
+                    }
+                    if (verif == true) {
+                        System.out.println(line);
+                    }
 
+                }
+            }
+            br.close();
+           }
+           catch (IOException e) {
+            e.printStackTrace();
+        }   
+      }
+	public static void main(String[] args) {
+            Chambre c=new Chambre();
+            c.Suggestion("simple", 3, 2);
+            
+        }
 }
+
