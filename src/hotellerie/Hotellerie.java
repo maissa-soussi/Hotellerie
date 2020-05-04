@@ -64,8 +64,37 @@ public class Hotellerie {
 			bo = true;
 		return bo;
 	}
+        
+        //verifier si la format du date est correcte
+        private static boolean verifFormatDate (String date) {
+            boolean v=false;
+            String jour;
+            String mois;
+            String annee;
+            jour = date.substring(0, 2);
+            mois = date.substring(3, 5);
+            annee = date.substring(6, 10);
+            String sl1;
+            String sl2;
+            sl1 = date.substring(2,3);
+            sl2 = date.substring(5,6);
+            int m;
+            m=Integer.parseInt(mois);
+            int j;
+            j=Integer.parseInt(jour);
+            int a;
+            a=Integer.parseInt(annee);
+            
+            if((j>0) && (j<=31) && (m>0) && (m<=12) && (a>1929) && (a<=2003) && ("/".equals(sl1)) && ("/".equals(sl2)))
+            {
+             v=true;
+            }
+                       
+            return v;
+        }
 
 	public static void main(String[] args) {
+            System.out.println(verifFormatDate("12/02/1997"));
 		System.out.println("Bonjour ! ");
 		System.out.println("Veuillez entrez le chiffre qui correspond Ã  votre choix ");
 		System.out.println(
@@ -109,7 +138,7 @@ public class Hotellerie {
 						for (int i = 0; i < nb_chambre; i++) {
 							r.reserver(type, vue, nbsem, semdebut);
 							if (i == nb_chambre - 1) {
-								System.out.println("Votre réservation a été efféctuée avec succés .");
+								System.out.println("Votre rï¿½servation a ï¿½tï¿½ effï¿½ctuï¿½e avec succï¿½s .");
 							}
 						}
 						int j = r.getNum_R();
@@ -120,7 +149,7 @@ public class Hotellerie {
 						}
 						// Reservation.cloturer(nb1);
 
-						// ici raaafet le cin c'est dans nb1
+					
 					}
 					if (nb2 == 2) {
 						System.out.println("Entrer votre nouveau mail");
@@ -145,6 +174,11 @@ public class Hotellerie {
 					String prenom = sc4.nextLine();
 					System.out.println("Entrer votre Date de naissance jj/mm/aaaa");
 					String date = sc4.nextLine();
+                                        while (verifFormatDate(date)==false)
+                                        {
+                                            System.out.println("La format du date est incorrecte");
+                                            date = sc4.nextLine();
+                                        }
 					System.out.println("Entrer votre Email");
 					String mail = sc4.nextLine();
 					System.out.println("Entrer votre Telephone");
@@ -173,7 +207,7 @@ public class Hotellerie {
 					for (int i = 0; i < nb_chambre; i++) {
 						r.reserver(type, vue, nbsem, semdebut);
 						if (i == nb_chambre - 1) {
-							System.out.println("Votre réservation a été efféctuée avec succés .");
+							System.out.println("Votre rï¿½servation a ï¿½tï¿½ effï¿½ctuï¿½e avec succï¿½s .");
 						}
 					}
 					int j = r.getNum_R();

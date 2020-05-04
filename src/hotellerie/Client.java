@@ -95,7 +95,7 @@ public class Client {
             BufferedReader br = new BufferedReader(new FileReader("src\\hotellerie\\Files\\Client.txt"));
             String client;
             DecimalFormat nf=new DecimalFormat("00000000");
-            System.out.println(nf.format(cin));
+            //System.out.println(nf.format(cin));
             while (((client = br.readLine()) != null) && (res == false)) {
                 //String[] tab = client.split("-");
                 //res = (tab[0].equals(String.valueOf(nf.format(cin))));
