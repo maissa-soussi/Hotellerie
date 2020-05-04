@@ -145,20 +145,22 @@ public class Test {
             vue = input4.nextLine();
         }
        
-        if(r.rechercher_chambre(type, vue, nbsem,semdebut)!= 0){
-        r.reserver(type.toLowerCase(), vue.toLowerCase(), semdebut, nbsem);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
+        if(r.rechercher_chambre(type.toLowerCase(), vue.toLowerCase(),nbsem,semdebut)> 0){
+        r.reserver(type.toLowerCase(), vue.toLowerCase(), nbsem,semdebut);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
         nbReserve++;
         }
-        else break;
-       
+        else break;       
        //r.visualiser(r.getNum_R());
     }
-     if(nbReserve!= nb_chambre)
+        System.out.println("nbR:"+nbReserve+":"+nb_chambre);
+     if(nbReserve < nb_chambre)
         {
             for (int j=1;j<=nbReserve;j++)
             r.annuler(r.getNum_R());
         }
-     else {System.out.println("La résérvation a été efféctuée avec succés .");}
+     else 
+         System.out.println("La résérvation a été efféctuée avec succés .");
+     
     }
 
     public static void MenuModifierClient(int nb1, Client e) {
