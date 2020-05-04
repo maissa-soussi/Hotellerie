@@ -170,18 +170,38 @@ public class Test {
         r.reserver(type.toLowerCase(), vue.toLowerCase(), nbsem,semdebut);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
         nbReserve++;
         }
-        else break;       
+        else
+        {
+           Chambre c=new Chambre();
+           if(c.Suggestion(type.toLowerCase(), nbsem, semdebut)){
+           vue="aaaa";
+            while (VerifVueC(vue) == false) {
+            System.out.println("entrer une autre vue");
+            vue = input4.nextLine();
+        }
+         if(r.rechercher_chambre(type.toLowerCase(), vue.toLowerCase(),nbsem,semdebut)> 0){
+        r.reserver(type.toLowerCase(), vue.toLowerCase(), nbsem,semdebut);// appel � la methode rechercher_chambre pour chercher la chambre disponible selon ces criteres et reserver chambre pour reserver cette chambre
+        nbReserve++;   
+           }
+           }
+          else 
+            System.out.println("chambre non dispo");
+        }       
        //r.visualiser(r.getNum_R());
     }
-        System.out.println("nbR:"+nbReserve+":"+nb_chambre);
+        //System.out.println("nbR:"+nbReserve+":"+nb_chambre);
      if(nbReserve < nb_chambre)
         {
             for (int j=1;j<=nbReserve;j++)
             r.annuler(r.getNum_R());
+            System.out.println("chambres non dispo");
         }
      else 
+     { 
+         Client e1=new Client(nb1);
          System.out.println("La résérvation a été efféctuée avec succés .");
-        // SendMail.sendmail(e,r);
+        SendMail.sendmail(e1,r);
+     }
      
     }
 

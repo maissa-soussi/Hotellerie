@@ -262,8 +262,9 @@ public class Chambre {
         e.printStackTrace();
     }
     }
-      public void Suggestion(String type,int nbSem,int semDeb)  
+      public boolean Suggestion(String type,int nbSem,int semDeb)  
       {
+          Boolean resultat=false;
            try {
             FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
             BufferedReader br = new BufferedReader(fichier);
@@ -281,6 +282,7 @@ public class Chambre {
                         }
                     }
                     if (verif == true) {
+                        resultat=true;
                         System.out.println(line);
                     }
 
@@ -290,7 +292,8 @@ public class Chambre {
            }
            catch (IOException e) {
             e.printStackTrace();
-        }   
+        } 
+           return resultat;
       }
 	public static void main(String[] args) {
             Chambre c=new Chambre();
