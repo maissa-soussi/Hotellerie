@@ -442,7 +442,7 @@ public class Reservation {
 		this.visualiser(numr);
 		this.annuler(numr);
 		this.reserver(type, vue, nbsem, semdebut);
-		System.out.println("Votre nouvelle résérvation : ");
+		System.out.println("Votre nouvelle résérvation :");
 		this.visualiser(this.getNum_R());
 		
 
