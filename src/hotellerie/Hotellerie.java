@@ -103,6 +103,12 @@ public class Hotellerie {
             Matcher m = p.matcher(email.toUpperCase());
             return m.matches();
             }
+        
+        // verifier la longueur du tel = 8
+        public static boolean islength8(int num){
+            String chaine = Integer.toString(num);
+            return (8==chaine.length());
+            }
 
 	public static void main(String[] args) {
             System.out.println(verifFormatDate("12/02/1997"));
@@ -162,6 +168,7 @@ public class Hotellerie {
 
 					
 					}
+                                        //modif d'un client
 					if (nb2 == 2) {
 						System.out.println("Entrer votre nouveau mail");
 						Scanner sc3 = new Scanner(System.in);
@@ -173,15 +180,22 @@ public class Hotellerie {
                                                 }
 						System.out.println("Entrer votre nouveau Tel");
 						int nb4 = sc3.nextInt();
+                                                  while (islength8(nb4)==false)
+                                                    {
+                                                        System.out.println("Il faut entrer un numero de 8 chiffres");
+                                                        nb4 = sc3.nextInt();
+                                                    }
 						System.out.println("Entrer votre nouveau pays d'habitat");
 						String nb5 = sc3.nextLine();
 						e.Modifier(nb1, nb3, nb4, nb5);
 						System.out.println("Modification effectuee avec suscces !");
 					}
+                                        //annuler une operation
 					if (nb2 == 0) {
 						System.out.println("Operation annulee");
 					}
 				} else {
+                                    // entrer les données d'un nouveau client
 					System.out.println("Vous etes un nouveau client");
 					Scanner sc4 = new Scanner(System.in);
 					System.out.println("Entrer votre nom");
@@ -204,10 +218,16 @@ public class Hotellerie {
                                         }
 					System.out.println("Entrer votre Telephone");
 					int tel = sc4.nextInt();
+                                        while (islength8(tel)==false)
+                                        {
+                                            System.out.println("Il faut entrer un numero de 8 chiffres");
+                                            tel = sc4.nextInt();
+                                        }
 					System.out.println("Entrer votre Pays d'habitat");
 					String pays = sc4.nextLine();
 					sc4.nextLine();
 					Client e1 = new Client(nb1, nom, prenom, date, mail, tel, pays);
+                                        //Commencer la reservation
 					System.out.println("Maintenant on commence la procedure de reservation");
 					Scanner input6 = new Scanner(System.in);
 					System.out.println("Combien de semaine voulez-vous allouez?");
