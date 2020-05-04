@@ -154,6 +154,7 @@ public class Hotellerie {
 						Scanner input5 = new Scanner(System.in);
 						System.out.println("A quelle semaine voulez-vous debuter votre sejour ?");
 						int semdebut = input5.nextInt();
+                                                SendMail.sendmail(e,r);
 						for (int i = 0; i < nb_chambre; i++) {
 							r.reserver(type, vue, nbsem, semdebut);
 							if (i == nb_chambre - 1) {
@@ -167,7 +168,7 @@ public class Hotellerie {
 							j--;
 						}
                                                 
-                                                SendMail.sendmail(e.getEmail(),"Reservation effectuée");
+                                               
 						// Reservation.cloturer(nb1);
 
 					

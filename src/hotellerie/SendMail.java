@@ -23,7 +23,7 @@ import javax.mail.internet.MimeMessage;
  * @author ASUS
  */
 public class SendMail {
-    public static void sendmail(String recepient,String res) throws MessagingException
+    public static void sendmail(Client e,Reservation r) throws MessagingException
     {
         System.out.println("Envoie du Mail en Cours");
         Properties properties = new Properties();
@@ -45,21 +45,22 @@ public class SendMail {
             }
         });
         
-        Message message = prepareMessage(session,myEmailAcount, recepient,res);
+        Message message = prepareMessage(session,myEmailAcount, e,r);
         
         //transport the message 
         Transport.send(message);
         System.out.println("E-mail envoyé");
     }
 
-    private static Message prepareMessage(Session session, String myEmailAcount, String recepient, String res){
+    private static Message prepareMessage(Session session, String myEmailAcount, Client e, Reservation r){
        try 
        {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(myEmailAcount));
-        message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-        message.setSubject("Reservation");
-        message.setText(res);
+        message.setRecipient(Message.RecipientType.TO, new InternetAddress(e.getEmail()));
+        message.setSubject("Confirmation de reservation");
+        String Code = "Bonjour "+ e.getNom()+" "+e.getPrenom()+", \n Votre Num de reservation : "+r.getNum_R()+"\n Date d'arrivée : "+r.getDate_Arrivee()+" \n Votre Cin : "+r.getCin_client()+" \n Num Chambre : "+r.getNb_chambre()+" \n Nombre de semaine : "+r.getNb_semaine()+"\n Prix Total : "+r.getPrix_total();
+        message.setText(Code);
         return message;
        }
         catch(Exception ex)
