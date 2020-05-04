@@ -1,5 +1,6 @@
 package hotellerie;
 
+import static java.awt.PageAttributes.MediaType.A;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,6 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static javafx.scene.input.KeyCode.Z;
 
 public class Hotellerie {
 	// verifier si la reservation existe ou non
@@ -68,7 +72,8 @@ public class Hotellerie {
         //verifier si la format du date est correcte
         private static boolean verifFormatDate (String date) {
             boolean v=false;
-            String jour;
+            if (date.length()==10)
+            {String jour;
             String mois;
             String annee;
             jour = date.substring(0, 2);
@@ -89,9 +94,15 @@ public class Hotellerie {
             {
              v=true;
             }
-                       
+            }          
             return v;
         }
+        // verifier si l'adresse mail est valide
+        public static boolean isEmailAdress(String email){
+            Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
+            Matcher m = p.matcher(email.toUpperCase());
+            return m.matches();
+            }
 
 	public static void main(String[] args) {
             System.out.println(verifFormatDate("12/02/1997"));
@@ -138,7 +149,7 @@ public class Hotellerie {
 						for (int i = 0; i < nb_chambre; i++) {
 							r.reserver(type, vue, nbsem, semdebut);
 							if (i == nb_chambre - 1) {
-								System.out.println("Votre r�servation a �t� eff�ctu�e avec succ�s .");
+								System.out.println("Votre reservation a ete effectuee avec succes .");
 							}
 						}
 						int j = r.getNum_R();
@@ -155,6 +166,11 @@ public class Hotellerie {
 						System.out.println("Entrer votre nouveau mail");
 						Scanner sc3 = new Scanner(System.in);
 						String nb3 = sc3.nextLine();
+                                                while (isEmailAdress(nb3)==false)
+                                                {
+                                                    System.out.println("La format du mail est incorrecte");
+                                                    nb3 = sc3.nextLine();
+                                                }
 						System.out.println("Entrer votre nouveau Tel");
 						int nb4 = sc3.nextInt();
 						System.out.println("Entrer votre nouveau pays d'habitat");
@@ -181,6 +197,11 @@ public class Hotellerie {
                                         }
 					System.out.println("Entrer votre Email");
 					String mail = sc4.nextLine();
+                                        while (isEmailAdress(mail)==false)
+                                        {
+                                            System.out.println("La format du mail est incorrecte");
+                                            mail = sc4.nextLine();
+                                        }
 					System.out.println("Entrer votre Telephone");
 					int tel = sc4.nextInt();
 					System.out.println("Entrer votre Pays d'habitat");
