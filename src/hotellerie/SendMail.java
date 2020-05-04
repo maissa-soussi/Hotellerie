@@ -17,14 +17,16 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import sun.security.pkcs11.wrapper.Functions;
 
 /**
  *
  * @author ASUS
  */
 public class SendMail {
-    public static void sendmail(Client e,Reservation r) throws MessagingException
+    public static void sendmail(Client e,Reservation r)
     {
+        try{
         System.out.println("Envoie du Mail en Cours");
         Properties properties = new Properties();
         // les propriétés du serveur mail
@@ -37,9 +39,9 @@ public class SendMail {
         String myPasswordAccount = "07484274";
                 
         //ouvrir une session
-        Session session = Session.getInstance(properties, new Authenticator() {
-            @Override  
-                    protected PasswordAuthentication getPasswordAuthentication()
+         Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication()
             {
                 return new PasswordAuthentication(myEmailAcount,myPasswordAccount);
             }
@@ -49,7 +51,11 @@ public class SendMail {
         
         //transport the message 
         Transport.send(message);
-        System.out.println("E-mail envoyé");
+        System.out.println("E-mail envoyé");}
+    catch (MessagingException err)
+    {
+        err.getMessage();
+    }
     }
 
     private static Message prepareMessage(Session session, String myEmailAcount, Client e, Reservation r){
