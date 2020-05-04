@@ -69,7 +69,9 @@ public class Client {
 
     // fonction d'affichage d'un client
     public void affiche() {
-        System.out.println("Cin: " + Cin + "\n" + "Nom: " + Nom + "\n" + "Prenom: " + Prenom + "\n" + "Date de naissance: " + Date_N + "\n" + "Email: " + Email + "\n" + "Tel" + Tel + "\n" + "Pays" + Pays);
+        System.out.println("_____________________________________");
+        System.out.println("| Cin: " + Cin + "\n" + "| Nom: " + Nom + "\n" + "| Prenom: " + Prenom + "\n" + "| Date de naissance: " + Date_N + "\n" + "| Email: " + Email + "\n" + "| Tel:" + Tel + "\n" + "| Pays:" + Pays);
+        System.out.println("_____________________________________");
     }
 
     //ajout d'un nouveau client
@@ -114,6 +116,7 @@ public class Client {
     public void Modifier(long cin, String Email, long Tel, String Pays) {
         Boolean res = false;
         String nvclient = "";
+        DecimalFormat nf=new DecimalFormat("00000000");
         try {
             BufferedReader br = new BufferedReader(new FileReader("src\\hotellerie\\Files\\Client.txt"));
             String client;
@@ -126,7 +129,7 @@ public class Client {
             // recherche du client à partir du fichier client
             while (((client = br.readLine()) != null) && (res == false)) {
                 tab = client.split("-");
-                res = (tab[0].equals(String.valueOf(cin)));
+                res = (tab[0].equals(String.valueOf(nf.format(cin))));
                 if (res == false) {
                     bufferedWriter.write(client);
                     bufferedWriter.newLine();

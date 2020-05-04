@@ -186,9 +186,12 @@ public class Hotellerie {
                                                         nb4 = sc3.nextInt();
                                                     }
 						System.out.println("Entrer votre nouveau pays d'habitat");
-						String nb5 = sc3.nextLine();
+                                                Scanner sc33 = new Scanner(System.in);
+						String nb5 = sc33.nextLine();
 						e.Modifier(nb1, nb3, nb4, nb5);
 						System.out.println("Modification effectuee avec suscces !");
+                                                System.out.println("Voici votre nouvelle fiche client!");
+                                                e.affiche();
 					}
                                         //annuler une operation
 					if (nb2 == 0) {
