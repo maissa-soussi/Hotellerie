@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static javafx.scene.input.KeyCode.Z;
+import javax.mail.MessagingException;
 
 public class Hotellerie {
 	// verifier si la reservation existe ou non
@@ -110,7 +111,8 @@ public class Hotellerie {
             return (8==chaine.length());
             }
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MessagingException {
+            
             System.out.println(verifFormatDate("12/02/1997"));
 		System.out.println("Bonjour ! ");
 		System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
@@ -164,6 +166,8 @@ public class Hotellerie {
 							r.annuler(j - 1);
 							j--;
 						}
+                                                
+                                                SendMail.sendmail(e.getEmail(),"Reservation effectuée");
 						// Reservation.cloturer(nb1);
 
 					

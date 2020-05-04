@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+
 class ErrException extends Exception {
 }
 
@@ -438,16 +439,15 @@ public class Reservation {
 
 	// modifier une reservation
 	public void modifier(int numr,String type, String vue, int nbsem, int semdebut) {
-		System.out.println("Votre ancienne résérvation : ");
+		System.out.println("Votre ancienne rï¿½sï¿½rvation : ");
 		this.visualiser(numr);
 		this.annuler(numr);
 		this.reserver(type, vue, nbsem, semdebut);
-		System.out.println("Votre nouvelle résérvation :");
+		System.out.println("Votre nouvelle rï¿½sï¿½rvation :");
 		this.visualiser(this.getNum_R());
-		
-
+	
 	}
-
+        
 	/**
 	 * @param reservation
 	 * @return the Num_R
