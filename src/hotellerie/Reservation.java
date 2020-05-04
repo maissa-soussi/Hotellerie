@@ -437,7 +437,14 @@ public class Reservation {
 	
 
 	// modifier une reservation
-	public void modifier(int numr) {
+	public void modifier(int numr,String type, String vue, int nbsem, int semdebut) {
+		System.out.println("Votre ancienne résérvation : ");
+		this.visualiser(numr);
+		this.annuler(numr);
+		this.reserver(type, vue, nbsem, semdebut);
+		System.out.println("Votre nouvelle résérvation :");
+		this.visualiser(this.getNum_R());
+		
 
 	}
 
