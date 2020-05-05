@@ -361,7 +361,7 @@ public class Hotellerie {
             R.effectuer(n, co, nbp, d);
             MenuCommande(nom);
         } else if (nb == 0) {
-            MenuRestaurant();
+            Menu();
     }
     }
     
@@ -389,15 +389,18 @@ public class Hotellerie {
                     j = b.nextInt();
                 }
                 R.recette_journee(j);
+                MenuStat(no);
             }
             if (i == 2) {
                 R.recette_semaine();
+                MenuStat(no);
             }
             if (i == 3) {
                 R.frequence();
+                MenuStat(no);
             }
             if (i == 0) {
-                MenuRestaurant();
+                Menu();
             }
     }
     
