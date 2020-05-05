@@ -157,6 +157,9 @@ public class Reservation {
 				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 				Files.write(reservation, ("" + getReste_payer()).getBytes(), StandardOpenOption.WRITE,
 						StandardOpenOption.APPEND);
+                                Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				Files.write(reservation, ("" + getNb_chambre()).getBytes(), StandardOpenOption.WRITE,
+						StandardOpenOption.APPEND);
 			} else {
 				System.out.println("chambre non disponible");
 			}

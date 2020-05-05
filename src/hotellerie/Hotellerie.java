@@ -61,12 +61,11 @@ public class Hotellerie {
             System.out.println("Bonjour ! ");
             System.out.println("Entrer le CIN  ou 0 Pour quitter");
             Scanner sc1 = new Scanner(System.in);
-            int nb1 = sc1.nextInt();
+            long nb1 = sc1.nextLong();
             if (nb1 == 0) {
             MenuReception();
             } else {
-                Reservation r=recherchereservation2(nb1);
-                r.cloturer(nb1);
+                Reservation.cloturer(nb1);
                 MenuReception();
             }
         }
@@ -90,7 +89,7 @@ public class Hotellerie {
                 String[] tab=readLine.split("-");
                 if(Integer.parseInt(tab[0])==nb1)
                 {
-                    r=new Reservation(Integer.parseInt(tab[0]),Integer.parseInt(tab[1]),tab[2],tab[3],Integer.parseInt(tab[4]), Float.parseFloat(tab[6]),Float.parseFloat(tab[7]),Integer.parseInt(tab[8]));                   
+                    r=new Reservation(Integer.parseInt(tab[0]),Long.parseLong(tab[1]),tab[2],tab[3],Integer.parseInt(tab[4]), Float.parseFloat(tab[6]),Float.parseFloat(tab[7]),Integer.parseInt(tab[8]));                   
                 }
                 i++;
             }
@@ -102,7 +101,7 @@ public class Hotellerie {
     }
     
     //retourner la reservation avec CIN=nb1
-    public static Reservation recherchereservation2(int nb1)
+    public static Reservation recherchereservation2(long nb1)
     {
         Reservation r = null;
         try {
@@ -114,9 +113,9 @@ public class Hotellerie {
             
             while (((readLine = b.readLine()) != null) && (bo==false)) {
                 String[] tab=readLine.split("-");
-                if(Integer.parseInt(tab[1])==nb1)
+                if(Long.parseLong(tab[1])==nb1)
                 {
-                    r=new Reservation(Integer.parseInt(tab[0]),Integer.parseInt(tab[1]),tab[2],tab[3],Integer.parseInt(tab[4]), Float.parseFloat(tab[6]),Float.parseFloat(tab[7]),Integer.parseInt(tab[8]));                   
+                    r=new Reservation(Integer.parseInt(tab[0]),Long.parseLong(tab[1]),tab[2],tab[3],Integer.parseInt(tab[4]), Float.parseFloat(tab[6]),Float.parseFloat(tab[7]),Integer.parseInt(tab[8]));                   
                 }
                 i++;
             }
@@ -132,7 +131,7 @@ public class Hotellerie {
         System.out.println("Bonjour ! ");
         System.out.println("Entrer CIN  ou 0 Pour quitter");
         Scanner sc1 = new Scanner(System.in);
-        int nb1 = sc1.nextInt();
+        long nb1 = sc1.nextLong();
         if (nb1 == 0) {
             Menu();
         } else {
@@ -210,11 +209,11 @@ public class Hotellerie {
     }
     }
     
-    public static void MenuModifier(int nb1)
+    public static void MenuModifier(long nb1)
     {
         //modifier reservation
     }
-    public static void MenuReserver(int nb1) {
+    public static void MenuReserver(long nb1) {
         Scanner input1 = new Scanner(System.in);
         System.out.println("Combien de semaine voulez-vous allouez? (1|2|3|4)");
         int nbsem = input1.nextInt();
@@ -281,9 +280,7 @@ public class Hotellerie {
           else 
             System.out.println("chambre non dispo");
         }       
-       //r.visualiser(r.getNum_R());
     }
-        //System.out.println("nbR:"+nbReserve+":"+nb_chambre);
      if(nbReserve < nb_chambre)
         {
             for (int j=1;j<=nbReserve;j++)
