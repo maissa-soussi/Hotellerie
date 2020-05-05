@@ -153,8 +153,8 @@ public class Hotellerie {
                     MenuReservation();
                 }
                 else if (nb == 3) {
-                    Reservation r=recherchereservation1(nb1);
-                    r.annuler(nb1);
+                    Reservation r=recherchereservation2(nb1);
+                    r.annuler(r.getNum_R());
                     MenuReservation();
                     }
                 else if (nb == 0) {                       
