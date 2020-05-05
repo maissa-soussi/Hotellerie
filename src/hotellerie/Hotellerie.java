@@ -21,20 +21,18 @@ public class Hotellerie {
     
     public static void Menu() {
         System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
-        System.out.println(" 1- Reservation     2- Reception     3- Restaurant");
+        System.out.println(" 1- Reservation     2- Reception     3- Restaurant     0- quitter");
         Scanner sc = new Scanner(System.in);
         int nb = sc.nextInt();
         if (nb == 1) {
             MenuReservation();
-            Menu();
         } else if (nb == 2) {
             MenuReception();
-            Menu();
         } else if (nb == 3) {
             MenuRestaurant();
-            Menu();
-        } else {
+        } else if (nb == 0) {
             System.out.println("Operation annulee");
+            System.exit(0);
         }
     }
     
@@ -203,9 +201,9 @@ public class Hotellerie {
         int nb = sc.nextInt();
         if (nb == 1) {
             MenuReserver(nb1);
-            MenuReservation();
+            Menu();
         } else if (nb == 0) {
-            MenuReservation();
+            Menu();
     }
     }
     
