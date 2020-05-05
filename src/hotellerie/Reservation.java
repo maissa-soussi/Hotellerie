@@ -38,7 +38,18 @@ public class Reservation {
 	private float prix_reservation;
 	private float reste_payer;
 
-	public Reservation(long cin, int nbs, int nbcham) {
+	public Reservation(int a,long b,String c,String d,int e,float f,float g, int h)
+        {
+            Num_R=a;
+	    Cin_client=b;
+	    Date_Reservation=c;
+	    Date_Arrivee =d;
+	    Nb_semaine=e;
+	    prix_total=f;
+	    reste_payer=g;
+	    Nb_chambre=h;           
+        }
+        public Reservation(long cin, int nbs, int nbcham) {
 		Path reservation = Paths.get("src\\Hotellerie\\Files\\Reservation.txt");
 		Num_R = this.NumR(reservation) + 1;
 		Cin_client = cin;
@@ -439,11 +450,11 @@ public class Reservation {
 
 	// modifier une reservation
 	public void modifier(int numr,String type, String vue, int nbsem, int semdebut) {
-		System.out.println("Votre ancienne r�s�rvation : ");
+		System.out.println("Ancienne résérvation : ");
 		this.visualiser(numr);
 		this.annuler(numr);
 		this.reserver(type, vue, nbsem, semdebut);
-		System.out.println("Votre nouvelle r�s�rvation :");
+		System.out.println("Nouvelle résérvation :");
 		this.visualiser(this.getNum_R());
 	
 	}

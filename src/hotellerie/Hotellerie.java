@@ -52,27 +52,79 @@ public class Hotellerie {
             if (nb1 == 0) {
             MenuReception();
             } else {
-                Reservation r=recherchereservation(nb1);
+                Reservation r=recherchereservation1(nb1);
                 r.visualiser(nb1);
                 MenuReception();
             }
         } 
         else if (nb == 2) {
             System.out.println("Bonjour ! ");
-            System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
+            System.out.println("Entrer le CIN  ou 0 Pour quitter");
             Scanner sc1 = new Scanner(System.in);
             int nb1 = sc1.nextInt();
             if (nb1 == 0) {
             MenuReception();
             } else {
-                Reservation r=recherchereservation(nb1);
-                r.;
+                Reservation r=recherchereservation2(nb1);
+                r.cloturer(nb1);
                 MenuReception();
             }
         }
         else if (nb == 0) {                       
             Menu();
         }                    
+    }
+    
+    //retourner la reservation avec numr=nb1
+    public static Reservation recherchereservation1(int nb1)
+    {
+        Reservation r = null;
+        try {
+            File f = new File("src\\Hotellerie\\Files\\Reservation.txt");
+            BufferedReader b = new BufferedReader(new FileReader(f));
+            int i=0;
+            Boolean bo=false;
+            String readLine = "";
+            
+            while (((readLine = b.readLine()) != null) && (bo==false)) {
+                String[] tab=readLine.split("-");
+                if(Integer.parseInt(tab[0])==nb1)
+                {
+                    r=new Reservation(Integer.parseInt(tab[0]),Integer.parseInt(tab[1]),tab[2],tab[3],Integer.parseInt(tab[4]), Float.parseFloat(tab[6]),Float.parseFloat(tab[7]),Integer.parseInt(tab[8]));                   
+                }
+                i++;
+            }
+            b.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return r;
+    }
+    
+    //retourner la reservation avec CIN=nb1
+    public static Reservation recherchereservation2(int nb1)
+    {
+        Reservation r = null;
+        try {
+            File f = new File("src\\Hotellerie\\Files\\Reservation.txt");
+            BufferedReader b = new BufferedReader(new FileReader(f));
+            int i=0;
+            Boolean bo=false;
+            String readLine = "";
+            
+            while (((readLine = b.readLine()) != null) && (bo==false)) {
+                String[] tab=readLine.split("-");
+                if(Integer.parseInt(tab[1])==nb1)
+                {
+                    r=new Reservation(Integer.parseInt(tab[0]),Integer.parseInt(tab[1]),tab[2],tab[3],Integer.parseInt(tab[4]), Float.parseFloat(tab[6]),Float.parseFloat(tab[7]),Integer.parseInt(tab[8]));                   
+                }
+                i++;
+            }
+            b.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return r;
     }
     
     private static void MenuReservation()
@@ -101,7 +153,8 @@ public class Hotellerie {
                     MenuReservation();
                 }
                 else if (nb == 3) {
-                    //annuler la reservation
+                    Reservation r=recherchereservation1(nb1);
+                    r.annuler(nb1);
                     MenuReservation();
                     }
                 else if (nb == 0) {                       
