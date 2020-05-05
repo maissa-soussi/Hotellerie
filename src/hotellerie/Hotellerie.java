@@ -146,19 +146,19 @@ public class Hotellerie {
                 int nb = sc.nextInt();
                 if (nb == 1) {
                     MenuReserver(nb1);
-                    MenuReservation();
+                    Menu();
                     } 
                 else if (nb == 2) {
                     MenuModifier(nb1);
-                    MenuReservation();
+                    Menu();
                 }
                 else if (nb == 3) {
                     Reservation r=recherchereservation2(nb1);
                     r.annuler(r.getNum_R());
-                    MenuReservation();
+                    Menu();
                     }
                 else if (nb == 0) {                       
-                    MenuReservation();
+                    Menu();
                 }                    
                 
             } else {
