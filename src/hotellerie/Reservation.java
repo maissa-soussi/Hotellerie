@@ -22,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-
 class ErrException extends Exception {
 }
 
@@ -38,18 +37,18 @@ public class Reservation {
 	private float prix_reservation;
 	private float reste_payer;
 
-	public Reservation(int a,long b,String c,String d,int e,float f,float g, int h)
-        {
-            Num_R=a;
-	    Cin_client=b;
-	    Date_Reservation=c;
-	    Date_Arrivee =d;
-	    Nb_semaine=e;
-	    prix_total=f;
-	    reste_payer=g;
-	    Nb_chambre=h;           
-        }
-        public Reservation(long cin, int nbs, int nbcham) {
+	public Reservation(int a, long b, String c, String d, int e, float f, float g, int h) {
+		Num_R = a;
+		Cin_client = b;
+		Date_Reservation = c;
+		Date_Arrivee = d;
+		Nb_semaine = e;
+		prix_total = f;
+		reste_payer = g;
+		Nb_chambre = h;
+	}
+
+	public Reservation(long cin, int nbs, int nbcham) {
 		Path reservation = Paths.get("src\\Hotellerie\\Files\\Reservation.txt");
 		Num_R = this.NumR(reservation) + 1;
 		Cin_client = cin;
@@ -76,10 +75,10 @@ public class Reservation {
 
 	public int rechercher_chambre(String type, String vue, int nbSem, int numS) {
 		int num = 0;
-	            try{	
-	            Path chambre = Paths.get("src\\Hotellerie\\Files\\Chambre.txt");
+		try {
+			Path chambre = Paths.get("src\\Hotellerie\\Files\\Chambre.txt");
 			List<String> lignes = Files.readAllLines(chambre);
-			
+
 			for (String ligne : lignes) {
 				String[] detail = ligne.split("-");
 				if ((detail[1].equals(type)) && (detail[2].equals(vue))) {
@@ -99,14 +98,12 @@ public class Reservation {
 
 				}
 			}
-	            }
-	        catch(IOException e)
-	        {
-	            e.getMessage();
-	        }
-
-			return num;
+		} catch (IOException e) {
+			e.getMessage();
 		}
+
+		return num;
+	}
 
 	// faire la reservation
 	public void reserver(String type, String vue, int nbsem, int semdebut) {
@@ -157,7 +154,7 @@ public class Reservation {
 				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 				Files.write(reservation, ("" + getReste_payer()).getBytes(), StandardOpenOption.WRITE,
 						StandardOpenOption.APPEND);
-                                Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+				Files.write(reservation, ("-").getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
 				Files.write(reservation, ("" + getNb_chambre()).getBytes(), StandardOpenOption.WRITE,
 						StandardOpenOption.APPEND);
 			} else {
@@ -170,7 +167,6 @@ public class Reservation {
 		}
 
 	}
-	
 
 	// le prix juste au moment de la reservation
 	public void Calcul_prix_total(String type) {
@@ -252,12 +248,49 @@ public class Reservation {
 
 	}
 
-	public String facture(Path reservation, long cin, String chambres) {
+	// rechercher et retourner un tableau des dates d'arriv�e de toutes les
+	// r�servation
+	public String[] rechercher_reservation(Path reservation, long cin) {
+		String[] dates = new String[this.getNb_chambre()];
 		try {
 			List<String> lignes = Files.readAllLines(reservation);
+			int i = 0;
 			for (String ligne : lignes) {
 				String[] donnees = ligne.split("-");
 				if (donnees[1].equals("" + cin)) {
+					dates[i] = donnees[3];
+					i++;
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("erreur lors de la lecture du fichier reservation");
+		}
+		return dates;
+
+	}
+
+	int determiner_nbr_chambre(String[] date) {
+		String[] dates = date;
+		int nbr = 1;
+		int i = 0;
+		while (i < dates.length - 1) {
+			if (dates[i] == dates[i + 1]) {
+				nbr++;
+			}
+			i++;
+		}
+		return nbr;
+	}
+
+	public String facture(Path reservation, long cin, String chambres) {
+		try {
+			List<String> lignes = Files.readAllLines(reservation);
+			String dates[] = rechercher_reservation(reservation, cin);
+			int nbr = determiner_nbr_chambre(dates);
+			int ctr = 0;
+			for (String ligne : lignes) {
+				String[] donnees = ligne.split("-");
+				if (donnees[1].equals("" + cin) && (ctr <= nbr)) {
 					setCin_client(Long.valueOf(donnees[1]));
 					setDate_reservation(donnees[2]);
 					setDate_Arrivee(donnees[3]);
@@ -266,6 +299,7 @@ public class Reservation {
 					chambres = chambres + "-" + ("" + this.Nb_chambre);
 					setPrix_total(prix_total + Float.valueOf(donnees[6]));
 					setReste_payer(reste_payer + Float.valueOf(donnees[7]));
+					ctr++;
 				}
 			}
 		} catch (IOException e) {
@@ -378,33 +412,33 @@ public class Reservation {
 		} catch (IOException e) {
 			System.out.println("erreur");
 		}
-		
 
 	}
-	private void cloner()
-    {
-         try{
-             File fichier1 = new File("src\\Reservation.txt");
-        FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Reservation.txt");
-        BufferedReader br = new BufferedReader(fichier);
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1, true));
-        String line=br.readLine();
-        if (line != null)
-         bufferedWriter.write(line);
-        while ((line = br.readLine()) != null) {
-       if(line.length()>0) {
-           bufferedWriter.write("\r\n");
-           bufferedWriter.write(line);
-                ;}
-        }
-        bufferedWriter.close();
-        br.close();
-        Files.move(Paths.get("src\\Reservation.txt"), Paths.get("src\\Hotellerie\\Files\\Reservation.txt"), StandardCopyOption.REPLACE_EXISTING);
-         }
-         catch (IOException e) {
-        e.printStackTrace();
-    }
-    }
+
+	private void cloner() {
+		try {
+			File fichier1 = new File("src\\Reservation.txt");
+			FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Reservation.txt");
+			BufferedReader br = new BufferedReader(fichier);
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1, true));
+			String line = br.readLine();
+			if (line != null)
+				bufferedWriter.write(line);
+			while ((line = br.readLine()) != null) {
+				if (line.length() > 0) {
+					bufferedWriter.write("\r\n");
+					bufferedWriter.write(line);
+					;
+				}
+			}
+			bufferedWriter.close();
+			br.close();
+			Files.move(Paths.get("src\\Reservation.txt"), Paths.get("src\\Hotellerie\\Files\\Reservation.txt"),
+					StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void nettoyer_fichier() {
 
@@ -427,13 +461,12 @@ public class Reservation {
 
 	}
 
-	private static void writeTo(String data, String fichier)  {
+	private static void writeTo(String data, String fichier) {
 		try {
-		FileWriter writer = new FileWriter(fichier);
-		writer.write(data.replaceAll("(?m)^[ \t]*\r?\n", ""));
-		writer.close();
-		}
-		catch(IOException e) {
+			FileWriter writer = new FileWriter(fichier);
+			writer.write(data.replaceAll("(?m)^[ \t]*\r?\n", ""));
+			writer.close();
+		} catch (IOException e) {
 			e.printStackTrace();
 
 		}
@@ -449,19 +482,22 @@ public class Reservation {
 				+ donnees[6] + "-" + donnees[7];
 		return ("" + num) + ch;
 	}
-	
 
 	// modifier une reservation
-	public void modifier(int numr,String type, String vue, int nbsem, int semdebut) {
+	public void modifier(int numr, String type, String vue, int nbsem, int semdebut) {
 		System.out.println("Ancienne résérvation : ");
 		this.visualiser(numr);
+		if(rechercher_chambre(type, vue, nbsem, semdebut)!=0) {
 		this.annuler(numr);
 		this.reserver(type, vue, nbsem, semdebut);
 		System.out.println("Nouvelle résérvation :");
-		this.visualiser(this.getNum_R());
-	
+		this.visualiser(this.getNum_R());}
+		else {
+			System.out.println("chambre non disponible");
+		}
+
 	}
-        
+
 	/**
 	 * @param reservation
 	 * @return the Num_R
