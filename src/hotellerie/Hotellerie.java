@@ -153,7 +153,7 @@ public class Hotellerie {
                         while (verifNum_R(nb2)==false) {
                         System.out.println("numero de reservation inexistant SVP essayer de nouveau");
                             sc2 = new Scanner(System.in);
-                            nb2 = sc.nextInt();    
+                            nb2 = sc2.nextInt();    
                         }
                         if (nb2 == 0) {
                         Menu();
