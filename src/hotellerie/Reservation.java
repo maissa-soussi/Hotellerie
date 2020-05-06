@@ -69,6 +69,7 @@ public class Reservation {
              prix_total=this.Calcul_prix_total();
              prix_reservation=prix_total;
              reste_payer=prix_total * 0.9;
+             
         }
         
         //Constructeur avec un seul parametre
@@ -82,7 +83,7 @@ public class Reservation {
             BufferedReader br = new BufferedReader(new FileReader("src\\Hotellerie\\Files\\Reservation.txt"));
             String reservation;
             DecimalFormat nf=new DecimalFormat("00000000");
-            while (((reservation = br.readLine()) != null) && (res == false)) {
+            while ((res == false) && ((reservation = br.readLine()) != null)) {
                 tab = reservation.split("-");
                 res = (tab[0].equals(Integer.toString(Num_R)));
             }
@@ -136,8 +137,8 @@ public class Reservation {
         try {
             BufferedReader br = new BufferedReader(new FileReader("src\\Hotellerie\\Files\\Reservation.txt"));
             String reservation="";
-            File FileTemp = new File("Reservation.txt");
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FileTemp, true));
+            File File = new File("src\\Reservation.txt");
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(File, true));
             // recherche du reservation à partir du fichier reservation
             while (((reservation = br.readLine()) != null)) {
                 String[] tab=reservation.split("-");
@@ -173,7 +174,7 @@ public class Reservation {
             bufferedWriter.close();
             br.close();
             // remplacer l'ancien fichier reservation par le nouveau           
-            Path temp = Files.move(Paths.get("Reservation.txt"), Paths.get("src\\Hotellerie\\Files\\Reservation.txt"), StandardCopyOption.REPLACE_EXISTING);
+        Files.move(Paths.get("src\\Reservation.txt"), Paths.get("src\\Hotellerie\\Files\\Reservation.txt"), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -385,6 +386,7 @@ public class Reservation {
     	str.append("\n");
   	}
   	writeTo(str.toString(), fichier);
+        input.close();
   	}catch(IOException ex)
   	{
   		ex.printStackTrace();

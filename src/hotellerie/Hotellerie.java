@@ -173,6 +173,7 @@ public class Hotellerie {
                     Menu();
                     } 
                 else if (nb == 2) {
+                    
                         System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
                         Scanner sc2 = new Scanner(System.in);
                         int nb2 = sc2.nextInt();
@@ -185,8 +186,9 @@ public class Hotellerie {
                         Menu();
                         } else {
                             Reservation r=new Reservation(nb2);
+                            MenuModifier(nb2);
                            //appel au fonction Modifier 
-                            MenuReception();
+                            Menu();
                         }
                 }
                 else if (nb == 3) {
@@ -587,5 +589,102 @@ public class Hotellerie {
             e.printStackTrace();
         }
         return (bo || n==0);
+    }
+        public static void MenuModifier(int numR) {
+        Scanner input1 = new Scanner(System.in);
+        System.out.println("Combien de semaine voulez-vous allouez? (1|2|3|4)");
+        int nbsem = input1.nextInt();
+        while (VerifNbsem(nbsem) == false) {
+            System.out.println("Nombre de semaine invalide");
+            System.out.println("Combien de semaine voulez-vous allouez? (1|2|3|4)");
+            nbsem = input1.nextInt();
+        }
+        Scanner input2 = new Scanner(System.in);
+        System.out.println("Combien de chambre voulez-vous reservez?");
+        int nb_chambre = input2.nextInt();
+        while (nb_chambre < 0) {
+            System.out.println("Saisir un Nombre de chambre correcte");
+            System.out.println("Combien de chambre voulez-vous reservez?");
+            nb_chambre = input2.nextInt();
+        }
+          Scanner input5 = new Scanner(System.in);
+        System.out.println("A quelle semaine voulez-vous debuter votre sejour ?");
+        int semdebut = input5.nextInt();
+        while (semdebut + nbsem > 5 || semdebut <= 0) {
+            System.out.println("saisir un nombre de semaine correcte");
+            System.out.println("A quelle semaine voulez-vous debuter votre sejour ?");
+            semdebut = input5.nextInt();
+        }
+       // Reservation r = new Reservation(nb1, nbsem, nb_chambre);//initialiser une reservation avec cin=250 , nb semaine � louer =1 ,nb de chambre a louer =1 
+       
+       int [] tab=new int[nb_chambre];
+       int k=0;
+        for (int i=1;i<=nb_chambre;i++)
+        {
+        Scanner input3 = new Scanner(System.in);
+        System.out.println("Quel type voulez-vous choisir pour la chambre num "+i+"? (simple|double|triple|luxe)");
+        String type = input3.nextLine();
+        while (VerifTypeC(type) == false) {
+            System.out.println("type invalide");
+            System.out.println("Quel type voulez-vous choisir ? (simple|double|triple|luxe)");
+            type = input3.nextLine();
+        }
+        Scanner input4 = new Scanner(System.in);
+        System.out.println("Voulez vous choisir une chambre avec vue mer/piscine/jardin ");
+        String vue = input4.nextLine();
+        while (VerifVueC(vue) == false) {
+            System.out.println("vue invalide");
+            System.out.println("Voulez vous choisir une chambre avec vue mer/piscine/jardin ");
+            vue = input4.nextLine();
+        }
+        int num;
+        num=Reservation.rechercher_chambre(type.toLowerCase(), vue.toLowerCase(),nbsem,semdebut);
+        if(num>0){
+        tab[k]=num;
+        k++;
+        Chambre c = new Chambre();
+        c.ReserverChambre(num, nbsem, semdebut);
+        }
+        else
+        {
+           Chambre c=new Chambre();
+           if(c.Suggestion(type.toLowerCase(), nbsem, semdebut)){
+           vue="aaaa";
+            while (VerifVueC(vue) == false) {
+            System.out.println("entrer une autre vue");
+            vue = input4.nextLine();
+        }
+          int num1;
+          num1= Reservation.rechercher_chambre(type.toLowerCase(), vue.toLowerCase(),nbsem,semdebut);
+            if(num1>0){
+              tab[k]=num1;
+               k++;
+             Chambre c1 = new Chambre();
+             c1.ReserverChambre(num1, nbsem, semdebut);
+           }
+           }
+          else 
+            System.out.println("chambre non dispo");
+        }       
+    }
+     if(k < nb_chambre)
+        {
+            System.out.println("chambres non dispo");
+            for (int i=0;i<k;i++)
+            {
+                Chambre c=new Chambre(tab[i]);
+                c.AnnulerReservation(tab[i],nbsem, semdebut);
+            }
+        }
+     else 
+     {  
+     Reservation r1=new Reservation(numR);
+    Client e1=new Client(r1.getCin_client());
+     r1.annuler();
+         Reservation r=new Reservation(e1.getCin(),semdebut,nbsem,nb_chambre,tab);
+         r.AjouterReservation();
+        SendMail.sendmail(e1,r);
+        r.Visualiser();
+     }     
     }
 }
