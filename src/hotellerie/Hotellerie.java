@@ -49,7 +49,6 @@ public class Hotellerie {
             nb = sc.nextInt();    
             }
         if (nb == 1) {
-            System.out.println("Bonjour ! ");
             System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
             Scanner sc1 = new Scanner(System.in);
             int nb1 = sc1.nextInt();
@@ -67,20 +66,19 @@ public class Hotellerie {
             }
         } 
         else if (nb == 2) {
-            System.out.println("Bonjour ! ");
-            System.out.println("Entrer le CIN  ou 0 Pour quitter");
+            System.out.println("Entrer le Numero de reservation  ou 0 Pour quitter");
             Scanner sc1 = new Scanner(System.in);
-            String nb1s = sc1.nextLine();
-            while (verifcin(nb1s)==false) {
-                System.out.println("Entrer le CIN  ou 0 Pour quitter");
+            int nb1s = sc1.nextInt();
+            while (verifNum_R(nb1s)==false) {
+                System.out.println("Entrer le Numero de reservation  ou 0 Pour quitter");
                 sc1 = new Scanner(System.in);
-                nb1s = sc1.nextLine();
+                nb1s = sc1.nextInt();
             }
-            long nb1=Long.valueOf(nb1s);
-            if (nb1 == 0) {
+            
+            if (nb1s == 0) {
             MenuReception();
             } else {
-                Reservation r=recherchereservation(nb1);
+                Reservation r=new Reservation(nb1s);
                 r.cloturer();
                 MenuReception();
             }
@@ -455,7 +453,7 @@ public class Hotellerie {
             return true;
         }
     }
-    
+    //verifier si le num de reservation existe
     private static Boolean verifNum_R(int n) {
         Boolean bo = false;
         try {

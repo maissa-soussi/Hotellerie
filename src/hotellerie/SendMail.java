@@ -27,7 +27,7 @@ public class SendMail {
     public static void sendmail(Client e,Reservation r)
     {
         try{
-        System.out.println("Envoie du Mail en Cours");
+        System.out.println("Envoie du Mail en Cours...");
         Properties properties = new Properties();
         // les propriétés du serveur mail
         properties.put("mail.smtp.auth", "true");
