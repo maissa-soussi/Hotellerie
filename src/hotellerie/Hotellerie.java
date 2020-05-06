@@ -102,7 +102,20 @@ public class Hotellerie {
     
     private static void MenuReservation()
     {
-        System.out.println("Entrer CIN  ou 0 Pour quitter");
+        
+       
+                System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
+                System.out.println(" 1- Effectuer une reservation     2- modifier une reservation     3- annuler une réservation     0- quitter");
+                Scanner sc = new Scanner(System.in);
+                int nb = sc.nextInt();
+                while ((nb != 1) && (nb != 2) && (nb != 3) && (nb != 0)) {
+                    System.out.println("Veuillez entrez un chiffre parmis 1, 2, 3, 0 ");
+                    sc = new Scanner(System.in);
+                    nb = sc.nextInt();
+                }
+                if (nb == 1) {
+                    
+                    System.out.println("Entrer CIN  ou 0 Pour quitter");
         Scanner sc1 = new Scanner(System.in);
         String nb1s = sc1.nextLine();
         while (verifcin1(nb1s)==false) {
@@ -118,16 +131,44 @@ public class Hotellerie {
                 Client e = new Client(nb1);
                 System.out.println("Voici les coordonnees du client");
                 e.affiche();
-                System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
-                System.out.println(" 1- Effectuer une reservation     2- modifier une reservation     3- annuler une réservation     0- quitter");
-                Scanner sc = new Scanner(System.in);
-                int nb = sc.nextInt();
-                while ((nb != 1) && (nb != 2) && (nb != 3) && (nb != 0)) {
-                    System.out.println("Veuillez entrez un chiffre parmis 1, 2, 3, 0 ");
-                    sc = new Scanner(System.in);
-                    nb = sc.nextInt();
-                }
-                if (nb == 1) {
+                
+                } else {
+                System.out.println("C'est un nouveau client");
+                Scanner sc4 = new Scanner(System.in);
+                System.out.println("nom");
+                String nom = sc4.nextLine();
+                System.out.println("Prenom");
+                String prenom = sc4.nextLine();               
+                System.out.println("Date de naissance jj/mm/aaaa");
+                String date = sc4.nextLine();                
+                while (verifFormatDate(date)==false)
+                    {
+                        System.out.println("La format du date est incorrecte");
+                        date = sc4.nextLine();
+                    }
+		System.out.println("Email");
+		String mail = sc4.nextLine();
+                while (isEmailAdress(mail)==false)
+                    {
+                        System.out.println("La format du mail est incorrecte");
+                        mail = sc4.nextLine();
+                    }
+		System.out.println("Telephone");
+		int tel = sc4.nextInt();
+                while (islength8(tel)==false)
+                    {
+                        System.out.println("Il faut entrer un numero de 8 chiffres");
+                        tel = sc4.nextInt();
+                    }               
+                System.out.println("Pays d'habitat");
+                Scanner p = new Scanner(System.in);
+                String pays = p.nextLine();
+                Client e1 = new Client(nb1, nom, prenom, date, mail, tel, pays);
+                e1.affiche();
+                e1.Ajouter();               
+            }
+        }
+                
                     MenuReserver(nb1);
                     Menu();
                     } 
@@ -169,57 +210,6 @@ public class Hotellerie {
                     Menu();
                 }                    
                 
-            } else {
-                System.out.println("C'est un nouveau client");
-                Scanner sc4 = new Scanner(System.in);
-                System.out.println("nom");
-                String nom = sc4.nextLine();
-                System.out.println("Prenom");
-                String prenom = sc4.nextLine();               
-                System.out.println("Date de naissance jj/mm/aaaa");
-                String date = sc4.nextLine();                
-                while (verifFormatDate(date)==false)
-                    {
-                        System.out.println("La format du date est incorrecte");
-                        date = sc4.nextLine();
-                    }
-		System.out.println("Email");
-		String mail = sc4.nextLine();
-                while (isEmailAdress(mail)==false)
-                    {
-                        System.out.println("La format du mail est incorrecte");
-                        mail = sc4.nextLine();
-                    }
-		System.out.println("Telephone");
-		int tel = sc4.nextInt();
-                while (islength8(tel)==false)
-                    {
-                        System.out.println("Il faut entrer un numero de 8 chiffres");
-                        tel = sc4.nextInt();
-                    }               
-                System.out.println("Pays d'habitat");
-                Scanner p = new Scanner(System.in);
-                String pays = p.nextLine();
-                Client e1 = new Client(nb1, nom, prenom, date, mail, tel, pays);
-                e1.affiche();
-                e1.Ajouter();               
-            }
-        }
-        System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
-        System.out.println(" 1- Effectuer une reservation     0- Annuler");
-        Scanner sc = new Scanner(System.in);
-        int nb = sc.nextInt();
-        while ((nb != 1) && (nb != 0)) {
-                System.out.println("Veuillez entrez un chiffre parmis 1, 0 ");
-                sc = new Scanner(System.in);
-                nb = sc.nextInt();
-            }
-        if (nb == 1) {
-            MenuReserver(nb1);
-            Menu();
-        } else if (nb == 0) {
-            Menu();
-    }
     }
    
     public static void MenuReserver(long nb1) {
