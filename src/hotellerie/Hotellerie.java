@@ -39,7 +39,6 @@ public class Hotellerie {
     
     public static void MenuReception()
     {
-        System.out.println("Bonjour ! ");
         System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
         Scanner sc1 = new Scanner(System.in);
         int nb1 = sc1.nextInt();
@@ -103,7 +102,6 @@ public class Hotellerie {
     
     private static void MenuReservation()
     {
-        System.out.println("Bonjour ! ");
         System.out.println("Entrer CIN  ou 0 Pour quitter");
         Scanner sc1 = new Scanner(System.in);
         String nb1s = sc1.nextLine();

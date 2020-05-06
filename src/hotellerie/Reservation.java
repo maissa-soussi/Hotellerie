@@ -112,9 +112,10 @@ public class Reservation {
 		Client c = new Client(Cin_client);
 		
                 String Num_Chambres="";
+                DecimalFormat nf=new DecimalFormat("000");
                   for (int i=0;i<chambres.length;i++)
                   {
-                     Num_Chambres=Num_Chambres+" | "+chambres[i];
+                     Num_Chambres=Num_Chambres+" | "+nf.format(chambres[i]);
                   }
 		System.out.println("\t\t\t" + "Numéro de(s) chambre(s) résérvée(s) : " + Num_Chambres);
 		System.out.println("Nom : " + c.getNom() + "\t\t" + "Prénom : " + c.getPrenom());
@@ -183,7 +184,8 @@ public class Reservation {
         public void Visualiser()
         {   
             System.out.println("           Date Reservation : "+Date_Reservation);
-            System.out.println("       Numero de Reservation : "+Num_R);
+            DecimalFormat nf=new DecimalFormat("000");
+            System.out.println("       Numero de Reservation : "+nf.format(Num_R));
             Client c = new Client(Cin_client);
             System.out.println("Nom : " + c.getNom()+" \t   Prenom : "+c.getPrenom());
             System.out.println("E-mail : " + c.getEmail());
@@ -192,7 +194,7 @@ public class Reservation {
             System.out.println("Nombre de chambres : " + Nb_chambre);
             String Num_Chambres="";
             for (int i=0;i<chambres.length;i++)
-                Num_Chambres=Num_Chambres+" | "+chambres[i];
+                Num_Chambres=Num_Chambres+" | "+nf.format(chambres[i]);
             System.out.println("Numero de chambre : " + Num_Chambres);
             System.out.println("Prix total en (dinars) : " + prix_total);
             System.out.println("Avance payee en (dinars) : " + ((reste_payer/0.9) * 0.1));
