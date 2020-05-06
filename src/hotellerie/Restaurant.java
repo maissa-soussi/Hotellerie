@@ -3,9 +3,13 @@ package hotellerie;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -156,16 +160,19 @@ public class Restaurant {
         String ligne="";
         File FileTemp = new File("Reservation.txt");
         BufferedWriter bw = new BufferedWriter(new FileWriter(FileTemp, true));
- 
         while ((ligne = br.readLine()) != null){
             if(ligne.startsWith(t)){
                   String[] tab=ligne.split("-");                 
                   float nouv_resteapayer=Float.parseFloat(tab[7])+p*c.getNb_Plat();
                   float nouv_prixtotal=Float.parseFloat(tab[6])+p*c.getNb_Plat();
-                  bw.write(tab[0]+"-"+tab[1]+"-"+tab[2]+"-"+tab[3]+"-"+tab[4]+"-"+tab[5]+"-"+nouv_prixtotal+"-"+nouv_resteapayer+"\n");
-                  bw.flush();
+                  String ch=tab[0]+"-"+tab[1]+"-"+tab[2]+"-"+tab[3]+"-"+tab[4]+"-"+tab[5]+"-"+nouv_prixtotal+"-"+nouv_resteapayer;
+                  for(int i=8;i<Integer.parseInt(tab[5])+8;i++)
+                      ch=ch+"-"+tab[i];
+                  bw.newLine();
+                  bw.write(ch);                 
              }else{
-                  bw.write(ligne+"\n");
+                bw.newLine();  
+                bw.write(ligne);                 
              }
         }
         bw.close();
@@ -175,6 +182,7 @@ public class Restaurant {
         catch (IOException e) {
             e.printStackTrace();
         }
+        effacerlignevide("Reservation");
         System.out.println("                         Restaurant "+ this.Nom_R);
         Date da = new Date();
         SimpleDateFormat f = new SimpleDateFormat("dd/M/yyyy                                                   H':'m", Locale.FRANCE);
@@ -274,4 +282,31 @@ public class Restaurant {
         }
     }
 }
+    public static void effacerlignevide(String ch) {
+      try
+  	{
+    String fichier="src\\Hotellerie\\Files\\"+ch+".txt";
+    InputStream fis = new FileInputStream(fichier);
+    Reader reader = new InputStreamReader(fis, "utf-8");
+    BufferedReader input =  new BufferedReader(reader);
+    String line = null;
+    StringBuilder str=new StringBuilder();
+    while ((line = input.readLine()) != null)
+    {
+    	str.append(line);
+    	str.append("\n");
+  	}
+  	writeTo(str.toString(), fichier);
+  	}catch(IOException ex)
+  	{
+  		ex.printStackTrace();
+  	} 
+  }
+  private static void writeTo(String data, String fichier)throws IOException
+  {
+  	FileWriter writer=new FileWriter(fichier);
+  	writer.write(data.replaceAll("(?m)^[ \t]*\r?\n", ""));
+  	writer.close();
+  }        
+    
 }
