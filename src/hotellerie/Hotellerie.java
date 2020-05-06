@@ -147,13 +147,38 @@ public class Hotellerie {
                     Menu();
                     } 
                 else if (nb == 2) {
-                    MenuModifier(nb1);
-                    Menu();
+                                System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
+                        Scanner sc2 = new Scanner(System.in);
+                        int nb2 = sc2.nextInt();
+                        while (verifNum_R(nb2)==false) {
+                        System.out.println("numero de reservation inexistant SVP essayer de nouveau");
+                            sc2 = new Scanner(System.in);
+                            nb2 = sc.nextInt();    
+                        }
+                        if (nb2 == 0) {
+                        Menu();
+                        } else {
+                            Reservation r=new Reservation(nb2);
+                           //appel au fonction Modifier 
+                            MenuReception();
+                        }
                 }
                 else if (nb == 3) {
-                    Reservation r=recherchereservation(nb1);
-                    r.annuler();
-                    Menu();
+                                System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
+                         Scanner sc3 = new Scanner(System.in);
+                         int nb3 = sc3.nextInt();
+                         while (verifNum_R(nb3)==false) {
+                         System.out.println("numero de reservation inexistant SVP essayer de nouveau");
+                             sc3 = new Scanner(System.in);
+                             nb3 = sc3.nextInt();    
+                         }
+                         if (nb3 == 0) {
+                         Menu();
+                         } else {
+                             Reservation r=new Reservation(nb3);
+                             r.annuler();
+                             Menu();
+                         }
                     }
                 else if (nb == 0) {                       
                     Menu();
