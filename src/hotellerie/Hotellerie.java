@@ -591,6 +591,8 @@ public class Hotellerie {
         return (bo || n==0);
     }
         public static void MenuModifier(int numR) {
+                 Reservation r1=new Reservation(numR);
+                 r1.annuler();
         Scanner input1 = new Scanner(System.in);
         System.out.println("Combien de semaine voulez-vous allouez? (1|2|3|4)");
         int nbsem = input1.nextInt();
@@ -675,12 +677,12 @@ public class Hotellerie {
                 Chambre c=new Chambre(tab[i]);
                 c.AnnulerReservation(tab[i],nbsem, semdebut);
             }
+            r1.AjouterReservation();
         }
      else 
      {  
-     Reservation r1=new Reservation(numR);
     Client e1=new Client(r1.getCin_client());
-     r1.annuler();
+     //r1.annuler();
          Reservation r=new Reservation(e1.getCin(),semdebut,nbsem,nb_chambre,tab);
          r.AjouterReservation();
         SendMail.sendmail(e1,r);

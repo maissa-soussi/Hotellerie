@@ -230,10 +230,11 @@ public class Reservation {
         {
             try {
             DecimalFormat nf=new DecimalFormat("00000000");
+            DecimalFormat nf1=new DecimalFormat("000");
             String nvres = Num_R+"-"+nf.format(Cin_client) + "-" + Date_Reservation + "-" + Date_Arrivee + "-" + Nb_semaine + "-" + Nb_chambre + "-" + prix_total + "-" + reste_payer;
             for (int i=0;i<chambres.length;i++)
             {
-                nvres=nvres+"-"+chambres[i];
+                nvres=nvres+"-"+nf1.format(chambres[i]);
                 
             }
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src\\Hotellerie\\Files\\Reservation.txt", true));
