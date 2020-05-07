@@ -125,10 +125,56 @@ public class Reservation {
 		System.out.println("Pays : " + c.getPays() + "\n");
 		System.out.println("Prix total à payer (en dinars) : " + prix_total);
 		System.out.println("Reste à payer (en dinars) : " + reste_payer);
-
+                ajoutcloture();
+                
 	}
         
+        public void ajoutcloture()
+        {
+            Boolean res = false;
         
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src\\Hotellerie\\Files\\Reservation.txt"));
+            String reservation="";
+            File File = new File("src\\Reservation.txt");
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(File, true));
+            // recherche du reservation à partir du fichier reservation
+            while (((reservation = br.readLine()) != null)) {
+                String[] tab=reservation.split("-");
+                res = (tab[0].equals(String.valueOf(Num_R)));
+                if (res == false) {
+                    bufferedWriter.newLine();
+                    bufferedWriter.write(reservation);                   
+                }
+                else
+                {   
+                    String pathFichier = "src\\Hotellerie\\Files\\Cloture.txt";
+		
+		/* Texte à ajouter */
+                String aAjouter =reservation + "\n";
+		FileWriter writer = null;
+		try	{
+			/* Ouverture du fichier en écriture */
+			writer = new FileWriter(pathFichier, true);
+			writer.write(aAjouter, 0, aAjouter.length());
+                        writer.close();
+		}
+		catch(IOException ex){
+			ex.printStackTrace();
+		}
+                }
+            }
+            bufferedWriter.close();
+            br.close();
+            // remplacer l'ancien fichier reservation par le nouveau           
+        Files.move(Paths.get("src\\Reservation.txt"), Paths.get("src\\Hotellerie\\Files\\Reservation.txt"), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        effacerlignevide("Reservation");
+        effacerlignevide("Cloture");
+        
+        }
         //Annuler une reservation
         public void annuler()
         {
