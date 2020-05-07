@@ -48,7 +48,7 @@ public class Hotellerie {
     {
        
         
-            System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
+            System.out.println("\n Veuillez entrez le chiffre qui correspond à votre choix ");
         System.out.println(" 1- Visualiser une reservation     2- Clôturer un séjour   3-Etat des chammbres   4-Recette   0- quitter");
         Scanner sc = new Scanner(System.in);
         int nb = sc.nextInt();
@@ -62,7 +62,7 @@ public class Hotellerie {
         Scanner sc1 = new Scanner(System.in);
         int nb1 = sc1.nextInt();
         while (nb1!=0 && verifNum_R1(nb1)==false) {
-        System.out.println("numero de reservation inexistant SVP essayer de nouveau");
+        System.out.println("\n numero de reservation inexistant SVP essayer de nouveau");
             sc1 = new Scanner(System.in);
             nb1 = sc1.nextInt();    
             }
@@ -80,19 +80,19 @@ public class Hotellerie {
         Scanner sc1 = new Scanner(System.in);
         int nb1 = sc1.nextInt();
         while (nb1!=0 &&verifNum_R1(nb1)==false) {
-        System.out.println("numero de reservation inexistant SVP essayer de nouveau");
+        System.out.println("\n numero de reservation inexistant SVP essayer de nouveau");
             sc1 = new Scanner(System.in);
             nb1 = sc1.nextInt();    
             }
         if(nb1==0)
         {
-            MenuReception();
+            Menu();
         }
         else{
             Reservation r=new Reservation(nb1);
             r.cloturer();
-            System.out.println("voulez-vous repondre à nos questions");
-            System.out.println("Tapez 1 si oui,2 sinon ");
+            System.out.println("\n voulez-vous repondre à nos questions");
+            System.out.println("1-Oui | 2-Non");
             int choix=sc.nextInt();
             while (choix !=1 && choix != 2)
             { 
