@@ -97,7 +97,23 @@ public class Feedback {
                 String[] detail = line.split("-");
                 float r=(float)(Integer.parseInt(detail[0]))/Integer.parseInt(detail[1]);
                 DecimalFormat df = new DecimalFormat("0.00");
-                System.out.println(questions[i]+" : "+df.format(r));
+                //System.out.println(questions[i]+" : "+df.format(r));
+                if ((1<=r)&&(r<2)) {
+                	System.out.println(questions[i]+" : * ");
+                }
+                else if ((2<=r)&&(r<3)) {
+                	System.out.println(questions[i]+" : ** ");
+                }
+                else if ((3<=r)&&(r<4)) {
+                	System.out.println(questions[i]+" : *** ");
+                }
+                else if ((4<=r)&&(r<5)) {
+                	System.out.println(questions[i]+" : **** ");
+                }
+                else {
+                	System.out.println(questions[i]+" : ***** ");
+                }
+                i++;
             }
             br.close();
             Files.move(Paths.get("src\\Feedback.txt"), Paths.get("src\\Hotellerie\\Files\\Feedback.txt"), StandardCopyOption.REPLACE_EXISTING);
