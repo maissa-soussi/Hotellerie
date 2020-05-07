@@ -86,7 +86,7 @@ public class Hotellerie {
             }
         if(nb1==0)
         {
-            Menu();
+            MenuReception();
         }
         else{
             Reservation r=new Reservation(nb1);
@@ -117,7 +117,7 @@ public class Hotellerie {
             MenuReception();
         }
         else if(nb==0){
-            MenuReception();
+            Menu();
         }
              
     }
@@ -145,7 +145,7 @@ public class Hotellerie {
             }
         long nb1=Long.valueOf(nb1s);
         if (nb1 == 0) {
-            Menu();
+            MenuReception();
         } else {
             if (Client.Verif(nb1)) {
                 Client e = new Client(nb1);
