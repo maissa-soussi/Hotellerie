@@ -61,23 +61,34 @@ public class Hotellerie {
              System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
         Scanner sc1 = new Scanner(System.in);
         int nb1 = sc1.nextInt();
-        while (verifNum_R1(nb1)==false) {
+        while (nb1!=0 && verifNum_R1(nb1)==false) {
         System.out.println("numero de reservation inexistant SVP essayer de nouveau");
             sc1 = new Scanner(System.in);
             nb1 = sc1.nextInt();    
             }
+        if(nb1==0)
+        {
+            MenuReception();
+        }
+        else{
             Reservation r=new Reservation(nb1);
             r.Visualiser();
             MenuReception();
+        }
         }else if(nb==2){
              System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
         Scanner sc1 = new Scanner(System.in);
         int nb1 = sc1.nextInt();
-        while (verifNum_R1(nb1)==false) {
+        while (nb1!=0 &&verifNum_R1(nb1)==false) {
         System.out.println("numero de reservation inexistant SVP essayer de nouveau");
             sc1 = new Scanner(System.in);
             nb1 = sc1.nextInt();    
             }
+        if(nb1==0)
+        {
+            MenuReception();
+        }
+        else{
             Reservation r=new Reservation(nb1);
             r.cloturer();
             System.out.println("voulez-vous repondre à nos questions");
@@ -92,7 +103,7 @@ public class Hotellerie {
             {Feedback f=new Feedback();
             f.obtenirFeedback();}
             MenuReception();
-        }
+        }}
         else if(nb==3)
         {
             Chambre c=new Chambre();
