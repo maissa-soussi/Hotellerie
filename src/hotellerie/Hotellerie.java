@@ -21,7 +21,7 @@ public class Hotellerie {
         Scanner sc = new Scanner(System.in);
         int nb = sc.nextInt();
         while ((nb != 1) && (nb != 2) && (nb != 3) && (nb!=4) && (nb != 0)) {
-            System.out.println("Veuillez entrez un chiffre parmis 1, 2, 3, 0 ");
+            System.out.println("Veuillez entrez un chiffre parmis 1, 2, 3, 4, 0 ");
             sc = new Scanner(System.in);
             nb = sc.nextInt();    
             }
@@ -91,37 +91,9 @@ public class Hotellerie {
         }
         }       
     }
-    
-    //retourner la reservation avec CIN=nb1
-    public static Reservation recherchereservation(long nb1)
-    {
-        Reservation r = null;
-        try {
-            File f = new File("src\\Hotellerie\\Files\\Reservation.txt");
-            BufferedReader b = new BufferedReader(new FileReader(f));
-            int i=0;
-            Boolean bo=false;
-            String readLine = "";
-            
-            while (((readLine = b.readLine()) != null) && (bo==false)) {
-                String[] tab=readLine.split("-");
-                if(Long.parseLong(tab[1])==nb1)
-                {
-                    r=new Reservation(Integer.parseInt(tab[0]));                   
-                }
-                i++;
-            }
-            b.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return r;
-    }
-    
+
     private static void MenuReservation()
-    {
-        
-       
+    {             
                 System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
                 System.out.println(" 1- Effectuer une reservation     2- modifier une reservation     3- annuler une réservation     0- quitter");
                 Scanner sc = new Scanner(System.in);
@@ -133,10 +105,10 @@ public class Hotellerie {
                 }
                 if (nb == 1) {
                     
-                    System.out.println("Entrer CIN  ou 0 Pour quitter");
+        System.out.println("Entrer CIN  ou 0 Pour quitter");
         Scanner sc1 = new Scanner(System.in);
         String nb1s = sc1.nextLine();
-        while (verifcin1(nb1s)==false) {
+        while (verifcin(nb1s)==false) {
                 System.out.println("Entrer le CIN  ou 0 Pour quitter");
                 sc1 = new Scanner(System.in);
                 nb1s = sc1.nextLine();
@@ -566,31 +538,13 @@ public class Hotellerie {
             return (8==chaine.length());
             }
         
-        private static Boolean verifcin1(String n) {
+        private static Boolean verifcin(String n) {
         Boolean bo = false;
         if(n.length()==8)
             bo=true;       
         return (bo || "0".equals(n));
     }
         
-        private static Boolean verifcin(String n) {
-        Boolean bo = false;
-        try {
-            File f = new File("src\\Hotellerie\\Files\\Reservation.txt");
-            BufferedReader b = new BufferedReader(new FileReader(f));
-            String readLine = "";
-            while (((readLine = b.readLine()) != null) && (bo == false)) {
-                String[] tab = readLine.split("-");
-                if (tab[1].equals(n)) {
-                    bo = true;
-                }
-            }
-            b.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return (bo || "0".equals(n));
-    }
         private static Boolean verifNum_R1(int n) {
         Boolean bo = false;
         try {
