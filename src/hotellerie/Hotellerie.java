@@ -197,6 +197,7 @@ public class Hotellerie {
                         Menu();
                         } else {
                             Reservation r=new Reservation(nb2);
+                            r.Visualiser();
                             MenuModifier(nb2);
                            //appel au fonction Modifier 
                             Menu();
