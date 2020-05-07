@@ -17,10 +17,10 @@ public class Hotellerie {
     
     public static void Menu() {
         System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
-        System.out.println(" 1- Reservation     2- Reception     3- Restaurant     0- quitter");
+        System.out.println(" 1- Reservation     2- Reception     3- Restaurant   4-Resultats Feedback     0- quitter");
         Scanner sc = new Scanner(System.in);
         int nb = sc.nextInt();
-        while ((nb != 1) && (nb != 2) && (nb != 3) && (nb != 0)) {
+        while ((nb != 1) && (nb != 2) && (nb != 3) && (nb!=4) && (nb != 0)) {
             System.out.println("Veuillez entrez un chiffre parmis 1, 2, 3, 0 ");
             sc = new Scanner(System.in);
             nb = sc.nextInt();    
@@ -31,7 +31,14 @@ public class Hotellerie {
             MenuReception();
         } else if (nb == 3) {
             MenuRestaurant();
-        } else if (nb == 0) {
+        }
+        else if (nb==4)
+        {
+            //MenuFeedback
+            Feedback f=new Feedback();
+            f.resultatsFeedback();
+        }
+        else if (nb == 0) {
             System.out.println("MERCI A BIENTOT");
             System.exit(0);
         }

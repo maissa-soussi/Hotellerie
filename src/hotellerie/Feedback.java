@@ -31,25 +31,25 @@ public class Feedback {
             System.out.println("entrer une note entre 0 et 5 ");
             nb1 = sc1.nextInt();
         }
-        System.out.println("Comment jugez-vous le niveau de confort de votre chambres (entre 0 et 5 )");
+        System.out.println("Comment jugez-vous le niveau de confort de votre chambres ?(entre 0 et 5 )");
         int nb2 = sc1.nextInt();
         while (nb2 < 0 || nb2 > 5) {
             System.out.println("entrer une note entre 0 et 5 ");
             nb2 = sc1.nextInt();
         }
-        System.out.println("Que pensez-vous de la qualité de service du Restaurant principale (entre 0 et 5 )");
+        System.out.println("Que pensez-vous de la qualité de service du Restaurant principale ? (entre 0 et 5 )");
         int nb3 = sc1.nextInt();
         while (nb3 < 0 || nb3 > 5) {
             System.out.println("entrer une note entre 0 et 5 ");
             nb3 = sc1.nextInt();
         }
-        System.out.println("Comment jugez-vous l'animation de l'hotel (entre 0 et 5 )");
+        System.out.println("Comment jugez-vous l'animation de l'hotel ? (entre 0 et 5 )");
         int nb4 = sc1.nextInt();
         while (nb4 < 0 || nb4 > 5) {
             System.out.println("entrer une note entre 0 et 5 ");
             nb4 = sc1.nextInt();
         }
-        System.out.println("Donner une note de satisfaction concernant votre séjour(entre 0 et 5 )");
+        System.out.println("Donner une note de satisfaction concernant votre séjour ?(entre 0 et 5 )");
         int nb5 = sc1.nextInt();
         while (nb5 < 0 || nb5 > 5) {
             System.out.println("entrer une note entre 0 et 5 ");
@@ -91,7 +91,7 @@ public class Feedback {
             FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Feedback.txt");
             BufferedReader br = new BufferedReader(fichier);
             String line;
-            String[] questions={"Question1","Question2","Question3","Question4","Question5"};
+            String[] questions={"Comment jugez-vous l’amabilité du personnel d'accueil ?","Comment jugez-vous le niveau de confort de votre chambres ?","Que pensez-vous de la qualité de service du Restaurant principale ?","Comment jugez-vous l'animation de l'hotel ?","Donner une note de satisfaction concernant votre séjour ?"};
             int i = 0;
             while ((line = br.readLine()) != null && i < 5) {
                 String[] detail = line.split("-");
