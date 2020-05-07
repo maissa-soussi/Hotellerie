@@ -284,9 +284,4 @@ public class Chambre {
         } 
            return resultat;
       }
-	public static void main(String[] args) {
-            Chambre c=new Chambre();
-            c.Suggestion("simple", 3, 2);
-            
-        }
 }

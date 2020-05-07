@@ -293,8 +293,8 @@ public class Hotellerie {
            Chambre c=new Chambre();
            if(c.Suggestion(type.toLowerCase(), nbsem, semdebut)){
            vue="aaaa";
-            while (VerifVueC(vue) == false) {
-            System.out.println("entrer une autre vue");
+            while (!vue.equalsIgnoreCase("non")&& VerifVueC(vue) == false) {
+            System.out.println("entrer une autre vue sinon saisir non");
             vue = input4.nextLine();
         }
           int num1;
@@ -312,7 +312,7 @@ public class Hotellerie {
     }
      if(k < nb_chambre)
         {
-            System.out.println("chambres non dispo");
+            System.out.println("Reservation non aboutie");
             for (int i=0;i<k;i++)
             {
                 Chambre c=new Chambre(tab[i]);
@@ -671,8 +671,8 @@ public class Hotellerie {
            Chambre c=new Chambre();
            if(c.Suggestion(type.toLowerCase(), nbsem, semdebut)){
            vue="aaaa";
-            while (VerifVueC(vue) == false) {
-            System.out.println("entrer une autre vue");
+            while (!vue.equalsIgnoreCase("non")&& VerifVueC(vue) == false) {
+            System.out.println("entrer une autre vue sinon saisir non");
             vue = input4.nextLine();
         }
           int num1;
@@ -690,11 +690,17 @@ public class Hotellerie {
     }
      if(k < nb_chambre)
         {
-            System.out.println("chambres non dispo");
+            System.out.println("Modification non aboutie");
             for (int i=0;i<k;i++)
             {
                 Chambre c=new Chambre(tab[i]);
                 c.AnnulerReservation(tab[i],nbsem, semdebut);
+            }
+            Chambre c1 = new Chambre();
+            int[] t1=r1.getChambres();
+            for (int i=0;i<t1.length;i++)
+            {
+                c1.ReserverChambre(t1[i],r1.getNb_semaine(),r1.semaineDeb());
             }
             r1.AjouterReservation();
         }

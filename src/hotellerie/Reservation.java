@@ -331,6 +331,10 @@ public class Reservation {
     public double getPrix_reservation() {
         return prix_reservation;
     }
+    public int[] getChambres()
+    {
+        return chambres;
+    }
     
     public double getReste_payer() {
         return reste_payer;
@@ -371,7 +375,25 @@ public class Reservation {
     public void setReste_payer(double reste_payer) {
         this.reste_payer = reste_payer;
     }
-    
+    public int semaineDeb()
+    {
+        int nums=0;
+        switch (Date_Arrivee) {
+                        case "2020/08/02":
+                            nums=1;
+                            break;
+                        case "2020/08/09":
+                            nums=2;
+                            break;
+                        case "2020/08/16":
+                            nums=3;
+                            break;
+                        case "2020/08/23":
+                            nums=4;
+                            break;
+    }
+        return nums;
+    }
     public static void effacerlignevide(String ch) {
       try
   	{
