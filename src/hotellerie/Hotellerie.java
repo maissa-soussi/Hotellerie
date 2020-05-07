@@ -67,6 +67,17 @@ public class Hotellerie {
         }else if(nb==2){
             Reservation r=new Reservation(nb1);
             r.cloturer();
+            System.out.println("voulez-vous repondre à nos questions");
+            System.out.println("Tapez 1 si oui,2 sinon ");
+            int choix=sc.nextInt();
+            while (choix !=1 && choix != 2)
+            { 
+                System.out.println("1-Oui | 2-Non");
+                choix=sc.nextInt();
+            }
+            if(choix==1)
+            {Feedback f=new Feedback();
+            f.obtenirFeedback();}
             MenuReception();
         }else if(nb==0){
             MenuReception();
