@@ -16,12 +16,12 @@ public class Hotellerie {
     } 
     
     public static void Menu() {
-        System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
+        System.out.println("\n \n Veuillez entrez le chiffre qui correspond à votre choix ");
         System.out.println(" 1- Reservation     2- Reception     3- Restaurant   4-Resultats Feedback     0- quitter");
         Scanner sc = new Scanner(System.in);
         int nb = sc.nextInt();
         while ((nb != 1) && (nb != 2) && (nb != 3) && (nb!=4) && (nb != 0)) {
-            System.out.println("Veuillez entrez un chiffre parmis 1, 2, 3, 4, 0 ");
+            System.out.println("\n Veuillez entrez un chiffre parmis 1, 2, 3, 4, 0 ");
             sc = new Scanner(System.in);
             nb = sc.nextInt();    
             }
@@ -39,18 +39,18 @@ public class Hotellerie {
             f.resultatsFeedback();
         }
         else if (nb == 0) {
-            System.out.println("MERCI A BIENTOT");
+            System.out.println("\n \n MERCI A BIENTOT");
             System.exit(0);
         }
     }
     
     public static void MenuReception()
     {
-        System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
+        System.out.println("\n \n Entrer le numero de reservation  ou 0 Pour quitter");
         Scanner sc1 = new Scanner(System.in);
         int nb1 = sc1.nextInt();
         while (verifNum_R1(nb1)==false) {
-        System.out.println("numero de reservation inexistant SVP essayer de nouveau");
+        System.out.println("\n numero de reservation inexistant SVP essayer de nouveau");
             sc1 = new Scanner(System.in);
             nb1 = sc1.nextInt();    
             }
@@ -58,12 +58,12 @@ public class Hotellerie {
         {
             Menu();
         }else{
-            System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
+            System.out.println("\n \n Veuillez entrez le chiffre qui correspond à votre choix ");
         System.out.println(" 1- Visualiser une reservation     2- Clôturer un séjour     0- quitter");
         Scanner sc = new Scanner(System.in);
         int nb = sc.nextInt();
         while ((nb != 1) && (nb != 2) && (nb != 0)) {
-            System.out.println("Veuillez entrez un chiffre parmis 1, 2, 0 ");
+            System.out.println("\n Veuillez entrez un chiffre parmis 1, 2, 0 ");
             sc = new Scanner(System.in);
             nb = sc.nextInt();    
             }
@@ -74,7 +74,7 @@ public class Hotellerie {
         }else if(nb==2){
             Reservation r=new Reservation(nb1);
             r.cloturer();
-            System.out.println("voulez-vous repondre à nos questions");
+            System.out.println("\n voulez-vous repondre à nos questions");
             System.out.println("Tapez 1 si oui,2 sinon ");
             int choix=sc.nextInt();
             while (choix !=1 && choix != 2)
@@ -94,22 +94,22 @@ public class Hotellerie {
 
     private static void MenuReservation()
     {             
-                System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
+                System.out.println("\n \n Veuillez entrez le chiffre qui correspond à votre choix ");
                 System.out.println(" 1- Effectuer une reservation     2- modifier une reservation     3- annuler une réservation     0- quitter");
                 Scanner sc = new Scanner(System.in);
                 int nb = sc.nextInt();
                 while ((nb != 1) && (nb != 2) && (nb != 3) && (nb != 0)) {
-                    System.out.println("Veuillez entrez un chiffre parmis 1, 2, 3, 0 ");
+                    System.out.println("\n Veuillez entrez un chiffre parmis 1, 2, 3, 0 ");
                     sc = new Scanner(System.in);
                     nb = sc.nextInt();
                 }
                 if (nb == 1) {
                     
-        System.out.println("Entrer CIN  ou 0 Pour quitter");
+        System.out.println("\n Entrer CIN  ou 0 Pour quitter");
         Scanner sc1 = new Scanner(System.in);
         String nb1s = sc1.nextLine();
         while (verifcin(nb1s)==false) {
-                System.out.println("Entrer le CIN  ou 0 Pour quitter");
+                System.out.println("\n Entrer le CIN  ou 0 Pour quitter");
                 sc1 = new Scanner(System.in);
                 nb1s = sc1.nextLine();
             }
@@ -119,11 +119,11 @@ public class Hotellerie {
         } else {
             if (Client.Verif(nb1)) {
                 Client e = new Client(nb1);
-                System.out.println("Voici les coordonnees du client");
+                System.out.println("\n Voici les coordonnees du client");
                 e.affiche();
                 
                 } else {
-                System.out.println("C'est un nouveau client");
+                System.out.println("\n C'est un nouveau client");
                 Scanner sc4 = new Scanner(System.in);
                 System.out.println("nom");
                 String nom = sc4.nextLine();
@@ -133,21 +133,21 @@ public class Hotellerie {
                 String date = sc4.nextLine();                
                 while (verifFormatDate(date)==false)
                     {
-                        System.out.println("La format du date est incorrecte");
+                        System.out.println("\n La format du date est incorrecte");
                         date = sc4.nextLine();
                     }
 		System.out.println("Email");
 		String mail = sc4.nextLine();
                 while (isEmailAdress(mail)==false)
                     {
-                        System.out.println("La format du mail est incorrecte");
+                        System.out.println("\n La format du mail est incorrecte");
                         mail = sc4.nextLine();
                     }
 		System.out.println("Telephone");
 		int tel = sc4.nextInt();
                 while (islength8(tel)==false)
                     {
-                        System.out.println("Il faut entrer un numero de 8 chiffres");
+                        System.out.println("\n Il faut entrer un numero de 8 chiffres");
                         tel = sc4.nextInt();
                     }               
                 System.out.println("Pays d'habitat");
@@ -164,11 +164,11 @@ public class Hotellerie {
                     } 
                 else if (nb == 2) {
                     
-                        System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
+                        System.out.println("\n Entrer le numero de reservation  ou 0 Pour quitter");
                         Scanner sc2 = new Scanner(System.in);
                         int nb2 = sc2.nextInt();
                         while (verifNum_R1(nb2)==false) {
-                        System.out.println("numero de reservation inexistant SVP essayer de nouveau");
+                        System.out.println("\n numero de reservation inexistant SVP essayer de nouveau");
                             sc2 = new Scanner(System.in);
                             nb2 = sc2.nextInt();    
                         }
@@ -183,11 +183,11 @@ public class Hotellerie {
                         }
                 }
                 else if (nb == 3) {
-                         System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
+                         System.out.println("\n Entrer le numero de reservation  ou 0 Pour quitter");
                          Scanner sc3 = new Scanner(System.in);
                          int nb3 = sc3.nextInt();
                          while (verifNum_R1(nb3)==false) {
-                             System.out.println("numero de reservation inexistant SVP essayer de nouveau");
+                             System.out.println("\n numero de reservation inexistant SVP essayer de nouveau");
                              sc3 = new Scanner(System.in);
                              nb3 = sc3.nextInt();    
                          }
@@ -207,10 +207,10 @@ public class Hotellerie {
    
     public static void MenuReserver(long nb1) {
         Scanner input1 = new Scanner(System.in);
-        System.out.println("Combien de semaine voulez-vous allouez? (1|2|3|4)");
+        System.out.println("\n \n Combien de semaine voulez-vous allouez? (1|2|3|4)");
         int nbsem = input1.nextInt();
         while (VerifNbsem(nbsem) == false) {
-            System.out.println("Nombre de semaine invalide");
+            System.out.println("\n Nombre de semaine invalide");
             System.out.println("Combien de semaine voulez-vous allouez? (1|2|3|4)");
             nbsem = input1.nextInt();
         }
@@ -218,7 +218,7 @@ public class Hotellerie {
         System.out.println("Combien de chambre voulez-vous reservez?");
         int nb_chambre = input2.nextInt();
         while (nb_chambre < 0) {
-            System.out.println("Saisir un Nombre de chambre correcte");
+            System.out.println("\n Saisir un Nombre de chambre correcte");
             System.out.println("Combien de chambre voulez-vous reservez?");
             nb_chambre = input2.nextInt();
         }
@@ -226,7 +226,7 @@ public class Hotellerie {
         System.out.println("A quelle semaine voulez-vous debuter votre sejour ?");
         int semdebut = input5.nextInt();
         while (semdebut + nbsem > 5 || semdebut <= 0) {
-            System.out.println("saisir un nombre de semaine correcte");
+            System.out.println("\n saisir un nombre de semaine correcte");
             System.out.println("A quelle semaine voulez-vous debuter votre sejour ?");
             semdebut = input5.nextInt();
         }
@@ -240,7 +240,7 @@ public class Hotellerie {
         System.out.println("Quel type voulez-vous choisir pour la chambre num "+i+"? (simple|double|triple|luxe)");
         String type = input3.nextLine();
         while (VerifTypeC(type) == false) {
-            System.out.println("type invalide");
+            System.out.println("\n type invalide");
             System.out.println("Quel type voulez-vous choisir ? (simple|double|triple|luxe)");
             type = input3.nextLine();
         }
@@ -248,7 +248,7 @@ public class Hotellerie {
         System.out.println("Voulez vous choisir une chambre avec vue mer/piscine/jardin ");
         String vue = input4.nextLine();
         while (VerifVueC(vue) == false) {
-            System.out.println("vue invalide");
+            System.out.println("\n vue invalide");
             System.out.println("Voulez vous choisir une chambre avec vue mer/piscine/jardin ");
             vue = input4.nextLine();
         }
@@ -266,7 +266,7 @@ public class Hotellerie {
            if(c.Suggestion(type.toLowerCase(), nbsem, semdebut)){
            vue="aaaa";
             while (!vue.equalsIgnoreCase("non")&& VerifVueC(vue) == false) {
-            System.out.println("entrer une autre vue sinon saisir non");
+            System.out.println("\n entrer une autre vue sinon saisir non");
             vue = input4.nextLine();
         }
           int num1;
@@ -279,12 +279,12 @@ public class Hotellerie {
            }
            }
           else 
-            System.out.println("chambre non dispo");
+            System.out.println("\n chambre non dispo");
         }       
     }
      if(k < nb_chambre)
         {
-            System.out.println("Reservation non aboutie");
+            System.out.println("\n Reservation non aboutie");
             for (int i=0;i<k;i++)
             {
                 Chambre c=new Chambre(tab[i]);
@@ -302,15 +302,15 @@ public class Hotellerie {
     
     public static void MenuRestaurant()
     {
-        System.out.println("entrer le nom du restaurant Royale/Italiano/Mexicano");
+        System.out.println("\n \n entrer le nom du restaurant Royale/Italiano/Mexicano");
             Scanner s1 = new Scanner(System.in);
             String no = s1.nextLine();
             while (verifNom_R(no) == false) {
-                System.out.println("restaurant inexistant SVP essayez de nouveau");
+                System.out.println("\n restaurant inexistant SVP essayez de nouveau");
                 s1 = new Scanner(System.in);
                 no = s1.nextLine();
             }
-        System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
+        System.out.println("\n Veuillez entrez le chiffre qui correspond à votre choix ");
         System.out.println(" 1- Effectuer une commande     2- Suivre les stats du restaurant     0- Annuler");
         Scanner sc = new Scanner(System.in);
         int nb = sc.nextInt();
@@ -332,7 +332,7 @@ public class Hotellerie {
     }
     
     private static void MenuCommande(String nom) {
-        System.out.println(" 1- Effectuer une commande     0- Annuler");
+        System.out.println("\n \n 1- Effectuer une commande     0- Annuler");
         Scanner sc = new Scanner(System.in);
         int nb = sc.nextInt();
         while ((nb != 1)&& (nb != 0)) {
@@ -346,7 +346,7 @@ public class Hotellerie {
             Scanner c1 = new Scanner(System.in);
             int n = c1.nextInt();
             while (verifNum_R(n) == false) {
-                System.out.println("numero de reservation inexistant SVP essayez de nouveau");
+                System.out.println("\n numero de reservation inexistant SVP essayez de nouveau");
                 c1 = new Scanner(System.in);
                 n = c1.nextInt();
             }
@@ -354,7 +354,7 @@ public class Hotellerie {
             Scanner c2 = new Scanner(System.in);
             String co = c2.nextLine();
             while (verifCode_Plat(co, nom) == false) {
-                System.out.println("plat inexistant SVP essayez de nouveau");
+                System.out.println("\n plat inexistant SVP essayez de nouveau");
                 c2 = new Scanner(System.in);
                 co = c2.nextLine();
             }
@@ -365,7 +365,7 @@ public class Hotellerie {
             Scanner c4 = new Scanner(System.in);
             int d = c4.nextInt();
             while (verifDate_C(d) == false) {
-                System.out.println("numero de la journee invalede SVP essayez de nouveau");
+                System.out.println("\n numero de la journee invalede SVP essayez de nouveau");
                 c4 = new Scanner(System.in);
                 d = c4.nextInt();
             }
@@ -378,7 +378,7 @@ public class Hotellerie {
     
     private static void MenuStat(String no) {
             Restaurant R = new Restaurant(no);
-            System.out.println("Veuillez entrez le chiffre qui correspond à votre choix ");
+            System.out.println("\n \n Veuillez entrez le chiffre qui correspond à votre choix ");
             System.out.println(" 1- Visualiser la recette d'une journee");
             System.out.println(" 2- Visualiser la recette de la semaine courante");
             System.out.println(" 3- Visualiser la  fréquence de demande de chaque plat pendant la semaine courante");
@@ -395,7 +395,7 @@ public class Hotellerie {
                 Scanner b = new Scanner(System.in);
                 int j = b.nextInt();
                 while (verifDate_C(j) == false) {
-                    System.out.println("numero de la journee invalede SVP essayez de nouveau");
+                    System.out.println("\n numero de la journee invalede SVP essayez de nouveau");
                     b = new Scanner(System.in);
                     j = b.nextInt();
                 }

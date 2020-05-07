@@ -183,6 +183,7 @@ public class Restaurant {
             e.printStackTrace();
         }
         effacerlignevide("Reservation");
+        System.out.println("\n \n"); 
         System.out.println("                         Restaurant "+ this.Nom_R);
         Date da = new Date();
         SimpleDateFormat f = new SimpleDateFormat("dd/M/yyyy                                                   H':'m", Locale.FRANCE);
@@ -232,7 +233,7 @@ public class Restaurant {
             }
             }
             b.close();
-            System.out.println("la recette de la journée "+d+" est: "+r);
+            System.out.println("\n la recette de la journée "+d+" est: "+r);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -253,7 +254,7 @@ public class Restaurant {
             }
             }
             b.close();
-            System.out.println("la recette de la semaine est: "+r);
+            System.out.println("\n la recette de la semaine est: "+r);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -27,7 +27,7 @@ public class SendMail {
     public static void sendmail(Client e,Reservation r)
     {
         try{
-        System.out.println("Envoie du Mail en Cours...");
+        System.out.println("\n Envoie du Mail en Cours...");
         Properties properties = new Properties();
         // les propriétés du serveur mail
         properties.put("mail.smtp.auth", "true");
@@ -65,7 +65,7 @@ public class SendMail {
         message.setFrom(new InternetAddress(myEmailAcount));
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(e.getEmail()));
         message.setSubject("Confirmation de reservation");
-        String Code = "Bonjour "+ e.getNom()+" "+e.getPrenom()+", \n Votre Num de reservation : "+r.getNum_R()+"\n Date d'arrivée : "+r.getDate_Arrivee()+" \n Votre Cin : "+r.getCin_client()+" \n Num Chambre : "+r.getNb_chambre()+" \n Nombre de semaine : "+r.getNb_semaine()+"\n Prix Total : "+r.getPrix_total();
+        String Code = "Bonjour "+ e.getNom()+" "+e.getPrenom()+", \n Votre Num de reservation : "+r.getNum_R()+"\n Date d'arrivée : "+r.getDate_Arrivee()+" \n Votre Cin : "+r.getCin_client()+" \n Num Chambre : "+r.getNb_chambre()+" \n Nombre de semaine : "+r.getNb_semaine()+"\n Prix Total : "+r.getPrix_total()+"\n Reste à payer : "+r.getReste_payer();
         message.setText(Code);
         return message;
        }

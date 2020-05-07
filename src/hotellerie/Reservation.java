@@ -118,6 +118,7 @@ public class Reservation {
                   {
                      Num_Chambres=Num_Chambres+" | "+nf.format(chambres[i]);
                   }
+                System.out.println("\n \n");  
 		System.out.println("\t\t\t" + "Numéro de(s) chambre(s) résérvée(s) : " + Num_Chambres);
 		System.out.println("Nom : " + c.getNom() + "\t\t" + "Prénom : " + c.getPrenom());
 		System.out.println("E-mail : " + c.getEmail());
@@ -230,6 +231,7 @@ public class Reservation {
         //Visualiser reservation 
         public void Visualiser()
         {   
+            System.out.println("\n \n"); 
             System.out.println("           Date Reservation : "+Date_Reservation);
             DecimalFormat nf=new DecimalFormat("000");
             System.out.println("       Numero de Reservation : "+nf.format(Num_R));
