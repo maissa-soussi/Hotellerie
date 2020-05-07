@@ -339,6 +339,7 @@ public class Reservation {
 			List<String> lignes = Files.readAllLines(reservation);
 			for (String ligne : lignes) {
 				String[] donnees = ligne.split("-");
+                                if(Integer.parseInt(donnees[0])>=a)
 				a = Integer.parseInt(donnees[0]);
 			}
 		} catch (IOException e) {
