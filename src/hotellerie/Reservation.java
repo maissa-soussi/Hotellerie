@@ -324,6 +324,7 @@ public class Reservation {
             List<String> lignes = Files.readAllLines(reservation);
             for (String ligne : lignes) {
                 String[] donnees = ligne.split("\\*");
+                
                 if (Integer.parseInt(donnees[0]) >= a) {
                     a = Integer.parseInt(donnees[0]);
                 }
@@ -331,6 +332,10 @@ public class Reservation {
         } catch (IOException e) {
             System.out.println("erreur de lecture du fichier");
 
+        }
+        catch(NumberFormatException e)
+        {
+            e.getMessage();
         }
 
         return a;
