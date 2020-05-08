@@ -115,17 +115,17 @@ public class Hotellerie {
         Scanner sc = new Scanner(System.in);
         int nb = sc.nextInt();
         while ((nb != 1) && (nb != 2) && (nb != 3) && (nb != 0)) {
-            System.out.println("\n Veuillez entrez un chiffre parmis 1, 2, 3, 0 ");
+            System.out.println("\nVeuillez entrez un chiffre parmis 1, 2, 3, 0 ");
             sc = new Scanner(System.in);
             nb = sc.nextInt();
         }
         if (nb == 1) {
             
-            System.out.println("\n Entrer CIN  ou 0 Pour quitter");
+            System.out.println("\nEntrer CIN  ou 0 Pour quitter");
             Scanner sc1 = new Scanner(System.in);
             String nb1s = sc1.nextLine();
             while (verifcin(nb1s) == false) {
-                System.out.println("\n Entrer le CIN  ou 0 Pour quitter");
+                System.out.println("\nEntrer le CIN  ou 0 Pour quitter");
                 sc1 = new Scanner(System.in);
                 nb1s = sc1.nextLine();
             }
@@ -135,35 +135,40 @@ public class Hotellerie {
             } else {
                 if (Client.Verif(nb1)) {
                     Client e = new Client(nb1);
-                    System.out.println("\n Voici les coordonnees du client");
+                    System.out.println("\nVoici les coordonnees du client");
                     e.affiche();
                     
                 } else {
-                    System.out.println("\n C'est un nouveau client");
+                    System.out.println("\nVous etes un nouveau client :");
                     Scanner sc4 = new Scanner(System.in);
-                    System.out.println("nom");
+                    System.out.println("Veuillez saisir votre Nom : ");
                     String nom = sc4.nextLine();
-                    System.out.println("Prenom");
+                    System.out.println("Veuillez saisir votre Prenom : ");
                     String prenom = sc4.nextLine();                    
-                    System.out.println("Date de naissance jj/mm/aaaa");
+                    System.out.println("Veuillez saisir votre Date de naissance sous ce format : jj/mm/aaaa :");
                     String date = sc4.nextLine();                    
                     while (verifFormatDate(date) == false) {
-                        System.out.println("\n La format du date est incorrecte");
+                        System.out.println("\nLa format du date est incorrecte : ");
                         date = sc4.nextLine();
                     }
-                    System.out.println("Email");
+                    System.out.println("Veuillez saisir votre adresse Email : ");
                     String mail = sc4.nextLine();
                     while (isEmailAdress(mail) == false) {
-                        System.out.println("\n La format du mail est incorrecte");
+                        System.out.println("\nLa format du mail est incorrecte .");
                         mail = sc4.nextLine();
                     }
-                    System.out.println("Telephone");
-                    int tel = sc4.nextInt();
+                    System.out.println("Veuillez saisir votre numero de Telephone : ");
+                    String tel1 = sc4.nextLine();
+                    while ( ! isInteger(tel1)){
+                    	System.out.println("\nIl faut entrer un numero de telephone valide");
+                        tel1 = sc4.nextLine();
+                    }
+                    int tel =Integer.valueOf(tel1);
                     while (islength8(tel) == false) {
-                        System.out.println("\n Il faut entrer un numero de 8 chiffres");
+                        System.out.println("\nIl faut entrer un numero de 8 chiffres");
                         tel = sc4.nextInt();
                     }                    
-                    System.out.println("Pays d'habitat");
+                    System.out.println(" Veuillez saisir votre Pays d'habitat");
                     Scanner p = new Scanner(System.in);
                     String pays = p.nextLine();
                     Client e1 = new Client(nb1, nom, prenom, date, mail, tel, pays);
@@ -441,7 +446,17 @@ public class Hotellerie {
             return true;
         }
     }
-
+    public static boolean isInteger(String str) {
+        if(str == null ) {
+            return false;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if(!Character.isDigit(str.charAt(i))) {
+                return false;
+            } 
+        }
+        return true;
+    }
     //verifier si le num de reservation existe
     private static Boolean verifNum_R(int n) {
         Boolean bo = false;
