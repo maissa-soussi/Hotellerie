@@ -436,6 +436,7 @@ public class Reservation {
         return nums;
     }
 
+    // permet d'effacer les lignes vides dans un fichiers
     public static void effacerlignevide(String ch) {
         try {
             String fichier = "src\\Hotellerie\\Files\\" + ch + ".txt";
@@ -448,17 +449,12 @@ public class Reservation {
                 str.append(line);
                 str.append("\n");
             }
-            writeTo(str.toString(), fichier);
-            input.close();
+            FileWriter writer = new FileWriter(fichier);
+            writer.write(str.toString().replaceAll("(?m)^[ \t]*\r?\n", ""));
+            writer.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-    private static void writeTo(String data, String fichier) throws IOException {
-        FileWriter writer = new FileWriter(fichier);
-        writer.write(data.replaceAll("(?m)^[ \t]*\r?\n", ""));
-        writer.close();
     }
 
     public void visualiserRecette() {

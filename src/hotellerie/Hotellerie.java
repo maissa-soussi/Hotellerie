@@ -593,7 +593,4 @@ public class Hotellerie {
         }        
         return (bo || "0".equals(n));
     }
-   
-
-    
 }
