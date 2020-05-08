@@ -73,7 +73,7 @@ public class Commande {
             BufferedReader b = new BufferedReader(new FileReader(f));
             for (int j = 0; j < i; j++) {
                 String readLine = b.readLine();
-                String[] tab = readLine.split("*");
+                String[] tab = readLine.split("\\*");
                 if (j == i - 1) {
                     if ("7".equals(tab[3]) && (Date_C != 7)) {
                         b.close();

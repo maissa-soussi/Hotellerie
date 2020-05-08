@@ -48,7 +48,7 @@ public class Client {
             String client;
             DecimalFormat nf = new DecimalFormat("00000000");
             while (((client = br.readLine()) != null) && (res == false)) {
-                tab = client.split("*");
+                tab = client.split("\\*");
                 res = (tab[0].equals(nf.format(Cin)));
             }
 
@@ -127,7 +127,7 @@ public class Client {
 
             // recherche du client à partir du fichier client
             while (((client = br.readLine()) != null) && (res == false)) {
-                tab = client.split("*");
+                tab = client.split("\\*");
                 res = (tab[0].equals(String.valueOf(nf.format(cin))));
                 if (res == false) {
                     bufferedWriter.write(client);

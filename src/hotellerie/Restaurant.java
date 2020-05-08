@@ -68,7 +68,7 @@ public class Restaurant {
             String readLine = "";
             /* importer les plats */
             while ((readLine = b.readLine()) != null) {
-                String[] tab = readLine.split("*");
+                String[] tab = readLine.split("\\*");
                 p[i] = new Plat(tab[0], tab[1], Float.parseFloat(tab[2]));
                 i++;
             }
@@ -171,7 +171,7 @@ public class Restaurant {
             BufferedWriter bw = new BufferedWriter(new FileWriter(FileTemp, true));
             while ((ligne = br.readLine()) != null) {
                 if (ligne.startsWith(t)) {
-                    String[] tab = ligne.split("*");
+                    String[] tab = ligne.split("\\*");
                     float nouv_resteapayer = Float.parseFloat(tab[7]) + p * c.getNb_Plat();
                     float nouv_prixtotal = Float.parseFloat(tab[6]) + p * c.getNb_Plat();
                     String ch = tab[0] + "*" + tab[1] + "*" + tab[2] + "*" + tab[3] + "*" + tab[4] + "*" + tab[5] + "*" + nouv_prixtotal + "*" + nouv_resteapayer;
@@ -214,7 +214,7 @@ public class Restaurant {
             BufferedReader b = new BufferedReader(new FileReader(f));
             String readLine = "";
             while (((readLine = b.readLine()) != null) && (bo == false)) {
-                String[] tab = readLine.split("*");
+                String[] tab = readLine.split("\\*");
                 if (tab[0].equals(co)) {
                     bo = true;
                 }
@@ -234,7 +234,7 @@ public class Restaurant {
             BufferedReader b = new BufferedReader(new FileReader(f));
             String readLine = "";
             while ((readLine = b.readLine()) != null) {
-                String[] tab = readLine.split("*");
+                String[] tab = readLine.split("\\*");
                 if ((Integer.parseInt(tab[3]) == d) && (verifier(tab[1]))) {
                     r = r + Integer.parseInt(tab[2]) * this.getprix(tab[1]);
                 }
@@ -254,7 +254,7 @@ public class Restaurant {
             BufferedReader b = new BufferedReader(new FileReader(f));
             String readLine = "";
             while ((readLine = b.readLine()) != null) {
-                String[] tab = readLine.split("*");
+                String[] tab = readLine.split("\\*");
                 if (verifier(tab[1])) {
                     r = r + Integer.parseInt(tab[2]) * this.getprix(tab[1]);
                 }
@@ -275,7 +275,7 @@ public class Restaurant {
                 BufferedReader b = new BufferedReader(new FileReader(f));
                 String readLine = "";
                 while ((readLine = b.readLine()) != null) {
-                    String[] tab = readLine.split("*");
+                    String[] tab = readLine.split("\\*");
                     if (Plats[i].code.equals(tab[1])) {
                         fr = fr + Integer.parseInt(tab[2]);
                     }
