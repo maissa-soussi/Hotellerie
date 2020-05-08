@@ -137,13 +137,19 @@ public class Client {
             if (!Email.equals(tab[4])) {
                 tab[4] = Email;
             }
+            
+            if (!Pays.equals("") && !Pays.equals(tab[4])) {
+                tab[6] = Pays;
+            }
 
-            if (Tel != Integer.parseInt(tab[5])) {
-                tab[5] = Long.toString(Tel);
+            if (Tel != Integer.parseInt(tab[5]) && Tel!=0) {
+                
+                    tab[5] = Long.toString(Tel);
+                
             }
             // regrouper les nouvelles informations du client
-            for (int i = 0; i < tab.length; i++) {
-                nvclient = nvclient + tab[i] + "*";
+            for (String tab1 : tab) {
+                nvclient = nvclient + tab1 + "*";
             }
 
             // enlever le dernier caractere * de la chaine 
