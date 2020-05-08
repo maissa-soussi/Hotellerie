@@ -172,21 +172,7 @@ public class Chambre {
         return update[0] + "*" + update[1] + "*" + update[2] + "*" + update[3] + "*" + update[4] + "*" + update[5] + "*" + update[6];
     }
 
-    //fonction qui permet de verifier sur une ligne(une chambre) si elle est disponible durant la semaine donnée
-    private boolean Verifier(String line, int num) {
-        String[] update = line.split("\\*");
-        boolean test;
-        if (num < 1 || num > 4) {
-            test = false;
-        } else {
-            if (update[num + 2].compareTo("1") >= 0) {
-                test = false;
-            } else {
-                test = true;
-            }
-        }
-        return test;
-    }
+    
 
     //fonction utilisé pour convertir (0,1) du fichier texte en type boolean(true,false)
     private Boolean StringToBoolean(String ch) {
@@ -228,32 +214,7 @@ public class Chambre {
         }
 
     }
-
-    private void cloner() {
-        try {
-            File fichier1 = new File("src\\Chambre.txt");
-            FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
-            BufferedReader br = new BufferedReader(fichier);
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1, true));
-            String line = br.readLine();
-            if (line != null) {
-                bufferedWriter.write(line);
-            }
-            while ((line = br.readLine()) != null) {
-                if (line.length() > 0) {
-                    bufferedWriter.write("\r\n");
-                    bufferedWriter.write(line);
-                    ;
-                }
-            }
-            bufferedWriter.close();
-            br.close();
-            Files.move(Paths.get("src\\Chambre.txt"), Paths.get("src\\Hotellerie\\Files\\Chambre.txt"), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     public boolean Suggestion(String type, int nbSem, int semDeb) {
         Boolean resultat = false;
         try {
