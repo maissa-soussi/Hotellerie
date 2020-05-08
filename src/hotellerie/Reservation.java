@@ -473,7 +473,31 @@ public class Reservation {
             e.printStackTrace();
         }
     }
-
+    
+     //verifier si le num de reservation existe
+    public static Boolean verifNum_R1(int n) {
+        Boolean bo = false;
+        try {
+            File f = new File("src\\Hotellerie\\Files\\Reservation.txt");
+            BufferedReader b = new BufferedReader(new FileReader(f));
+            String readLine = "";
+            while (((readLine = b.readLine()) != null) && (bo == false)) {
+                String[] tab = readLine.split("\\*");
+                if (Integer.parseInt(tab[0]) == n) {
+                    bo = true;
+                }
+            }
+            b.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (bo || n == 0);
+    }
+    
+    
+    
+    
+//Modifier une réservation
     public static void Modifier(int numR) {
         Reservation r1 = new Reservation(numR);
         r1.annuler();
