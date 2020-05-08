@@ -1,4 +1,3 @@
-
 package hotellerie;
 
 import java.io.BufferedReader;
@@ -47,7 +46,7 @@ public class Client {
         try {
             BufferedReader br = new BufferedReader(new FileReader("src\\hotellerie\\Files\\Client.txt"));
             String client;
-            DecimalFormat nf=new DecimalFormat("00000000");
+            DecimalFormat nf = new DecimalFormat("00000000");
             while (((client = br.readLine()) != null) && (res == false)) {
                 tab = client.split("-");
                 res = (tab[0].equals(nf.format(Cin)));
@@ -78,8 +77,8 @@ public class Client {
     public void Ajouter() {
 
         try {
-            DecimalFormat nf=new DecimalFormat("00000000");
-            String nvclient = nf.format(Cin) + "-" + Nom + "-" + Prenom + "-" + Date_N + "-" + Email + "-" + Tel + "-" + Pays+"";
+            DecimalFormat nf = new DecimalFormat("00000000");
+            String nvclient = nf.format(Cin) + "-" + Nom + "-" + Prenom + "-" + Date_N + "-" + Email + "-" + Tel + "-" + Pays + "";
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src\\hotellerie\\Files\\Client.txt", true));
             bufferedWriter.newLine();
             bufferedWriter.write(nvclient);
@@ -96,13 +95,14 @@ public class Client {
         try {
             BufferedReader br = new BufferedReader(new FileReader("src\\hotellerie\\Files\\Client.txt"));
             String client;
-            DecimalFormat nf=new DecimalFormat("00000000");
+            DecimalFormat nf = new DecimalFormat("00000000");
             //System.out.println(nf.format(cin));
             while (((client = br.readLine()) != null) && (res == false)) {
                 //String[] tab = client.split("-");
                 //res = (tab[0].equals(String.valueOf(nf.format(cin))));
-                if (client.contains(nf.format(cin)))
-                     res=true;
+                if (client.contains(nf.format(cin))) {
+                    res = true;
+                }
             }
             br.close();
         } catch (IOException e) {
@@ -116,7 +116,7 @@ public class Client {
     public void Modifier(long cin, String Email, long Tel, String Pays) {
         Boolean res = false;
         String nvclient = "";
-        DecimalFormat nf=new DecimalFormat("00000000");
+        DecimalFormat nf = new DecimalFormat("00000000");
         try {
             BufferedReader br = new BufferedReader(new FileReader("src\\hotellerie\\Files\\Client.txt"));
             String client;
@@ -139,7 +139,7 @@ public class Client {
             if (!Email.equals(tab[4])) {
                 tab[4] = Email;
             }
-            
+
             if (Tel != Integer.parseInt(tab[5])) {
                 tab[5] = Long.toString(Tel);
             }

@@ -164,15 +164,15 @@ public class Chambre {
         update[num + 2] = "1";
         return update[0] + "-" + update[1] + "-" + update[2] + "-" + update[3] + "-" + update[4] + "-" + update[5] + "-" + update[6];
     }
+
     //
     private String InitChamp(String line, int num) {
         String[] update = line.split("-");
         update[num + 2] = "0";
         return update[0] + "-" + update[1] + "-" + update[2] + "-" + update[3] + "-" + update[4] + "-" + update[5] + "-" + update[6];
     }
-    
-    //fonction qui permet de verifier sur une ligne(une chambre) si elle est disponible durant la semaine donnée
 
+    //fonction qui permet de verifier sur une ligne(une chambre) si elle est disponible durant la semaine donnée
     private boolean Verifier(String line, int num) {
         String[] update = line.split("-");
         boolean test;
@@ -198,6 +198,7 @@ public class Chambre {
         }
 
     }
+
     public void AnnulerReservation(int numC, int nbSem, int numS) {
         try {
             File fichier1 = new File("src\\Chambre.txt");
@@ -227,39 +228,40 @@ public class Chambre {
         }
 
     }
-    	private void cloner()
-    {
-         try{
-             File fichier1 = new File("src\\Chambre.txt");
-        FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
-        BufferedReader br = new BufferedReader(fichier);
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1, true));
-        String line=br.readLine();
-        if (line != null)
-         bufferedWriter.write(line);
-        while ((line = br.readLine()) != null) {
-       if(line.length()>0) {
-           bufferedWriter.write("\r\n");
-           bufferedWriter.write(line);
-                ;}
+
+    private void cloner() {
+        try {
+            File fichier1 = new File("src\\Chambre.txt");
+            FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
+            BufferedReader br = new BufferedReader(fichier);
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fichier1, true));
+            String line = br.readLine();
+            if (line != null) {
+                bufferedWriter.write(line);
+            }
+            while ((line = br.readLine()) != null) {
+                if (line.length() > 0) {
+                    bufferedWriter.write("\r\n");
+                    bufferedWriter.write(line);
+                    ;
+                }
+            }
+            bufferedWriter.close();
+            br.close();
+            Files.move(Paths.get("src\\Chambre.txt"), Paths.get("src\\Hotellerie\\Files\\Chambre.txt"), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        bufferedWriter.close();
-        br.close();
-        Files.move(Paths.get("src\\Chambre.txt"), Paths.get("src\\Hotellerie\\Files\\Chambre.txt"), StandardCopyOption.REPLACE_EXISTING);
-         }
-         catch (IOException e) {
-        e.printStackTrace();
     }
-    }
-      public boolean Suggestion(String type,int nbSem,int semDeb)  
-      {
-          Boolean resultat=false;
-           try {
+
+    public boolean Suggestion(String type, int nbSem, int semDeb) {
+        Boolean resultat = false;
+        try {
             FileReader fichier = new FileReader("src\\Hotellerie\\Files\\Chambre.txt");
             BufferedReader br = new BufferedReader(fichier);
             String line;
             while ((line = br.readLine()) != null) {
-              String[] detail = line.split("-");
+                String[] detail = line.split("-");
                 if (detail[1].equals(type)) {
                     boolean verif = true;
                     int i = 0;
@@ -271,17 +273,16 @@ public class Chambre {
                         }
                     }
                     if (verif == true) {
-                        resultat=true;
+                        resultat = true;
                         System.out.println(line);
                     }
 
                 }
             }
             br.close();
-           }
-           catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        } 
-           return resultat;
-      }
+        }
+        return resultat;
+    }
 }
