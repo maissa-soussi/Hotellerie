@@ -56,7 +56,7 @@ public class Hotellerie {
             System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
             Scanner sc1 = new Scanner(System.in);
             int nb1 = sc1.nextInt();
-            while (nb1 != 0 && Reservation.verifNum_R1(nb1) == false) {
+            while (Reservation.verifNum_R1(nb1) == false) {
                 System.out.println("\n numero de reservation inexistant SVP essayer de nouveau");
                 sc1 = new Scanner(System.in);
                 nb1 = sc1.nextInt();                
@@ -394,7 +394,7 @@ public class Hotellerie {
             System.out.println("entrer le numero de reservation");
             Scanner c1 = new Scanner(System.in);
             int n = c1.nextInt();
-            while (Reservation.verifNum_R1(n) == false) {
+            while (Reservation.verifNum_R(n) == false) {
                 System.out.println("\n numero de reservation inexistant SVP essayez de nouveau");
                 c1 = new Scanner(System.in);
                 n = c1.nextInt();

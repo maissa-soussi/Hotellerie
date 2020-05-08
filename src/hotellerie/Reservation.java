@@ -474,7 +474,7 @@ public class Reservation {
         }
     }
     
-     //verifier si le num de reservation existe
+     //verifier si n=0 ou n est num de reservation existant
     public static Boolean verifNum_R1(int n) {
         Boolean bo = false;
         try {
@@ -494,6 +494,25 @@ public class Reservation {
         return (bo || n == 0);
     }
     
+    //verifier si le num de reservation existe
+    public static Boolean verifNum_R(int n) {
+        Boolean bo = false;
+        try {
+            File f = new File("src\\Hotellerie\\Files\\Reservation.txt");
+            BufferedReader b = new BufferedReader(new FileReader(f));
+            String readLine = "";
+            while (((readLine = b.readLine()) != null) && (bo == false)) {
+                String[] tab = readLine.split("\\*");
+                if (Integer.parseInt(tab[0]) == n) {
+                    bo = true;
+                }
+            }
+            b.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (bo);
+    }
     
     
     
