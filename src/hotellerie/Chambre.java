@@ -81,7 +81,7 @@ public class Chambre {
                 }
             }
             br.close();
-            String[] update = line.split("-");
+            String[] update = line.split("*");
             Num = Integer.parseInt(update[0]);
             Type = update[1];
             Vue = update[2];
@@ -160,21 +160,21 @@ public class Chambre {
     //fonction utilisé pour changer le champs Res'num'(Res1 ou Res2....) de la chambre qui sera reservé durant cette semaine (change de 0 a 1)
 
     private String ChangerChamp(String line, int num) {
-        String[] update = line.split("-");
+        String[] update = line.split("*");
         update[num + 2] = "1";
-        return update[0] + "-" + update[1] + "-" + update[2] + "-" + update[3] + "-" + update[4] + "-" + update[5] + "-" + update[6];
+        return update[0] + "*" + update[1] + "*" + update[2] + "*" + update[3] + "*" + update[4] + "*" + update[5] + "*" + update[6];
     }
 
     //
     private String InitChamp(String line, int num) {
-        String[] update = line.split("-");
+        String[] update = line.split("*");
         update[num + 2] = "0";
-        return update[0] + "-" + update[1] + "-" + update[2] + "-" + update[3] + "-" + update[4] + "-" + update[5] + "-" + update[6];
+        return update[0] + "*" + update[1] + "*" + update[2] + "*" + update[3] + "*" + update[4] + "*" + update[5] + "*" + update[6];
     }
 
     //fonction qui permet de verifier sur une ligne(une chambre) si elle est disponible durant la semaine donnée
     private boolean Verifier(String line, int num) {
-        String[] update = line.split("-");
+        String[] update = line.split("*");
         boolean test;
         if (num < 1 || num > 4) {
             test = false;
@@ -261,7 +261,7 @@ public class Chambre {
             BufferedReader br = new BufferedReader(fichier);
             String line;
             while ((line = br.readLine()) != null) {
-                String[] detail = line.split("-");
+                String[] detail = line.split("*");
                 if (detail[1].equals(type)) {
                     boolean verif = true;
                     int i = 0;

@@ -450,7 +450,7 @@ public class Hotellerie {
             BufferedReader b = new BufferedReader(new FileReader(f));
             String readLine = "";
             while (((readLine = b.readLine()) != null) && (bo == false)) {
-                String[] tab = readLine.split("-");
+                String[] tab = readLine.split("*");
                 if (Integer.parseInt(tab[0]) == n) {
                     bo = true;
                 }
@@ -470,7 +470,7 @@ public class Hotellerie {
             BufferedReader b = new BufferedReader(new FileReader(f));
             String readLine = "";
             while (((readLine = b.readLine()) != null) && (bo == false)) {
-                String[] tab = readLine.split("-");
+                String[] tab = readLine.split("*");
                 if (tab[0].equals(co)) {
                     bo = true;
                 }
@@ -556,7 +556,7 @@ public class Hotellerie {
             BufferedReader b = new BufferedReader(new FileReader(f));
             String readLine = "";
             while (((readLine = b.readLine()) != null) && (bo == false)) {
-                String[] tab = readLine.split("-");
+                String[] tab = readLine.split("*");
                 if (Integer.parseInt(tab[0]) == n) {
                     bo = true;
                 }

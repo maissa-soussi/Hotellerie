@@ -48,7 +48,7 @@ public class Client {
             String client;
             DecimalFormat nf = new DecimalFormat("00000000");
             while (((client = br.readLine()) != null) && (res == false)) {
-                tab = client.split("-");
+                tab = client.split("*");
                 res = (tab[0].equals(nf.format(Cin)));
             }
 
@@ -78,7 +78,7 @@ public class Client {
 
         try {
             DecimalFormat nf = new DecimalFormat("00000000");
-            String nvclient = nf.format(Cin) + "-" + Nom + "-" + Prenom + "-" + Date_N + "-" + Email + "-" + Tel + "-" + Pays + "";
+            String nvclient = nf.format(Cin) + "*" + Nom + "*" + Prenom + "*" + Date_N + "*" + Email + "*" + Tel + "*" + Pays + "";
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src\\hotellerie\\Files\\Client.txt", true));
             bufferedWriter.newLine();
             bufferedWriter.write(nvclient);
@@ -98,8 +98,7 @@ public class Client {
             DecimalFormat nf = new DecimalFormat("00000000");
             //System.out.println(nf.format(cin));
             while (((client = br.readLine()) != null) && (res == false)) {
-                //String[] tab = client.split("-");
-                //res = (tab[0].equals(String.valueOf(nf.format(cin))));
+                
                 if (client.contains(nf.format(cin))) {
                     res = true;
                 }
@@ -128,7 +127,7 @@ public class Client {
 
             // recherche du client à partir du fichier client
             while (((client = br.readLine()) != null) && (res == false)) {
-                tab = client.split("-");
+                tab = client.split("*");
                 res = (tab[0].equals(String.valueOf(nf.format(cin))));
                 if (res == false) {
                     bufferedWriter.write(client);
@@ -145,10 +144,10 @@ public class Client {
             }
             // regrouper les nouvelles informations du client
             for (int i = 0; i < tab.length; i++) {
-                nvclient = nvclient + tab[i] + "-";
+                nvclient = nvclient + tab[i] + "*";
             }
 
-            // enlever le dernier caractere - de la chaine 
+            // enlever le dernier caractere * de la chaine 
             nvclient = nvclient.substring(0, nvclient.length() - 1);
 
             // ajouter les données modifiées à leurs places 

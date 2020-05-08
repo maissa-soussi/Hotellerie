@@ -69,11 +69,11 @@ public class Feedback {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null && i < 5) {
-                String[] detail = line.split("-");
+                String[] detail = line.split("*");
                 detail[0] = Integer.parseInt(detail[0]) + nb[i] + "";
                 detail[1] = Integer.parseInt(detail[1]) + 1 + "";
                 i++;
-                bufferedWriter.write(detail[0] + "-" + detail[1]);
+                bufferedWriter.write(detail[0] + "*" + detail[1]);
                 bufferedWriter.write("\r\n");
             }
             bufferedWriter.close();
@@ -93,7 +93,7 @@ public class Feedback {
             String[] questions = {"Comment jugez-vous l’amabilité du personnel d'accueil ?", "Comment jugez-vous le niveau de confort de votre chambres ?", "Que pensez-vous de la qualité de service du Restaurant principale ?", "Comment jugez-vous l'animation de l'hotel ?", "Donner une note de satisfaction concernant votre séjour ?"};
             int i = 0;
             while ((line = br.readLine()) != null && i < 5) {
-                String[] detail = line.split("-");
+                String[] detail = line.split("*");
                 float r = (float) (Integer.parseInt(detail[0])) / Integer.parseInt(detail[1]);
                 DecimalFormat df = new DecimalFormat("0.00");
                 //System.out.println(questions[i]+" : "+df.format(r));

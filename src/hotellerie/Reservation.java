@@ -87,7 +87,7 @@ public class Reservation {
             String reservation;
             DecimalFormat nf = new DecimalFormat("00000000");
             while ((res == false) && ((reservation = br.readLine()) != null)) {
-                tab = reservation.split("-");
+                tab = reservation.split("*");
                 res = (tab[0].equals(Integer.toString(Num_R)));
             }
 
@@ -141,7 +141,7 @@ public class Reservation {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(File, true));
             // recherche du reservation à partir du fichier reservation
             while (((reservation = br.readLine()) != null)) {
-                String[] tab = reservation.split("-");
+                String[] tab = reservation.split("*");
                 res = (tab[0].equals(String.valueOf(Num_R)));
                 if (res == false) {
                     bufferedWriter.newLine();
@@ -185,7 +185,7 @@ public class Reservation {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(File, true));
             // recherche du reservation à partir du fichier reservation
             while (((reservation = br.readLine()) != null)) {
-                String[] tab = reservation.split("-");
+                String[] tab = reservation.split("*");
                 res = (tab[0].equals(String.valueOf(Num_R)));
                 if (res == false) {
                     bufferedWriter.newLine();
@@ -269,9 +269,9 @@ public class Reservation {
         try {
             DecimalFormat nf = new DecimalFormat("00000000");
             DecimalFormat nf1 = new DecimalFormat("000");
-            String nvres = Num_R + "-" + nf.format(Cin_client) + "-" + Date_Reservation + "-" + Date_Arrivee + "-" + Nb_semaine + "-" + Nb_chambre + "-" + prix_total + "-" + reste_payer;
+            String nvres = Num_R + "*" + nf.format(Cin_client) + "*" + Date_Reservation + "*" + Date_Arrivee + "*" + Nb_semaine + "*" + Nb_chambre + "*" + prix_total + "*" + reste_payer;
             for (int i = 0; i < chambres.length; i++) {
-                nvres = nvres + "-" + nf1.format(chambres[i]);
+                nvres = nvres + "*" + nf1.format(chambres[i]);
 
             }
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src\\Hotellerie\\Files\\Reservation.txt", true));
@@ -292,7 +292,7 @@ public class Reservation {
             List<String> lignes = Files.readAllLines(chambre);
 
             for (String ligne : lignes) {
-                String[] detail = ligne.split("-");
+                String[] detail = ligne.split("*");
                 if ((detail[1].equals(type)) && (detail[2].equals(vue))) {
                     boolean verif = true;
                     int i = 0;
@@ -323,7 +323,7 @@ public class Reservation {
         try {
             List<String> lignes = Files.readAllLines(reservation);
             for (String ligne : lignes) {
-                String[] donnees = ligne.split("-");
+                String[] donnees = ligne.split("*");
                 if (Integer.parseInt(donnees[0]) >= a) {
                     a = Integer.parseInt(donnees[0]);
                 }
