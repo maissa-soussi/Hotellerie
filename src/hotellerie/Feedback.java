@@ -76,6 +76,7 @@ public class Feedback {
                 bufferedWriter.write(detail[0] + "*" + detail[1]);
                 bufferedWriter.write("\r\n");
             }
+            System.out.println("Enquete enrégistrée avec succes");
             bufferedWriter.close();
             br.close();
             Files.move(Paths.get("src\\Feedback.txt"), Paths.get("src\\Hotellerie\\Files\\Feedback.txt"), StandardCopyOption.REPLACE_EXISTING);
