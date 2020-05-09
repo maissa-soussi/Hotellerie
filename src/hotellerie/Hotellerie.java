@@ -56,7 +56,7 @@ public class Hotellerie {
             System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
             Scanner sc1 = new Scanner(System.in);
             int nb1 = sc1.nextInt();
-            while (verifNum_R1(nb1) == false) {
+            while ((Reservation.verifNum_R(nb1) == false) && (nb1 !=0)) {
                 System.out.println("\n numero de reservation inexistant SVP essayer de nouveau");
                 sc1 = new Scanner(System.in);
                 nb1 = sc1.nextInt();                
@@ -72,7 +72,7 @@ public class Hotellerie {
             System.out.println("Entrer le numero de reservation  ou 0 Pour quitter");
             Scanner sc1 = new Scanner(System.in);
             int nb1 = sc1.nextInt();
-            while (nb1 != 0 && verifNum_R1(nb1) == false) {
+            while ((Reservation.verifNum_R(nb1) == false) && (nb1 !=0)) {
                 System.out.println("\n numero de reservation inexistant SVP essayer de nouveau");
                 sc1 = new Scanner(System.in);
                 nb1 = sc1.nextInt();                
@@ -198,7 +198,7 @@ public class Hotellerie {
             System.out.println("\n Entrer le numero de reservation  ou 0 Pour quitter");
             Scanner sc2 = new Scanner(System.in);
             int nb2 = sc2.nextInt();
-            while (verifNum_R1(nb2) == false) {
+            while ((Reservation.verifNum_R(nb2) == false) && (nb2 !=0)) {
                 System.out.println("\n numero de reservation inexistant SVP essayer de nouveau");
                 sc2 = new Scanner(System.in);
                 nb2 = sc2.nextInt();                
@@ -216,7 +216,7 @@ public class Hotellerie {
             System.out.println("\n Entrer le numero de reservation  ou 0 Pour quitter");
             Scanner sc3 = new Scanner(System.in);
             int nb3 = sc3.nextInt();
-            while (verifNum_R1(nb3) == false) {
+            while ((Reservation.verifNum_R(nb3) == false) && (nb3 !=0)) {
                 System.out.println("\n numero de reservation inexistant SVP essayer de nouveau");
                 sc3 = new Scanner(System.in);
                 nb3 = sc3.nextInt();                
@@ -527,26 +527,6 @@ public class Hotellerie {
         return bo;
     }
     
-    //verifier si n=0 ou n est num de reservation existant
-    public static Boolean verifNum_R1(int n) {
-        Boolean bo = false;
-        try {
-            File f = new File("src\\Hotellerie\\Files\\Reservation.txt");
-            BufferedReader b = new BufferedReader(new FileReader(f));
-            String readLine = "";
-            while (((readLine = b.readLine()) != null) && (bo == false)) {
-                String[] tab = readLine.split("\\*");
-                if (Integer.parseInt(tab[0]) == n) {
-                    bo = true;
-                }
-            }
-            b.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return (bo || n == 0);
-    }
-
     // verifier si le restaurant du nom r existe ou non
     private static Boolean verifNom_R(String r) {
         Boolean bo = false;
