@@ -304,6 +304,8 @@ public class Restaurant {
             FileWriter writer = new FileWriter(fichier);
             writer.write(str.toString().replaceAll("(?m)^[ \t]*\r?\n", ""));
             writer.close();
+            fis.close();
+            input.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

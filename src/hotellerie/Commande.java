@@ -89,6 +89,7 @@ public class Commande {
                 }
             }
             b.close();
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
